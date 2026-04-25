@@ -273,3 +273,11 @@ body::before {
   -webkit-box-shadow: 0 0 0 1000px #141414 inset;
   -webkit-text-fill-color: #F0EDE8;
 }
+
+/* Responsive nav utilities */
+.hidden { display: none !important; }
+@media (min-width: 768px) {
+  .md\:flex { display: flex !important; }
+  .md\:hidden { display: none !important; }
+  .md\:inline-flex { display: inline-flex !important; }
+}
