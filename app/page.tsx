@@ -5,6 +5,7 @@ import FadeUp from '@/components/FadeUp'
 import StatCounter from '@/components/StatCounter'
 import PostCard from '@/components/PostCard'
 import MandateBlock from '@/components/MandateBlock'
+import HeroCanvas from '@/components/HeroCanvas'
 
 export const revalidate = 3600
 
@@ -109,7 +110,10 @@ export default async function HomePage() {
           overflow: 'hidden',
         }}
       >
-        {/* Radial glow */}
+        {/* Animated particle network */}
+        <HeroCanvas />
+
+        {/* Radial glow — kept as a soft centre light behind the canvas */}
         <div
           aria-hidden
           style={{
@@ -119,40 +123,11 @@ export default async function HomePage() {
             transform: 'translateY(-50%)',
             width: '80vw',
             height: '80vw',
-            background: 'radial-gradient(ellipse at center, rgba(154,139,71,0.07) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse at center, rgba(154,139,71,0.05) 0%, transparent 60%)',
             pointerEvents: 'none',
+            zIndex: 0,
           }}
         />
-
-        {/* Watermark */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: '-10%',
-            transform: 'translateY(-50%)',
-            pointerEvents: 'none',
-          }}
-        >
-          <svg
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ width: '70vw', height: '70vw', opacity: 0.04 }}
-          >
-            <circle cx="50" cy="50" r="44" fill="none" stroke="#9A8B47" strokeWidth="0.8" />
-            <polygon
-              points="50,6 94,50 50,94 6,50"
-              fill="none"
-              stroke="#9A8B47"
-              strokeWidth="0.4"
-            />
-            <circle cx="50" cy="6" r="1.5" fill="#9A8B47" />
-            <circle cx="94" cy="50" r="1.5" fill="#9A8B47" />
-            <circle cx="50" cy="94" r="1.5" fill="#9A8B47" />
-            <circle cx="6" cy="50" r="1.5" fill="#9A8B47" />
-          </svg>
-        </div>
 
         <div
           style={{
