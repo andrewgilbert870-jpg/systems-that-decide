@@ -64,7 +64,7 @@ export default function HeroCanvas() {
           const dy = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.18
+            const alpha = (1 - dist / MAX_DIST) * 0.45
             ctx.beginPath()
             ctx.strokeStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${alpha})`
             ctx.lineWidth = 0.8
@@ -79,7 +79,7 @@ export default function HeroCanvas() {
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0.35)`
+        ctx.fillStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},0.6)`
         ctx.fill()
       }
 
