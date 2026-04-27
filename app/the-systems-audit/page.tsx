@@ -31,19 +31,19 @@ const frameworks = [
     num: '01',
     name: 'Supply Chain Map',
     description:
-      'Maps the full path from budget to publisher impression. Identifies where fees are extracted, where inventory quality degrades, and where the supply chain has been configured in the interests of the agency or vendor rather than the advertiser.',
+      'Maps the full path from budget to publisher impression. Identifies where fees are extracted, where inventory quality degrades, and where supply path decisions have created fee structures or inventory outcomes that do not serve the advertiser\'s interest.',
   },
   {
     num: '02',
     name: 'Agency Commercial Audit',
     description:
-      'A review of the commercial architecture of the agency relationship. How the agency earns, what is disclosed, where principal media arrangements exist, and where the financial incentives diverge from the client\'s interest.',
+      'A review of the commercial architecture of the agency relationship. How the agency earns, what is contractually disclosed, how principal media arrangements are structured, and where commercial incentives and client interests are not fully aligned.',
   },
   {
     num: '03',
     name: 'Measurement Integrity Assessment',
     description:
-      'An assessment of the measurement framework in use. What is being measured, how the methodology is constructed, whether it is fit for purpose, and where it has been structured to produce results that favour the agency or platform over the advertiser.',
+      'An assessment of the measurement framework in use. What is being measured, how the methodology is constructed, whether it is fit for purpose, and where measurement design or attribution methodology may not reflect true performance.',
   },
   {
     num: '04',
@@ -67,7 +67,7 @@ const frameworks = [
 
 const scoreDimensions = [
   { label: 'Dimension 01', name: 'Supply Chain Transparency' },
-  { label: 'Dimension 02', name: 'Agency Commercial Integrity' },
+  { label: 'Dimension 02', name: 'Commercial Transparency' },
   { label: 'Dimension 03', name: 'Measurement Integrity' },
   { label: 'Dimension 04', name: 'Brand Safety Coverage' },
   { label: 'Dimension 05', name: 'Technology Independence' },
@@ -76,7 +76,7 @@ const scoreDimensions = [
 
 const scoreTable = [
   { score: '100–120', assessment: 'Strong. The programme is well-configured and the principal risks are understood. Maintain and monitor.' },
-  { score: '75–99', assessment: 'Functional but exposed. Structural gaps exist that a well-briefed agency or vendor will exploit. Prioritise the lowest-scoring dimensions.' },
+  { score: '75–99', assessment: 'Functional but exposed. Structural gaps exist. Where they appear, they tend to be resolved in favour of intermediaries rather than the advertiser. Prioritise the lowest-scoring dimensions.' },
   { score: '50–74', assessment: 'Significant exposure. The programme is likely producing results that benefit intermediaries more than the advertiser. Structural change is warranted.' },
   { score: 'Below 50', assessment: 'Critical. The programme has fundamental integrity problems. Independent review and likely renegotiation of key relationships is recommended.' },
 ]
@@ -110,7 +110,7 @@ const deliverables = [
     num: '01',
     name: 'Systems Map',
     description:
-      'A hand-built map of your media ecosystem showing the supply chain, technology stack, and data flows as they actually exist. Not as the agency has presented them.',
+      'A hand-built map of your media ecosystem showing the supply chain, technology stack, and data flows as they actually exist — independent of any single stakeholder\'s account of them.',
   },
   {
     num: '02',
@@ -230,7 +230,7 @@ export default function TheSystemsAuditPage() {
                     maxWidth: '520px',
                   }}
                 >
-                  Built for the gap between what your agency reports and what is actually happening.
+                  Built to give you an independent view of how your programme is actually configured.
                 </h2>
               </FadeUp>
               <FadeUp delay={0.14}>

@@ -290,7 +290,7 @@ export default async function HomePage() {
             {[
               {
                 head: 'The system benefits from your confusion.',
-                body: "The vendor needs you to believe the measurement is clean. The agency needs the complexity to justify the fee. The platform needs you to accept its attribution as neutral. None of them have a financial interest in your clarity. They have a financial interest in your continued dependence on their version of events. That is not a conspiracy. It is just how commercial incentives work.",
+                body: "The vendor needs you to believe the measurement is clean. The system rewards intermediaries for managing complexity, not reducing it. The platform needs you to accept its attribution as neutral. None of them have a financial interest in your clarity. They have a financial interest in your continued dependence on their version of events. That is not a conspiracy. It is just how commercial incentives work.",
               },
               {
                 head: 'Sixteen years inside changes what you can see.',
