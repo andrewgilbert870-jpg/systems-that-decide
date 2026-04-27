@@ -64,10 +64,10 @@ export default function HeroCanvas() {
           const dy = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.45
+            const alpha = (1 - dist / MAX_DIST) * 0.7
             ctx.beginPath()
             ctx.strokeStyle = `rgba(${GOLD.r},${GOLD.g},${GOLD.b},${alpha})`
-            ctx.lineWidth = 0.8
+            ctx.lineWidth = 1.2
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
             ctx.stroke()
