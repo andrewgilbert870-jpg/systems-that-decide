@@ -170,7 +170,7 @@ export default async function HomePage() {
                 rel="noopener noreferrer"
                 className="btn-secondary"
               >
-                Subscribe to the Practitioner&apos;s View
+                Subscribe on Substack
               </a>
             </div>
           </FadeUp>
@@ -454,7 +454,7 @@ export default async function HomePage() {
                 marginBottom: '48px',
               }}
             >
-              Published through The Practitioner&apos;s View. Independent from vendor relationships,
+              Published through Systems That Decide on Substack. Independent from vendor relationships,
               platform incentives, and implementation revenue. The analysis is the product.
             </p>
           </FadeUp>
