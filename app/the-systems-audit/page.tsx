@@ -737,7 +737,7 @@ export default function TheSystemsAuditPage() {
         </div>
       </section>
 
-      {/* Section 8: Investment */}
+      {/* Section 8: CTA */}
       <section
         style={{
           background: '#0D0D0D',
@@ -747,28 +747,6 @@ export default function TheSystemsAuditPage() {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <FadeUp>
-            <p style={{ ...S.label, marginBottom: '20px' }}>Investment</p>
-          </FadeUp>
-          <FadeUp delay={0.08}>
-            <h2
-              style={{
-                fontFamily: 'var(--font-playfair)',
-                fontWeight: 700,
-                fontSize: 'clamp(28px, 4vw, 40px)',
-                color: '#F0EDE8',
-                marginBottom: '20px',
-              }}
-            >
-              Pricing.
-            </h2>
-          </FadeUp>
-          <FadeUp delay={0.12}>
-            <p style={{ ...S.body, maxWidth: '640px', marginBottom: '48px' }}>
-              The Systems Audit is priced on engagement scope. Pricing is confirmed at intake
-              following a scoping conversation.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.16}>
             <div
               style={{
                 background: '#141414',
@@ -787,8 +765,7 @@ export default function TheSystemsAuditPage() {
                   marginBottom: '28px',
                 }}
               >
-                Enquire to confirm scope and pricing. The first conversation is a scoping call — no
-                commitment required.
+                The first conversation is a scoping call. No commitment required.
               </p>
               <Link href="/enquire" className="btn-primary">
                 Start a Conversation

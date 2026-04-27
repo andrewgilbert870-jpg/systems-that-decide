@@ -315,35 +315,6 @@ export default function TheAgencyStackPage() {
                 >
                   Programmatic Infrastructure · Data & Measurement · AI & Automation · Vendor & Commercial
                 </p>
-                <div
-                  style={{
-                    borderTop: '1px solid #2A2825',
-                    paddingTop: '28px',
-                    marginTop: '4px',
-                  }}
-                >
-                  <p style={{ ...S.label, marginBottom: '10px' }}>Investment</p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-playfair)',
-                      fontWeight: 700,
-                      fontSize: '36px',
-                      color: '#F0EDE8',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    AUD $12,000 – $15,000
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: '14px',
-                      color: '#6B6560',
-                    }}
-                  >
-                    Founding Agency Rate available. Enquire for details.
-                  </p>
-                </div>
               </div>
             </FadeUp>
 
@@ -386,45 +357,6 @@ export default function TheAgencyStackPage() {
                 >
                   Monthly Review · Brief Response · Vendor Evaluation · Quarterly Direction
                 </p>
-                <div
-                  style={{
-                    borderTop: '1px solid #2A2825',
-                    paddingTop: '28px',
-                    marginTop: '4px',
-                  }}
-                >
-                  <p style={{ ...S.label, marginBottom: '10px' }}>Investment</p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-playfair)',
-                      fontWeight: 700,
-                      fontSize: '36px',
-                      color: '#F0EDE8',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    AUD $3,500 – $4,500{' '}
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-inter)',
-                        fontWeight: 400,
-                        fontSize: '20px',
-                        color: '#B8B2AE',
-                      }}
-                    >
-                      / month
-                    </span>
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: '14px',
-                      color: '#6B6560',
-                    }}
-                  >
-                    Minimum three-month initial term.
-                  </p>
-                </div>
               </div>
             </FadeUp>
           </div>
@@ -775,7 +707,7 @@ export default function TheAgencyStackPage() {
         </div>
       </section>
 
-      {/* Section 8: Investment */}
+      {/* Section 8: CTA */}
       <section
         style={{
           background: '#0D0D0D',
@@ -784,171 +716,6 @@ export default function TheAgencyStackPage() {
         }}
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <FadeUp>
-            <p style={{ ...S.label, marginBottom: '20px' }}>Investment</p>
-          </FadeUp>
-          <FadeUp delay={0.08}>
-            <h2
-              style={{
-                fontFamily: 'var(--font-playfair)',
-                fontWeight: 700,
-                fontSize: 'clamp(28px, 4vw, 40px)',
-                color: '#F0EDE8',
-                marginBottom: '48px',
-              }}
-            >
-              Pricing.
-            </h2>
-          </FadeUp>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
-              gap: '24px',
-              marginBottom: '40px',
-            }}
-          >
-            {/* Stack Review pricing */}
-            <FadeUp delay={0.1}>
-              <div
-                style={{
-                  background: '#141414',
-                  border: '1px solid #2A2825',
-                  borderTop: '3px solid #9A8B47',
-                  padding: '36px',
-                }}
-              >
-                <p style={{ ...S.label, marginBottom: '20px' }}>The Stack Review</p>
-                <div style={{ display: 'flex', gap: '32px', marginBottom: '8px' }}>
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-inter)',
-                        fontSize: '15px',
-                        color: '#B8B2AE',
-                        marginBottom: '4px',
-                      }}
-                    >
-                      Standard
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-playfair)',
-                        fontWeight: 700,
-                        fontSize: '28px',
-                        color: '#F0EDE8',
-                      }}
-                    >
-                      AUD $12,000
-                    </p>
-                  </div>
-                  <div>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-inter)',
-                        fontSize: '15px',
-                        color: '#B8B2AE',
-                        marginBottom: '4px',
-                      }}
-                    >
-                      Complex
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: 'var(--font-playfair)',
-                        fontWeight: 700,
-                        fontSize: '28px',
-                        color: '#F0EDE8',
-                      }}
-                    >
-                      AUD $15,000
-                    </p>
-                  </div>
-                </div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '15px',
-                    color: '#6B6560',
-                    fontStyle: 'italic',
-                    lineHeight: 1.6,
-                    marginTop: '20px',
-                    marginBottom: '20px',
-                  }}
-                >
-                  Standard for agencies up to approximately $5M in managed media spend. Complex for
-                  larger or multi-platform programmatic operations.
-                </p>
-                <div
-                  style={{
-                    background: 'rgba(154,139,71,0.08)',
-                    borderLeft: '3px solid #9A8B47',
-                    padding: '16px 20px',
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: '16px',
-                      color: '#9A8B47',
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    Founding Agency Rate: AUD $8,000 — available to the first three agencies to
-                    engage.
-                  </p>
-                </div>
-              </div>
-            </FadeUp>
-
-            {/* Retainer pricing */}
-            <FadeUp delay={0.16}>
-              <div
-                style={{
-                  background: '#141414',
-                  border: '1px solid #2A2825',
-                  borderTop: '3px solid #9A8B47',
-                  padding: '36px',
-                }}
-              >
-                <p style={{ ...S.label, marginBottom: '20px' }}>The Technology Retainer</p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-playfair)',
-                    fontWeight: 700,
-                    fontSize: '28px',
-                    color: '#F0EDE8',
-                    marginBottom: '8px',
-                  }}
-                >
-                  AUD $3,500 – $4,500{' '}
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontWeight: 400,
-                      fontSize: '18px',
-                      color: '#B8B2AE',
-                    }}
-                  >
-                    / month
-                  </span>
-                </p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-inter)',
-                    fontSize: '15px',
-                    color: '#6B6560',
-                    lineHeight: 1.6,
-                    marginTop: '12px',
-                  }}
-                >
-                  Minimum three-month initial term. Monthly in advance.
-                </p>
-              </div>
-            </FadeUp>
-          </div>
-
           <FadeUp>
             <Link href="/enquire" className="btn-primary">
               Enquire About The Agency Stack

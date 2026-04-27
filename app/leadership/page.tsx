@@ -29,13 +29,13 @@ const roles = [
   {
     role: 'Vice President, Advertising',
     company: 'Afterpay / Block',
-    format: '2020–2024 · Retail Media · Payments-Led Advertising',
+    format: '2025–2026 · Retail Media · Payments-Led Advertising',
     body: "Built Block’s first global media network out of ANZ. Responsible for commercial, product, audience, integrations, and supply strategy across Afterpay, Cash App, and Square. The network became the model for Block’s global advertising expansion. Started from zero. Built to a market-leading retail media operation.",
   },
   {
     role: 'Director of Commercial & Solutions',
     company: 'Yahoo',
-    format: '2019–2020 · Programmatic · Platform Operations',
+    format: '2019–2025 · Programmatic · Platform Operations',
     body: "Led commercial and platform solutions across Yahoo’s DSP and SSP technology in ANZ and SEA. Go-to-market, sales enablement, and product strategy developed alongside global counterparts. Delivered 2,550% revenue growth from the time of joining through to 2025.",
   },
   {
