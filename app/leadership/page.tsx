@@ -50,7 +50,7 @@ const roleTypes = [
   {
     name: 'Senior Leadership',
     description:
-      'Senior roles in adtech, martech, retail media, commerce platforms, or measurement businesses operating in ANZ. Preference for operators building in a space I know well — not for titles in adjacent categories.',
+      'Senior roles in adtech, martech, retail media, commerce platforms, or measurement businesses operating in ANZ. Preference for operators building in a space I know well. Not for titles in adjacent categories.',
   },
   {
     name: 'Fractional Executive',
@@ -60,7 +60,7 @@ const roleTypes = [
   {
     name: 'Board Advisory',
     description:
-      'Independent director or advisory board roles for technology companies in programmatic infrastructure, retail media, measurement, or commerce. Specifically where operator knowledge of how these systems actually function is the value — not general commercial governance.',
+      'Independent director or advisory board roles for technology companies in programmatic infrastructure, retail media, measurement, or commerce. Specifically where operator knowledge of how these systems actually function is the value. Not general commercial governance.',
   },
   {
     name: 'Special Projects',
@@ -147,7 +147,7 @@ export default function LeadershipPage() {
             <p style={{ ...S.body, maxWidth: '680px', marginBottom: '48px' }}>
               The value of this experience is not the seniority. It is the specific set of decisions
               made, systems built, and transitions managed across every structural layer of the
-              modern media stack — from agency trading through adtech operations, verification, data,
+              modern media stack: agency trading through adtech operations, verification, data,
               and retail media at significant scale.
             </p>
           </FadeUp>
@@ -337,8 +337,8 @@ export default function LeadershipPage() {
               </blockquote>
               <p style={{ ...S.body, marginBottom: '32px' }}>
                 Conversations are taken selectively. The more specific you are about the role, the
-                business, and the problem you need solved, the better I can assess whether it is a
-                genuine fit.
+                business, and the problem you need solved, the better I can assess whether it is
+                the right fit.
               </p>
               <Link href="/enquire" className="btn-primary">
                 Start a Conversation

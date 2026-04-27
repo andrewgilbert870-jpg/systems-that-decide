@@ -43,7 +43,7 @@ const domains = [
     num: '03',
     name: 'AI & Automation',
     description:
-      'Platform AI exposure across PMax, Advantage+, and algorithmic social. Agency AI tooling and governance. Agentic decision accountability — what the AI is doing and who knows.',
+      'Platform AI exposure across PMax, Advantage+, and algorithmic social. Agency AI tooling and governance. Agentic decision accountability: what the AI is doing and who knows.',
   },
   {
     num: '04',
@@ -100,7 +100,7 @@ const reportElements = [
     num: '04',
     name: 'Risk Register',
     description:
-      'Vendor lock-in, data governance exposure, contract risks, and commercial conflicts — prioritised by severity with a recommended response for each.',
+      'Vendor lock-in, data governance exposure, contract risks, and commercial conflicts, prioritised by severity with a recommended response for each.',
   },
   {
     num: '05',
@@ -120,7 +120,7 @@ const retainerInclusions = [
   {
     name: 'Monthly Tech Review',
     description:
-      'A structured monthly review covering platform changes, new tools worth evaluating, and emerging risks. Delivered as a written summary with session notes.',
+      'A structured monthly review covering platform changes, new tools to assess, and emerging risks. Delivered as a written summary with session notes.',
   },
   {
     name: 'Brief Response',
@@ -236,7 +236,7 @@ export default function TheAgencyStackPage() {
             </p>
             <p style={{ ...S.body, maxWidth: '680px' }}>
               The Agency Stack fills that gap. Not as a consultant recommending tools. As an
-              operator who built these systems from the inside — and can tell you what is working,
+              operator who built these systems from the inside, and can tell you what is working,
               what is not, and what to do about it.
             </p>
           </FadeUp>
@@ -591,8 +591,8 @@ export default function TheAgencyStackPage() {
           </FadeUp>
           <FadeUp delay={0.12}>
             <p style={{ ...S.body, maxWidth: '640px', marginBottom: '48px' }}>
-              Most agencies that commission the Stack Review continue with the retainer — because
-              the questions do not stop after the report is delivered. Platform changes, new briefs,
+              Most agencies that commission the Stack Review continue with the retainer. The
+              questions do not stop after the report is delivered. Platform changes, new briefs,
               vendor decisions, and stack questions are handled in real time, not at the start of
               the next audit cycle.
             </p>

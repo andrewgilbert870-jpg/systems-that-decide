@@ -110,7 +110,7 @@ const deliverables = [
     num: '01',
     name: 'Systems Map',
     description:
-      'A hand-built map of your media ecosystem showing the supply chain, technology stack, and data flows as they actually exist — independent of any single stakeholder\'s account of them.',
+      'A hand-built map of your media ecosystem showing the supply chain, technology stack, and data flows as they actually exist. Independent of any single stakeholder\'s account of them.',
   },
   {
     num: '02',
@@ -243,7 +243,7 @@ export default function TheSystemsAuditPage() {
                 </p>
                 <p style={{ ...S.body }}>
                   The work is conducted entirely by Andrew Gilbert. Not delegated. 16 years of
-                  operator experience across every layer of the paid media ecosystem — agency media
+                  operator experience across every layer of the paid media ecosystem: agency media
                   buying, brand-side management at scale, brand safety and verification (IAS ANZ),
                   audience data infrastructure (Eyeota), programmatic DSP and SSP operations (Yahoo
                   APAC), and retail media network design and leadership (Block / Afterpay). He did

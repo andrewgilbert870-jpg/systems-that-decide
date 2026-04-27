@@ -384,7 +384,7 @@ export default async function HomePage() {
           </FadeUp>
           <FadeUp delay={0.08}>
             <h2 style={{ ...S.sectionHead, marginBottom: '56px', maxWidth: '640px' }}>
-              Five ways to engage.
+              Six ways to engage.
             </h2>
           </FadeUp>
 
