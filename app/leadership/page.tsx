@@ -55,7 +55,7 @@ const roleTypes = [
   {
     name: 'Fractional Executive',
     description:
-      'CRO, VP Commercial, or VP Product on a fractional basis for technology businesses in the programmatic, retail media, or measurement space. Particularly suited to ANZ market entry or scale phases where a full-time hire is premature.',
+      'Senior commercial, revenue, or product leadership on a fractional basis for technology businesses in the programmatic, retail media, or measurement space. Particularly suited to ANZ market entry or scale phases where a full-time hire is premature.',
   },
   {
     name: 'Board Advisory',
