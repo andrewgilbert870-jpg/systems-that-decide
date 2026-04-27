@@ -48,9 +48,9 @@ const roles = [
 
 const roleTypes = [
   {
-    name: 'Senior Leadership (VP / C-Suite)',
+    name: 'Senior Leadership',
     description:
-      'VP or C-suite roles in adtech, martech, retail media, commerce platforms, or measurement businesses operating in ANZ. Preference for operators building in a space I know well — not for titles in adjacent categories.',
+      'Senior roles in adtech, martech, retail media, commerce platforms, or measurement businesses operating in ANZ. Preference for operators building in a space I know well — not for titles in adjacent categories.',
   },
   {
     name: 'Fractional Executive',
