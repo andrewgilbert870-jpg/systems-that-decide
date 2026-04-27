@@ -8,7 +8,7 @@ interface Particle {
   vy: number
 }
 
-const GOLD = { r: 154, g: 139, b: 71 }
+const GOLD = { r: 212, g: 175, b: 55 }
 const COUNT = 60
 const MAX_DIST = 200
 const SPEED = 0.28
