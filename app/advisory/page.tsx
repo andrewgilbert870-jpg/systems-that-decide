@@ -7,7 +7,7 @@ import MandateBlock from '@/components/MandateBlock'
 export const metadata: Metadata = {
   title: 'Advisory & Leadership',
   description:
-    'Independent advisory engagements for organisations facing structural change in advertising, retail media, and commerce.',
+    'Independent advisory engagements for organisations in ANZ. Two named products for brands and agencies, plus strategic advisory, education, and transaction services.',
 }
 
 const S = {
@@ -23,25 +23,18 @@ const S = {
 
 const engagements = [
   {
-    name: 'Strategic Audit',
-    format: 'Single Engagement · 2–4 Weeks',
-    who: 'Independent Agencies · Brands Direct',
-    description:
-      'A structured diagnostic of your current position in the algorithmic ecosystem. Where your decisions are made, where they should be made, and where the system is working against you.\n\nTypically triggered by a market shift: AI disruption, regulatory change, or research surfacing inefficiencies. Or by an agency that wants to scale but lacks the technology strategy to do it transparently and efficiently. The audit produces a clear assessment of where you are, where the gaps are, and what to prioritise first.',
-  },
-  {
     name: 'Executive Advisory',
     format: 'Ongoing · Quarterly or Monthly Retainer',
-    who: 'Independent Agencies · Tech Platforms · Brands in Transformation',
+    who: 'Leadership Teams · Tech Platforms · Brands in Transformation',
     description:
       'A standing relationship for leadership teams that want an unconflicted outside view. Regular briefings, pressure-testing of strategy, and access to analysis as the market moves.\n\nWhen you are inside the business it is difficult to see the full picture. Biases develop. Teams operate under assumptions about what their product delivers or what their clients actually want that go untested. This engagement provides the independent challenge that internal teams cannot give each other.',
   },
   {
     name: 'Market Entry & Expansion',
     format: 'Project-Based · 4–8 Weeks',
-    who: 'Tech Companies Entering ANZ · APAC Market',
+    who: 'Tech Companies Entering ANZ',
     description:
-      'For technology companies outside ANZ looking to enter the market, and for those who have launched and want to sense-check their strategy before committing further.\n\nThis engagement is built on understanding what the market actually responds to, not what looks right from the outside. That judgment comes from having sat on both sides: winning the Afterpay business while at Yahoo, then moving to Afterpay and redirecting their entire channel strategy.',
+      'For technology companies outside ANZ looking to enter the market, and for those who have launched and want to sense-check their strategy before committing further.\n\nThis engagement is built on understanding what the ANZ market actually responds to, not what looks right from the outside. That judgment comes from having sat on both sides: winning the Afterpay business while at Yahoo, then moving to Afterpay and redirecting their entire channel strategy.',
   },
   {
     name: 'Team Education',
@@ -72,7 +65,7 @@ export default function AdvisoryPage() {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <FadeUp>
-            <p style={{ ...S.label, marginBottom: '20px' }}>Advisory & Leadership</p>
+            <p style={{ ...S.label, marginBottom: '20px' }}>Advisory</p>
           </FadeUp>
           <FadeUp delay={0.08}>
             <h1
@@ -101,20 +94,191 @@ export default function AdvisoryPage() {
                 marginBottom: '40px',
               }}
             >
-              Independent advisory engagements for organisations facing structural change in
+              Independent advisory engagements for organisations in ANZ facing structural change in
               advertising, retail media, and commerce.
             </p>
           </FadeUp>
           <FadeUp delay={0.2}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-              <a href="#engagements" className="btn-primary">
-                View Engagements
+              <a href="#products" className="btn-primary">
+                View Products
               </a>
               <Link href="/enquire" className="btn-secondary">
                 Enquire
               </Link>
             </div>
           </FadeUp>
+        </div>
+      </section>
+
+      {/* Named Products */}
+      <section
+        id="products"
+        style={{
+          background: '#0F0F0F',
+          padding: 'clamp(64px, 8vw, 96px) 0',
+          borderBottom: '1px solid #2A2825',
+        }}
+      >
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+          <FadeUp>
+            <p style={{ ...S.label, marginBottom: '20px' }}>Named Products</p>
+          </FadeUp>
+          <FadeUp delay={0.08}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-playfair)',
+                fontWeight: 700,
+                fontSize: 'clamp(28px, 4vw, 40px)',
+                color: '#F0EDE8',
+                marginBottom: '20px',
+                lineHeight: 1.25,
+              }}
+            >
+              Two products built for specific problems.
+            </h2>
+          </FadeUp>
+          <FadeUp delay={0.12}>
+            <p
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '18px',
+                color: '#B8B2AE',
+                lineHeight: 1.7,
+                maxWidth: '640px',
+                marginBottom: '48px',
+              }}
+            >
+              Alongside strategic advisory, two named products are available for organisations with
+              a specific, defined problem.
+            </p>
+          </FadeUp>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+              gap: '24px',
+            }}
+          >
+            {/* Card 1: The Systems Audit */}
+            <FadeUp delay={0.16}>
+              <div
+                style={{
+                  background: '#141414',
+                  border: '1px solid #2A2825',
+                  borderTop: '3px solid #9A8B47',
+                  padding: '40px',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <p style={{ ...S.label, marginBottom: '16px' }}>The Systems Audit</p>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-playfair)',
+                    fontWeight: 700,
+                    fontSize: '26px',
+                    color: '#F0EDE8',
+                    marginBottom: '16px',
+                    lineHeight: 1.25,
+                  }}
+                >
+                  For brands and large direct advertisers in ANZ.
+                </h3>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '17px',
+                    color: '#B8B2AE',
+                    lineHeight: 1.7,
+                    marginBottom: '28px',
+                    flex: 1,
+                  }}
+                >
+                  A full-scope, six-week independent assessment of your paid media ecosystem. Six
+                  frameworks. A Media Systems Health Score out of 120. A board-ready report.
+                </p>
+                <Link
+                  href="/the-systems-audit"
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '16px',
+                    color: '#9A8B47',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  View The Systems Audit
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                    arrow_forward
+                  </span>
+                </Link>
+              </div>
+            </FadeUp>
+
+            {/* Card 2: The Agency Stack */}
+            <FadeUp delay={0.22}>
+              <div
+                style={{
+                  background: '#141414',
+                  border: '1px solid #2A2825',
+                  borderTop: '3px solid #9A8B47',
+                  padding: '40px',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <p style={{ ...S.label, marginBottom: '16px' }}>The Agency Stack</p>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-playfair)',
+                    fontWeight: 700,
+                    fontSize: '26px',
+                    color: '#F0EDE8',
+                    marginBottom: '16px',
+                    lineHeight: 1.25,
+                  }}
+                >
+                  For independent agencies in ANZ.
+                </h3>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '17px',
+                    color: '#B8B2AE',
+                    lineHeight: 1.7,
+                    marginBottom: '28px',
+                    flex: 1,
+                  }}
+                >
+                  A technology audit and monthly advisory for agencies that want the stack
+                  governance capability of a holding company at a fractional cost.
+                </p>
+                <Link
+                  href="/the-agency-stack"
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontSize: '16px',
+                    color: '#9A8B47',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  View The Agency Stack
+                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>
+                    arrow_forward
+                  </span>
+                </Link>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 
@@ -132,57 +296,6 @@ export default function AdvisoryPage() {
               <ServiceRow {...e} isFirst={i === 0} />
             </FadeUp>
           ))}
-        </div>
-      </section>
-
-      {/* Senior Leadership */}
-      <section
-        style={{
-          background: '#1C1B1B',
-          padding: 'clamp(64px, 8vw, 96px) 0',
-        }}
-      >
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <FadeUp>
-            <p style={{ ...S.label, marginBottom: '20px' }}>Senior Leadership</p>
-          </FadeUp>
-          <FadeUp delay={0.08}>
-            <h2
-              style={{
-                fontFamily: 'var(--font-playfair)',
-                fontWeight: 400,
-                fontSize: 'clamp(26px, 4vw, 36px)',
-                color: '#F0EDE8',
-                marginBottom: '20px',
-                lineHeight: 1.25,
-                maxWidth: '640px',
-              }}
-            >
-              Open to senior leadership conversations.
-            </h2>
-          </FadeUp>
-          <FadeUp delay={0.14}>
-            <p
-              style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '18px',
-                color: '#B8B2AE',
-                lineHeight: 1.7,
-                maxWidth: '640px',
-                marginBottom: '36px',
-              }}
-            >
-              Alongside advisory work, I am open to senior leadership and fractional executive
-              roles in adtech, martech, retail media, and commerce infrastructure across ANZ and
-              APAC. If you are building something in this space and need an operator who has done
-              it before, get in touch.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <Link href="/enquire" className="btn-secondary">
-              Start a Conversation
-            </Link>
-          </FadeUp>
         </div>
       </section>
 

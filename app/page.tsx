@@ -55,10 +55,16 @@ const S = {
 
 const engagements = [
   {
-    name: 'Strategic Audit',
-    format: 'Single Engagement · 2–4 Weeks',
+    name: 'The Systems Audit',
+    format: 'For Brands · Single Engagement · 6 Weeks',
     description:
-      'A structured diagnostic of your current position in the algorithmic ecosystem. Where your decisions are made, where they should be made, and where the system is working against you.',
+      'A full-scope, independent assessment of your paid media ecosystem. Six frameworks. A Media Systems Health Score out of 120. A board-ready written report.',
+  },
+  {
+    name: 'The Agency Stack',
+    format: 'For Agencies · Stack Review + Monthly Retainer',
+    description:
+      'A technology audit and monthly advisory for independent agencies in ANZ. Builds a structured view of the stack, then keeps it current.',
   },
   {
     name: 'Executive Advisory',
@@ -70,7 +76,7 @@ const engagements = [
     name: 'Market Entry & Expansion',
     format: 'Project-Based · 4–8 Weeks',
     description:
-      'For technology companies outside ANZ looking to enter the market, and for those who have launched and want to sense-check their strategy before committing further.',
+      'For technology companies outside ANZ looking to enter the ANZ market, and for those who have launched and want to sense-check their strategy before committing further.',
   },
   {
     name: 'Team Education',
@@ -447,7 +453,7 @@ export default async function HomePage() {
 
           <FadeUp>
             <Link href="/advisory" className="enquire-btn">
-              View All Engagements
+              View Advisory
               <span className="material-symbols-outlined" style={{ fontSize: '16px', marginLeft: '8px' }}>
                 arrow_forward
               </span>
