@@ -1,0 +1,393 @@
+/* =========================================================================
+   Systems That Decide — Foundations
+   Colours, Type, Spacing, Borders, Motion, Utility tokens.
+   Mirrors `Systems That Decide ▸ Brand & Design System` (v1.0, 2025) and
+   `Systems That Decide ▸ Brand Fonts` (v1.0, 2025). Three fonts. Every
+   role deliberate. Space Grotesk leads. Inter carries. Space Mono frames.
+   ========================================================================= */
+
+/* ── Brand sans #1: Inter (uploaded OTFs) — body, UI, lead paragraphs ─────────────── */
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Thin-BETA.otf")            format("opentype"); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-ThinItalic-BETA.otf")      format("opentype"); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-ExtraLight-BETA.otf")      format("opentype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-ExtraLightItalic-BETA.otf") format("opentype"); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Light-BETA.otf")           format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-LightItalic-BETA.otf")     format("opentype"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Regular.otf")              format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Italic.otf")               format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Medium.otf")               format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-MediumItalic.otf")         format("opentype"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-SemiBold.otf")             format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-SemiBoldItalic.otf")       format("opentype"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Bold.otf")                 format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-BoldItalic.otf")           format("opentype"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-ExtraBold.otf")            format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-ExtraBoldItalic.otf")      format("opentype"); font-weight: 800; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-Black.otf")                format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/Inter-BlackItalic.otf")          format("opentype"); font-weight: 900; font-style: italic; font-display: swap; }
+
+/* ── Brand sans #2 — Space Grotesk (uploaded OTFs) — THE AUTHORITY VOICE ──────────
+   Display, headlines, navigation, card titles, data callouts. Geometric
+   sans-serif. Sharp. Commanding. Never used for running body. */
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/SpaceGrotesk-Light.otf")    format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/SpaceGrotesk-Regular.otf")  format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/SpaceGrotesk-Medium.otf")   format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/SpaceGrotesk-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("../fonts/SpaceGrotesk-Bold.otf")     format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ── Instrument Serif + IBM Plex Sans + Space Mono + Material Symbols ────────── */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap");
+
+:root {
+  /* ── Surfaces (dark — the canonical operating surface) ─────────────── */
+  --bg:                 #0D0D0D;   /* Obsidian — primary background */
+  --surface:            #141414;   /* Card / section surface */
+  --surface-raised:     #1C1B1B;   /* Inset panels, raised cards */
+
+  /* ── Brand accent — signal, never decoration ───────────────────────── */
+  --gold:               #9A8B47;   /* Signal Gold */
+  --gold-light:         #BBA55F;   /* Hover / secondary gold */
+  --gold-stat:          #C4A84A;   /* Brighter — large numerals only */
+  --gold-tint-08:       rgba(154,139,71,0.08);
+  --gold-tint-20:       rgba(154,139,71,0.20);
+  --gold-tint-30:       rgba(154,139,71,0.30);
+  --gold-tint-40:       rgba(154,139,71,0.40);
+
+  /* ── Text on dark ──────────────────────────────────────────────────── */
+  --fg:                 #F0EDE8;   /* Off-white — primary text */
+  --fg-muted:           #B8B2AE;   /* Muted Stone — body / secondary */
+  --fg-subtle:          rgba(255,255,255,0.45);  /* Raised from 0.30 → 0.45 for ≥4.5:1 contrast on --bg */
+  --fg-faint:           rgba(255,255,255,0.06);
+
+  /* ── Text on light (documents only) ────────────────────────────────── */
+  --doc-bg:             #FFFFFF;
+  --doc-fg:             #0D0D0D;
+  --doc-fg-body:        #333330;
+
+  /* ── Borders / dividers ────────────────────────────────────────────── */
+  --border:             #2A2825;
+  --border-faint:       rgba(255,255,255,0.06);
+  --border-gold:        rgba(154,139,71,0.20);
+
+  /* ── Semantic — functional only, never brand ───────────────────────── */
+  --status-risk:        #B85042;
+  --status-caution:     #C9873A;
+  --status-confirmed:   #4A7C59;
+
+  /* ── Type stacks ───────────────────────────────────────────────────── */
+  /* Three fonts. Instrument Serif leads at display sizes (hero H1, pull quotes) —
+     editorial weight without shouting. IBM Plex Sans carries headings, nav, cards,
+     body, UI. Space Mono frames (eyebrows, metadata, footers, technical strings). */
+  --font-display:       "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-heading:       "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:          "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:          "Space Mono", "SFMono-Regular", "Roboto Mono", Menlo, monospace;
+
+  /* Back-compat aliases. */
+  --font-sans-grotesk:  var(--font-heading);
+  --font-serif:         var(--font-display);
+
+  /* ── Type scale (web — translated from Brand Fonts v1.0 pt scale) ───
+     Doc spec → web equivalent (clamp for responsive):
+       Display     80pt SemiBold  → clamp(48px, 8vw, 80px)
+       Section     52pt Bold      → clamp(36px, 6vw, 52px)
+       Page head   32pt SemiBold  → clamp(26px, 3.6vw, 32px)
+       Subhead     24pt Medium    → clamp(20px, 2.4vw, 24px)
+       Card title  20pt Medium    → 20px
+       Lead        20pt SemiBold  → 20px (Inter)
+       Body        11pt Regular   → 16px web baseline (≈11pt print)
+       Caption     9pt  Regular   → 12px (Space Mono) */
+  --text-display:       clamp(48px, 8vw, 80px);
+  --text-section:       clamp(36px, 6vw, 52px);
+  --text-page:          clamp(26px, 3.6vw, 32px);
+  --text-h2:            clamp(20px, 2.4vw, 24px);
+  --text-h3:            20px;
+  --text-h4:            18px;
+  --text-lead:          20px;
+  --text-body:          16px;
+  --text-body-sm:       14px;
+  --text-meta:          13px;
+  --text-label:         12px;     /* Space Mono caps eyebrow */
+  --text-caption:       12px;
+  --text-mono:          clamp(40px, 5vw, 64px);
+
+  /* ── Spacing scale (mirrors brand doc XS → XXL, in px) ─────────────── */
+  --space-xs:           6px;
+  --space-s:            9px;
+  --space-m:            14px;
+  --space-l:            20px;
+  --space-xl:           28px;
+  --space-xxl:          40px;
+  --space-3xl:          64px;
+  --space-4xl:          96px;
+
+  /* ── Layout ────────────────────────────────────────────────────────── */
+  --container-max:      1280px;
+  --gutter:             24px;
+  --nav-height:         60px;   /* Matches Nav component height; used by PinnedNarrative offset */
+
+  /* ── Borders / radii / motion ──────────────────────────────────────── */
+  --radius-none:        0;
+  --border-w-hair:      1px;
+  --border-w-rule:      2px;
+  --border-w-quote:     4px;
+
+  --shadow-card:        0 8px 32px rgba(0,0,0,0.4);
+
+  --easing:             cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-expo:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:        cubic-bezier(0.45, 0, 0.55, 1);
+  --dur-fast:           180ms;
+  --dur-base:           320ms;
+  --dur-slow:           600ms;
+  --dur-reveal:         700ms;
+  --reveal-y:           18px;
+  --reveal-dur:         600ms;
+
+  /* ── Tracking / spacing ──────────────────────────────────────────────
+     Instrument Serif at display sizes benefits from negative tracking.
+     IBM Plex Sans headings sit at 0 or slightly negative.
+     Space Mono caps eyebrows and footer labels carry positive tracking. */
+  --tracking-display:   -0.03em;   /* Instrument Serif hero headline */
+  --tracking-heading:   -0.01em;   /* IBM Plex Sans section headings */
+  --tracking-tight:     -0.01em;   /* General tight spacing */
+  --tracking-label:     0.12em;    /* Space Mono caps eyebrows */
+  --tracking-nav:       0.10em;    /* Nav links */
+  --tracking-footer:    0.18em;    /* Footer caps — Space Mono */
+
+  /* ── Background motifs ─────────────────────────────────────────────── */
+  --dot-grid:           radial-gradient(circle, rgba(154,139,71,0.07) 1px, transparent 1px);
+  --dot-grid-size:      28px 28px;
+}
+
+/* =========================================================================
+   Z-index scale — single source of truth
+   Never invent a z-index outside this list.
+   =========================================================================
+   10   .pinned-narrative-panel  (position:fixed scroll panel)
+   50   nav / header             (sticky, must clear panel)
+   100  reserved (modals, drawers)
+   200  .scroll-progress         (always on top of content)
+   9999 body::after grain        (pointer-events:none, purely visual)
+   ========================================================================= */
+
+/* =========================================================================
+   Semantic / element defaults (when this stylesheet is imported standalone)
+   ========================================================================= */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  background-image: var(--dot-grid);
+  background-size: var(--dot-grid-size);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: rgba(154,139,71,0.25); color: var(--fg); }
+
+/* =========================================================================
+   Focus styles — keyboard navigation (WCAG 2.1 SC 2.4.7)
+   Uses :focus-visible so mouse users never see the ring.
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Type primitives — Brand Fonts v1.0 ───────────────────────────────── */
+
+/* Display — Instrument Serif 400, 80pt → clamp. Serif at this scale
+   is editorial weight without geometric stiffness. */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-display);
+  line-height: 1.0;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+}
+
+/* Section title — IBM Plex Sans Bold 52pt → clamp */
+.t-section {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-section);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-heading);
+  color: var(--fg);
+}
+
+/* Page headline — IBM Plex Sans SemiBold 32pt → clamp */
+.t-page {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-page);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-heading);
+  color: var(--fg);
+}
+
+/* Subheading / H2 — IBM Plex Sans Medium 24pt → clamp */
+.t-subhead {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h2);
+  line-height: 1.3;
+  color: var(--fg);
+}
+
+/* Card title / H3 — IBM Plex Sans Medium 20pt */
+.t-card-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: var(--text-h3);
+  line-height: 1.3;
+  color: var(--fg);
+  letter-spacing: 0;
+}
+
+/* Lead paragraph — Inter SemiBold 20pt */
+.t-lead {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* Body — Inter Regular */
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--fg-muted);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* Eyebrow / label — Space Mono Regular caps. Section eyebrows = gold;
+   inline metadata labels (dates, categories) should override to muted. */
+.t-label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Inline metadata caption — Space Mono Regular, muted, no caps */
+.t-caption {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--text-caption);
+  color: var(--fg-muted);
+  letter-spacing: 0;
+}
+
+/* Footer label — Space Mono Bold caps, muted */
+.t-footer-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: var(--tracking-footer);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* Stat numerals — Space Mono Bold */
+.t-stat {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--text-mono);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--gold-stat);
+}
+
+/* Pull quote — Instrument Serif italic. Native italic brings the
+   considered, authoritative voice the brand requires. */
+.t-quote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.5;
+  color: var(--gold);
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================================
+   Scrollbar — webkit only, matches dark palette
+   ========================================================================= */
+::-webkit-scrollbar              { width: 6px; height: 6px; }
+::-webkit-scrollbar-track        { background: var(--bg); }
+::-webkit-scrollbar-thumb        { background: #2A2825; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--gold-tint-40); }
+
+/* =========================================================================
+   Grain noise overlay — applied via a fixed pseudo-element
+   ========================================================================= */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* =========================================================================
+   Scroll progress bar — thin gold rule at top of viewport
+   ========================================================================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--gold);
+  z-index: 100;
+  transform-origin: left center;
+  transition: width 80ms linear;
+  pointer-events: none;
+}
+
+/* =========================================================================
+   Reveal animation — clip-path wipe (left → right)
+   ========================================================================= */
+.reveal-clip {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-reveal) var(--ease-out-expo);
+}
+.reveal-clip.is-shown {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* =========================================================================
+   Pinned narrative — mobile stack
+   ========================================================================= */
+@media (max-width: 768px) {
+  .pinned-narrative-desktop { display: none !important; }
+  .pinned-narrative-mobile  { display: block !important; }
+}
+@media (min-width: 769px) {
+  .pinned-narrative-desktop { display: block !important; }
+  .pinned-narrative-mobile  { display: none !important; }
+}

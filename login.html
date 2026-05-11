@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en" style="color-scheme: dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Login — Systems That Decide</title>
+  <link rel="stylesheet" href="css/foundations.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      background-image: var(--dot-grid);
+      background-size: var(--dot-grid-size);
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 3px;
+    }
+
+    .login-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      min-height: 100vh;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 48px 40px 44px;
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      text-decoration: none;
+    }
+
+    .login-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .wm-bold {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--fg);
+    }
+
+    .wm-light {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--fg-muted);
+    }
+
+    .login-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .login-heading {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(22px, 3vw, 28px);
+      color: var(--fg);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+
+    .login-sub {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 10px;
+    }
+
+    .code-input {
+      display: block;
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      padding: 14px 16px;
+      transition: border-color 200ms ease;
+      outline: none;
+      margin-bottom: 8px;
+    }
+
+    .code-input::placeholder {
+      color: var(--fg-subtle);
+      letter-spacing: 0.04em;
+    }
+
+    .code-input:focus {
+      border-color: var(--gold-tint-40);
+    }
+
+    .code-hint {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-subtle);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .error-msg {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--status-risk);
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .error-msg.visible { display: block; }
+
+    .login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--gold);
+      color: #0D0D0D;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 200ms ease;
+    }
+
+    .login-btn:hover { background: var(--gold-light); }
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .login-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--fg-subtle);
+      line-height: 1.6;
+    }
+
+    .login-footer a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-tint-30);
+    }
+
+    .login-footer a:hover { border-bottom-color: var(--gold); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 32px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-subtle);
+      text-decoration: none;
+      transition: color 200ms ease;
+    }
+
+    .back-link:hover { color: var(--gold); }
+
+    @media (max-width: 480px) {
+      .login-card { padding: 36px 24px 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+
+      <!-- Logo -->
+      <a href="index.html" class="login-logo" aria-label="Systems That Decide — home">
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="44" stroke="#9A8B47" stroke-width="3.6" fill="none" />
+          <polygon points="50,6 94,50 50,94 6,50" stroke="#9A8B47" stroke-width="1.4" fill="none" />
+          <circle cx="50" cy="6" r="3.4" fill="#9A8B47" />
+          <circle cx="94" cy="50" r="3.4" fill="#9A8B47" />
+          <circle cx="50" cy="94" r="3.4" fill="#9A8B47" />
+          <circle cx="6" cy="50" r="3.4" fill="#9A8B47" />
+        </svg>
+        <div class="login-wordmark">
+          <span class="wm-bold">Systems</span>
+          <span class="wm-light">That Decide</span>
+        </div>
+      </a>
+
+      <!-- Heading -->
+      <p class="login-eyebrow">Client Portal</p>
+      <h1 class="login-heading">Enter your access code.</h1>
+      <p class="login-sub">Your access code was provided alongside your engagement confirmation. Contact <a href="mailto:andrew@systemsthatdecide.io" style="color:var(--gold-light)">andrew@systemsthatdecide.io</a> if you need assistance.</p>
+
+      <!-- Form -->
+      <form id="login-form" novalidate>
+        <label for="access-code" class="field-label">Access code</label>
+        <input
+          type="text"
+          id="access-code"
+          name="access-code"
+          class="code-input"
+          placeholder="STD-XXXX-XXX"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          maxlength="20"
+          required
+          aria-describedby="code-hint error-msg"
+        />
+        <p id="code-hint" class="code-hint">Format: STD-XXXX-XXX</p>
+        <p id="error-msg" class="error-msg" role="alert" aria-live="assertive">That code isn't recognised. Please check and try again.</p>
+
+        <button type="submit" class="login-btn" id="submit-btn">
+          Access portal
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        New to the program? <a href="enquire.html">Book a scoping call</a> to discuss the Agentic Stack Readiness Program.
+      </div>
+    </div>
+
+    <a href="index.html" class="back-link">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to main site
+    </a>
+  </div>
+
+  <script>
+    // ── Access code registry ──────────────────────────────────────────
+    // Add new clients here: { name, tier, diagnosticComplete }
+    const ACCESS_CODES = {
+      "STD-2026-DEMO": { name: "Demo Client", tier: "asrp", diagnosticComplete: false },
+      // Additional client codes added here as engagements are onboarded
+    };
+
+    // ── Check if already authenticated this session ───────────────────
+    try {
+      const existing = sessionStorage.getItem("std_portal_auth");
+      if (existing) {
+        const parsed = JSON.parse(existing);
+        if (parsed && ACCESS_CODES[parsed.code]) {
+          window.location.replace("portal.html");
+        }
+      }
+    } catch (e) {}
+
+    // ── Form handling ─────────────────────────────────────────────────
+    const form = document.getElementById("login-form");
+    const input = document.getElementById("access-code");
+    const error = document.getElementById("error-msg");
+    const btn = document.getElementById("submit-btn");
+
+    // Normalise input as user types
+    input.addEventListener("input", () => {
+      input.value = input.value.toUpperCase().replace(/[^A-Z0-9-]/g, "");
+      error.classList.remove("visible");
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const code = input.value.trim();
+
+      if (!code) {
+        error.textContent = "Please enter your access code.";
+        error.classList.add("visible");
+        input.focus();
+        return;
+      }
+
+      const client = ACCESS_CODES[code];
+      if (!client) {
+        error.textContent = "That code isn’t recognised. Please check and try again.";
+        error.classList.add("visible");
+        input.focus();
+        return;
+      }
+
+      // Authenticated — store session and redirect
+      btn.disabled = true;
+      btn.textContent = "Accessing…";
+
+      try {
+        sessionStorage.setItem("std_portal_auth", JSON.stringify({
+          code,
+          name: client.name,
+          tier: client.tier,
+          diagnosticComplete: client.diagnosticComplete,
+          authenticatedAt: Date.now(),
+        }));
+      } catch (e) {}
+
+      // Small delay for UX, then redirect
+      setTimeout(() => {
+        window.location.href = "portal.html";
+      }, 300);
+    });
+  </script>
+</body>
+</html>
