@@ -303,7 +303,7 @@ const EcosystemBoard = () => {
               }}>
                 <div className="eco-col-label" style={{
                   display: "inline-flex", alignItems: "center", gap: 12,
-                  fontFamily: "var(--font-mono)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700,
+                  fontFamily: "var(--font-mono)", fontSize: "clamp(14px, 1.75vw, 22px)", fontWeight: 700,
                   letterSpacing: "0.08em", textTransform: "uppercase",
                   color: "var(--fg-muted)", marginBottom: 24,
                 }}>
@@ -345,7 +345,7 @@ const EcosystemBoard = () => {
               }}>
                 <div className="eco-col-label" style={{
                   display: "inline-flex", alignItems: "center", gap: 12,
-                  fontFamily: "var(--font-mono)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700,
+                  fontFamily: "var(--font-mono)", fontSize: "clamp(14px, 1.75vw, 22px)", fontWeight: 700,
                   letterSpacing: "0.08em", textTransform: "uppercase",
                   color: "var(--gold)", marginBottom: 24,
                 }}>
