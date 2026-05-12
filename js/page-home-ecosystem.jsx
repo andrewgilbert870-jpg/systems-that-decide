@@ -302,12 +302,12 @@ const EcosystemBoard = () => {
                 borderRight: "1px solid var(--border-faint)",
               }}>
                 <div className="eco-col-label" style={{
-                  display: "inline-flex", alignItems: "center", gap: 8,
-                  fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase",
-                  color: "var(--fg-muted)", marginBottom: 18,
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  fontFamily: "var(--font-mono)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700,
+                  letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: "var(--fg-muted)", marginBottom: 24,
                 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--fg-muted)" }} />
+                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--fg-muted)", flexShrink: 0 }} />
                   Now · What&rsquo;s Live
                 </div>
                 <ul className="eco-items" style={{
@@ -344,12 +344,12 @@ const EcosystemBoard = () => {
                 padding: "28px 32px 32px",
               }}>
                 <div className="eco-col-label" style={{
-                  display: "inline-flex", alignItems: "center", gap: 8,
-                  fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase",
-                  color: "var(--gold)", marginBottom: 18,
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  fontFamily: "var(--font-mono)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700,
+                  letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: "var(--gold)", marginBottom: 24,
                 }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)" }} />
+                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
                   Forward Signal · What&rsquo;s Emerging
                 </div>
                 <ul className="eco-items" style={{
