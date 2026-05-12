@@ -343,6 +343,15 @@ const EcosystemBoard = () => {
               <div className="eco-col-future" style={{
                 padding: "28px 32px 32px",
               }}>
+                <div className="eco-col-label" style={{
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  fontFamily: "var(--font-mono)", fontSize: "clamp(14px, 1.75vw, 22px)", fontWeight: 700,
+                  letterSpacing: "0.08em", textTransform: "uppercase",
+                  color: "var(--gold)", marginBottom: 24,
+                }}>
+                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
+                  What&rsquo;s Emerging
+                </div>
                 <ul className="eco-items" style={{
                   listStyle: "none", padding: 0, margin: 0,
                   display: "flex", flexDirection: "column", gap: 12,
