@@ -303,7 +303,7 @@ const EcosystemBoard = () => {
               }}>
                 <div className="eco-col-label" style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
-                  fontFamily: "var(--font-mono)", fontSize: "9.5px", fontWeight: 700,
+                  fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
                   letterSpacing: "0.14em", textTransform: "uppercase",
                   color: "var(--fg-muted)", marginBottom: 18,
                 }}>
@@ -312,16 +312,16 @@ const EcosystemBoard = () => {
                 </div>
                 <ul className="eco-items" style={{
                   listStyle: "none", padding: 0, margin: 0,
-                  display: "flex", flexDirection: "column", gap: 10,
+                  display: "flex", flexDirection: "column", gap: 12,
                 }}>
                   {entity.now.map((t, i) => (
                     <li key={i} style={{
-                      fontFamily: "var(--font-sans)", fontSize: "0.835rem",
-                      lineHeight: 1.55, color: "var(--fg-muted)",
+                      fontFamily: "var(--font-sans)", fontSize: "0.9375rem",
+                      lineHeight: 1.6, color: "var(--fg-muted)",
                       paddingLeft: 14, position: "relative",
                     }}>
                       <span aria-hidden style={{
-                        position: "absolute", left: 0, top: 7,
+                        position: "absolute", left: 0, top: 8,
                         width: 4, height: 4, borderRadius: "50%",
                         background: "var(--fg-subtle)",
                       }} />
@@ -330,11 +330,11 @@ const EcosystemBoard = () => {
                   ))}
                 </ul>
                 <div className="eco-anz-note" style={{
-                  marginTop: 16, padding: "10px 14px",
+                  marginTop: 18, padding: "12px 14px",
                   background: "rgba(154,139,71,0.06)",
                   borderLeft: "2px solid rgba(154,139,71,0.35)",
-                  fontFamily: "var(--font-sans)", fontSize: "0.78rem",
-                  color: "var(--fg-muted)", lineHeight: 1.5,
+                  fontFamily: "var(--font-sans)", fontSize: "0.875rem",
+                  color: "var(--fg-muted)", lineHeight: 1.6,
                 }}>
                   <strong style={{ color: "var(--gold)", fontWeight: 600, letterSpacing: "0.04em" }}>ANZ · </strong>{entity.anz}
                 </div>
@@ -345,7 +345,7 @@ const EcosystemBoard = () => {
               }}>
                 <div className="eco-col-label" style={{
                   display: "inline-flex", alignItems: "center", gap: 8,
-                  fontFamily: "var(--font-mono)", fontSize: "9.5px", fontWeight: 700,
+                  fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
                   letterSpacing: "0.14em", textTransform: "uppercase",
                   color: "var(--gold)", marginBottom: 18,
                 }}>
@@ -354,16 +354,16 @@ const EcosystemBoard = () => {
                 </div>
                 <ul className="eco-items" style={{
                   listStyle: "none", padding: 0, margin: 0,
-                  display: "flex", flexDirection: "column", gap: 10,
+                  display: "flex", flexDirection: "column", gap: 12,
                 }}>
                   {entity.next.map((t, i) => (
                     <li key={i} style={{
-                      fontFamily: "var(--font-sans)", fontSize: "0.835rem",
-                      lineHeight: 1.55, color: "var(--fg)", opacity: 0.82,
+                      fontFamily: "var(--font-sans)", fontSize: "0.9375rem",
+                      lineHeight: 1.6, color: "var(--fg)", opacity: 0.82,
                       paddingLeft: 14, position: "relative",
                     }}>
                       <span aria-hidden style={{
-                        position: "absolute", left: 0, top: 7,
+                        position: "absolute", left: 0, top: 8,
                         width: 4, height: 4, borderRadius: "50%",
                         background: "var(--gold)", opacity: 0.6,
                       }} />
@@ -598,7 +598,7 @@ const EntityDetail = ({ entity, idx }) => {
       <div style={{ ...fade(140), marginBottom: 24 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--fg-muted)", display: "inline-block" }} />
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--fg-muted)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--fg-muted)" }}>
             Now · What&rsquo;s Live
           </span>
         </div>
@@ -606,14 +606,14 @@ const EntityDetail = ({ entity, idx }) => {
           {entity.now.map((item, i) => (
             <li key={i} style={{
               display: "grid", gridTemplateColumns: "28px 1fr",
-              gap: "0 12px", padding: "9px 0",
+              gap: "0 12px", padding: "11px 0",
               borderBottom: "1px solid var(--border-faint)",
               alignItems: "baseline",
             }}>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--gold-tint-40)", letterSpacing: "0.06em" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--gold-tint-40)", letterSpacing: "0.06em" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-muted)", lineHeight: 1.55 }}>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 15, color: "var(--fg-muted)", lineHeight: 1.6 }}>
                 {item}
               </span>
             </li>
@@ -625,7 +625,7 @@ const EntityDetail = ({ entity, idx }) => {
       <div style={{ ...fade(220), marginBottom: 20 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)", display: "inline-block" }} />
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)" }}>
             Forward Signal
           </span>
         </div>
@@ -633,14 +633,14 @@ const EntityDetail = ({ entity, idx }) => {
           {entity.next.slice(0, 2).map((item, i) => (
             <li key={i} style={{
               display: "grid", gridTemplateColumns: "28px 1fr",
-              gap: "0 12px", padding: "9px 0",
+              gap: "0 12px", padding: "11px 0",
               borderBottom: i < 1 ? "1px solid var(--border-faint)" : "none",
               alignItems: "baseline",
             }}>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "rgba(154,139,71,0.5)", letterSpacing: "0.06em" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "rgba(154,139,71,0.5)", letterSpacing: "0.06em" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "rgba(240,237,232,0.75)", lineHeight: 1.55 }}>
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 15, color: "rgba(240,237,232,0.75)", lineHeight: 1.6 }}>
                 {item}
               </span>
             </li>
@@ -655,10 +655,10 @@ const EntityDetail = ({ entity, idx }) => {
           background: "rgba(154,139,71,0.06)",
           borderLeft: "2px solid rgba(154,139,71,0.35)",
         }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
             ANZ ·{" "}
           </span>
-          <span style={{ fontFamily: "var(--font-sans)", fontSize: 12, color: "var(--fg-muted)", lineHeight: 1.55 }}>
+          <span style={{ fontFamily: "var(--font-sans)", fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.6 }}>
             {entity.anz}
           </span>
         </div>
