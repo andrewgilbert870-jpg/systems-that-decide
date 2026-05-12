@@ -163,7 +163,7 @@ const HeroNodeNetwork = () => {
 };
 
 // ── Hero — full-bleed spatial network, serif display headline ────────────
-const HomeHero = ({ onPrimary, onSecondary }) => {
+const HomeHero = ({ onEnquire, onSecondary }) => {
   const [shown, setShown] = React.useState(false);
   React.useEffect(() => {
     const t = setTimeout(() => setShown(true), 100);
@@ -227,22 +227,30 @@ const HomeHero = ({ onPrimary, onSecondary }) => {
         </div>
 
         {/* Lead */}
-        <div style={{ ...lift(280), marginBottom: 52, maxWidth: 560 }}>
+        <div style={{ ...lift(280), marginBottom: 52, maxWidth: 580 }}>
           <p style={{
             fontFamily: "var(--font-sans)", fontWeight: 400,
             fontSize: "clamp(16px, 1.2vw, 18px)",
             color: "var(--fg-muted)", lineHeight: 1.75, margin: 0,
           }}>
-            Agentic systems are already operating inside your media stack. Most ANZ advertisers are exposed. Not because they lack AI awareness, but because their infrastructure was never designed for this operating model.
+            PMax, Advantage+, and Koa are already making decisions your team never sees. Systems That Decide is the independent advisory practice of Andrew Gilbert. Sixteen years operating across the buy-side stack, now outside it, with no platform to defend and no implementation work to sell.
           </p>
         </div>
 
         {/* CTAs */}
-        <div style={{ ...lift(400), display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
-          <PrimaryBtn onClick={onPrimary}>
-            Explore the Readiness Program <MIcon name="arrow_forward" size={15} />
-          </PrimaryBtn>
-          <SecondaryBtn onClick={onSecondary}>Read the Library</SecondaryBtn>
+        <div style={{ ...lift(400), display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+            <PrimaryBtn onClick={onEnquire}>
+              Book a scoping call <MIcon name="arrow_forward" size={15} />
+            </PrimaryBtn>
+            <SecondaryBtn onClick={onSecondary}>Read the Library</SecondaryBtn>
+          </div>
+          <span style={{
+            fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.12em",
+            textTransform: "uppercase", color: "var(--fg-subtle)",
+          }}>
+            30 minutes · No commitment · Andrew responds within one business day
+          </span>
         </div>
 
         {/* Scroll cue */}
@@ -260,53 +268,40 @@ const HomeHero = ({ onPrimary, onSecondary }) => {
   );
 };
 
-// ── EcosystemIntro — bridge between hero and pinned narrative ────────────
+// ── EcosystemIntro — qualifying filter + bridge to the stack map ─────────
 const EcosystemIntro = () => (
   <section style={{
     background: "var(--surface)",
     borderTop: "1px solid var(--border)",
     borderBottom: "1px solid var(--border)",
-    padding: "clamp(64px, 9vw, 104px) clamp(24px, 4vw, 96px)",
+    padding: "clamp(56px, 8vw, 88px) clamp(24px, 4vw, 96px)",
   }}>
     <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-      {/* Eyebrow — clip-path reveal */}
-      <Reveal axis="x" style={{ marginBottom: 24 }}>
-        <p style={{
-          fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700,
-          letterSpacing: "0.18em", textTransform: "uppercase",
-          color: "var(--gold)", margin: 0,
-        }}>
-          Where agentic systems are taking hold
-        </p>
-      </Reveal>
-
-      {/* Two-col body */}
-      <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr",
-        gap: "clamp(32px, 5vw, 72px)", alignItems: "start",
-      }} className="eco-intro-grid">
-        <Reveal axis="x" delay={80}>
-          <h2 style={{
-            fontFamily: "var(--font-sans)", fontWeight: 700,
-            fontSize: "clamp(26px, 3.2vw, 38px)", letterSpacing: "-0.01em",
-            color: "var(--fg)", lineHeight: 1.1, margin: 0,
-          }}>
-            Six entities. One structural shift.
-          </h2>
-        </Reveal>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "clamp(32px, 5vw, 80px)", alignItems: "start" }} className="eco-intro-grid">
+        <div>
+          <Reveal axis="x" style={{ marginBottom: 20 }}>
+            <Label>Who this is for</Label>
+          </Reveal>
+          <Reveal axis="x" delay={80}>
+            <h2 style={{
+              fontFamily: "var(--font-sans)", fontWeight: 700,
+              fontSize: "clamp(24px, 2.8vw, 34px)", letterSpacing: "-0.01em",
+              color: "var(--fg)", lineHeight: 1.15, margin: 0,
+            }}>
+              If your media budget runs through Google, Meta, or a DSP, the question has already moved on.
+            </h2>
+          </Reveal>
+        </div>
         <FadeUp delay={120}>
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: 16, color: "var(--fg-muted)", lineHeight: 1.75, margin: "0 0 18px", maxWidth: 520 }}>
-            Select any layer to see what's live now versus what's emerging, drawn from primary research across infrastructure, platforms, and market participants.
+          <p style={{ fontFamily: "var(--font-sans)", fontSize: 17, color: "var(--fg-muted)", lineHeight: 1.8, margin: "0 0 20px", maxWidth: 560 }}>
+            The practice works with brands, agencies, and publishers operating inside an agentic media stack who need analysis that doesn't come from inside it. The question is not whether agentic systems are in your buy. It's whether your infrastructure was built to operate alongside them, and what it costs you when it wasn't.
           </p>
-          <p style={{ fontFamily: "var(--font-sans)", fontSize: 16, color: "var(--fg-muted)", lineHeight: 1.75, margin: 0, maxWidth: 520 }}>
-            Scroll through the stack below. Each layer advances in turn.
-          </p>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 28 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <div style={{ width: 32, height: 1, background: "rgba(154,139,71,0.25)" }} />
             <span style={{
               fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: "0.14em",
               textTransform: "uppercase", color: "var(--fg-subtle)",
-            }}>Scroll the section below</span>
+            }}>Scroll to map the stack</span>
           </div>
         </FadeUp>
       </div>
@@ -606,7 +601,7 @@ const HomeLibrary = ({ onAll }) => (
 const HomePage = ({ onNavigate, onEnquire }) => (
   <div>
     <ScrollProgress />
-    <HomeHero onPrimary={() => onNavigate("asrp")} onSecondary={() => onNavigate("library")} />
+    <HomeHero onEnquire={onEnquire} onSecondary={() => onNavigate("library")} />
     <EcosystemIntro />
     <PinnedNarrative />
     <ChapterGate />
