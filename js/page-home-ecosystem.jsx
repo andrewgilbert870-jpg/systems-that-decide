@@ -294,8 +294,13 @@ const EcosystemBoard = () => {
               }}>{entity.tag}</span>
             </div>
 
-            <div className="eco-panel-cols" style={{ display: "grid", gridTemplateColumns: "1fr" }}>
-              <div className="eco-col-now" style={{ padding: "28px 32px 32px" }}>
+            <div className="eco-panel-cols" style={{
+              display: "grid", gridTemplateColumns: "1fr 1fr",
+            }}>
+              <div className="eco-col-now" style={{
+                padding: "28px 32px 32px",
+                borderRight: "1px solid var(--border-faint)",
+              }}>
                 <div className="eco-col-label" style={{
                   display: "inline-flex", alignItems: "center", gap: 12,
                   fontFamily: "var(--font-mono)", fontSize: "clamp(14px, 1.75vw, 22px)", fontWeight: 700,
@@ -307,7 +312,7 @@ const EcosystemBoard = () => {
                 </div>
                 <ul className="eco-items" style={{
                   listStyle: "none", padding: 0, margin: 0,
-                  display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 12,
+                  display: "flex", flexDirection: "column", gap: 12,
                 }}>
                   {entity.now.map((t, i) => (
                     <li key={i} style={{
@@ -333,6 +338,30 @@ const EcosystemBoard = () => {
                 }}>
                   <strong style={{ color: "var(--gold)", fontWeight: 600, letterSpacing: "0.04em" }}>ANZ · </strong>{entity.anz}
                 </div>
+              </div>
+
+              <div className="eco-col-future" style={{
+                padding: "28px 32px 32px",
+              }}>
+                <ul className="eco-items" style={{
+                  listStyle: "none", padding: 0, margin: 0,
+                  display: "flex", flexDirection: "column", gap: 12,
+                }}>
+                  {entity.next.map((t, i) => (
+                    <li key={i} style={{
+                      fontFamily: "var(--font-sans)", fontSize: "0.9375rem",
+                      lineHeight: 1.6, color: "var(--fg)", opacity: 0.82,
+                      paddingLeft: 14, position: "relative",
+                    }}>
+                      <span aria-hidden style={{
+                        position: "absolute", left: 0, top: 8,
+                        width: 4, height: 4, borderRadius: "50%",
+                        background: "var(--gold)", opacity: 0.6,
+                      }} />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
