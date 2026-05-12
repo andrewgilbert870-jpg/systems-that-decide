@@ -381,13 +381,7 @@ body::after {
 }
 
 /* =========================================================================
-   Pinned narrative — mobile stack
+   Pinned narrative — accordion on all screen sizes
    ========================================================================= */
-@media (max-width: 768px) {
-  .pinned-narrative-desktop { display: none !important; }
-  .pinned-narrative-mobile  { display: block !important; }
-}
-@media (min-width: 769px) {
-  .pinned-narrative-desktop { display: block !important; }
-  .pinned-narrative-mobile  { display: none !important; }
-}
+.pinned-narrative-desktop { display: none !important; }
+.pinned-narrative-mobile  { display: block !important; }

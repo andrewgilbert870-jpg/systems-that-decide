@@ -414,13 +414,13 @@ const ChapterGate = () => {
   return (
     <div ref={ref} style={{
       position: "relative",
-      minHeight: "56vh",
+      minHeight: "24vh",
       display: "flex", alignItems: "center", justifyContent: "center",
       background: "#100F0A",
       borderTop: "1px solid rgba(154,139,71,0.12)",
       borderBottom: "1px solid rgba(154,139,71,0.12)",
       overflow: "hidden",
-      padding: "clamp(72px, 10vw, 120px) clamp(24px, 6vw, 120px)",
+      padding: "clamp(40px, 5vw, 64px) clamp(24px, 6vw, 120px)",
     }}>
       {/* Radial gold haze — grows as the section scrolls into view */}
       <div style={{
