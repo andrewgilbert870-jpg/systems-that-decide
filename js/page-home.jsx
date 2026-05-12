@@ -310,6 +310,82 @@ const EcosystemIntro = () => (
   </section>
 );
 
+// ── AudienceSection — three-panel audience filter ────────────────────────
+const AUDIENCE_PANELS = [
+  {
+    label: "Brand",
+    heading: "Your agency says it's fine.",
+    body: "PMax and Advantage+ are making decisions inside your media buy that your agency can't fully audit. The question is whether your infrastructure was built to work alongside those systems, or whether you're running inside someone else's algorithm with no read on the outcome.",
+  },
+  {
+    label: "Independent agency",
+    heading: "Your clients will ask before you're ready.",
+    body: "Agentic buying compresses the margin model most independent agencies depend on. The question isn't whether this affects your business. It's whether you have a clear position on the other side of it before your clients ask.",
+  },
+  {
+    label: "Publisher",
+    heading: "You're not losing deals. You're being skipped.",
+    body: "Agentic systems don't buy the way human traders do. They optimise for structured signals and auction legibility. If your inventory isn't readable to the systems making the decisions, you're not losing deals to a competitor. You're being excluded before the auction starts.",
+  },
+];
+
+const AudienceSection = () => (
+  <section style={{
+    background: "var(--bg)",
+    borderTop: "1px solid var(--border)",
+    borderBottom: "1px solid var(--border)",
+    padding: "clamp(64px, 9vw, 96px) clamp(24px, 4vw, 96px)",
+  }}>
+    <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <Reveal axis="x" style={{ marginBottom: 14 }}>
+        <Label>Where you sit in the shift</Label>
+      </Reveal>
+      <Reveal axis="x" delay={80}>
+        <h2 style={{
+          fontFamily: "var(--font-sans)", fontWeight: 700,
+          fontSize: "clamp(24px, 2.8vw, 36px)", letterSpacing: "-0.01em",
+          color: "var(--fg)", lineHeight: 1.1,
+          margin: "0 0 clamp(40px, 5vw, 64px)", maxWidth: 640,
+        }}>
+          The shift looks different depending on where you sit inside the stack.
+        </h2>
+      </Reveal>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1, background: "var(--border)" }} className="audience-grid">
+        {AUDIENCE_PANELS.map((p, i) => (
+          <FadeUp key={i} delay={i * 120}>
+            <div style={{
+              background: "var(--bg)",
+              borderTop: "2px solid var(--gold)",
+              padding: "clamp(24px, 3vw, 36px)",
+              height: "100%",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+            }}>
+              <Label>{p.label}</Label>
+              <h3 style={{
+                fontFamily: "var(--font-heading)", fontWeight: 600,
+                fontSize: "clamp(17px, 1.6vw, 21px)", letterSpacing: "-0.01em",
+                color: "var(--fg)", lineHeight: 1.3, margin: 0,
+              }}>{p.heading}</h3>
+              <p style={{
+                fontFamily: "var(--font-sans)", fontSize: 15,
+                color: "var(--fg-muted)", lineHeight: 1.75, margin: 0,
+                flex: 1,
+              }}>{p.body}</p>
+            </div>
+          </FadeUp>
+        ))}
+      </div>
+    </div>
+    <style>{`
+      @media (max-width: 860px) { .audience-grid { grid-template-columns: 1fr !important; } }
+    `}</style>
+  </section>
+);
+
 // ── ChapterGate — full-viewport tonal break between the ecosystem map and thesis ─
 // A single Instrument Serif italic statement, no label, no eyebrow.
 // The background shifts to a slightly warmer dark to signal a chapter change.
@@ -603,6 +679,7 @@ const HomePage = ({ onNavigate, onEnquire }) => (
     <ScrollProgress />
     <HomeHero onEnquire={onEnquire} onSecondary={() => onNavigate("library")} />
     <EcosystemIntro />
+    <AudienceSection />
     <PinnedNarrative />
     <ChapterGate />
     <Thesis />
