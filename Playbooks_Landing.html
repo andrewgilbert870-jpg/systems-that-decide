@@ -416,7 +416,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="Playbooks_Landing.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#b8d9d6dccaddcff8cbc1cbccddd5cbccd0d9ccdcdddbd1dcdd96d1d7">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#5f3e313b2d3a281f2c262c2b3a322c2b373e2b3b3a3c363b3a713630">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
@@ -424,7 +424,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="Playbooks_Landing.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#1b7a757f697e6c5b6862686f7e76686f737a6f7f7e78727f7e357274">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#97f6f9f3e5f2e0d7e4eee4e3f2fae4e3fff6e3f3f2f4fef3f2b9fef8">Contact</a>
   </nav>
 </header>
 
@@ -637,7 +637,7 @@ body {
     <p>If something in the briefing maps to a decision sitting on your desk, a 30-minute scoping call is the starting point. One business day to reply.</p>
   </div>
   <div class="final-cta-btns">
-    <a class="btn-gold" href="/cdn-cgi/l/email-protection#7716191305120037040e0403121a04031f16031312141e1312591e18">Book a scoping call</a>
+    <a class="btn-gold" href="/cdn-cgi/l/email-protection#b8d9d6dccaddcff8cbc1cbccddd5cbccd0d9ccdcdddbd1dcdd96d1d7">Book a scoping call</a>
     <a class="btn-outline" href="#">Take the 90-second assessment</a>
   </div>
 </section>
@@ -707,9 +707,9 @@ document.getElementById('unlock-form').addEventListener('submit', async function
   btn.textContent = 'Sending…';
 
   try {
-    var resp = await fetch('/api/unlock', {
+    var resp = await fetch('https://formspree.io/f/xeebegjp', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify({ name, email, role }),
     });
 
@@ -718,9 +718,15 @@ document.getElementById('unlock-form').addEventListener('submit', async function
       throw new Error(body.error || 'Something went wrong. Please try again.');
     }
 
-    // Redirect straight to the matching briefing
-    var playbackId = ROLE_MAP[role] ? ROLE_MAP[role].id : role.toLowerCase() + 's';
-    window.location.href = '/api/playbook?id=' + playbackId;
+    // Show thank-you message
+    document.getElementById('unlock-form').innerHTML = `
+      <div style="padding:32px 0;">
+        <div style="font-family:var(--mono);font-weight:700;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:6px;height:6px;background:var(--gold);"></span>Submission received</div>
+        <div style="font-family:var(--serif);font-weight:700;font-size:28px;line-height:1.05;letter-spacing:-0.015em;color:var(--off);margin-bottom:12px;">You're in. Check<br><em style="font-style:italic;color:var(--gold);">your inbox.</em></div>
+        <p style="font-family:var(--sans);font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px;">The ${role} briefing is on its way. If it doesn't arrive within a few minutes, check your spam folder.</p>
+        <div style="padding-top:20px;border-top:1px solid var(--hairline);font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dim);">Sent to: <span style="color:var(--gold);">${email}</span></div>
+      </div>
+    `;
 
   } catch (ex) {
     err.textContent    = ex.message;
