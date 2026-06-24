@@ -41,38 +41,71 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "liga","kern";
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 /* ── Gold top bar ── */
 .gold-bar { height: 3px; background: var(--gold); }
 
-/* ── Nav (Correspondent style) ── */
+/* ── Nav (exact homepage style) ── */
 .nav {
-  display: flex;
-  justify-content: space-between;
+  position: fixed;
+  top: 4px; left: 0; right: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 17px 64px;
-  border-bottom: 1px solid var(--hairline-soft);
-  background: rgba(13,13,13,0.96);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
+  padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
+  background: rgba(13, 13, 13, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hairline);
 }
-.nav-group { display: flex; gap: 28px; }
-.nav-group a {
-  font-family: var(--sans); font-weight: 500; font-size: 13px;
-  letter-spacing: 0.04em; color: var(--dim); text-decoration: none;
-  transition: color 0.2s;
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
-.nav-group a:hover { color: var(--muted); }
-.nav-group a.active { color: var(--gold); }
-.nav-brand {
-  font-family: var(--sans); font-weight: 800; font-size: 12px;
-  letter-spacing: 0.3em; text-transform: uppercase; color: var(--off);
+.nav-right { justify-content: flex-end; }
+.nav a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
   text-decoration: none;
+  transition: color 200ms;
 }
-.nav-brand .g { color: var(--gold); }
+.nav a:hover { color: var(--off); }
+.nav a.active { color: var(--gold); }
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 44px;
+  justify-content: center;
+}
+.brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+.nav .contact {
+  color: var(--gold);
+  border-left: 1px solid var(--hairline);
+  padding-left: 1.8rem;
+  margin-left: 0.4rem;
+}
+.nav .contact:hover { color: var(--off); }
+.nav-toggle { display: none; }
+.mobile-drawer { display: none; }
+@media (max-width: 768px) {
+  .nav { padding: 0.9rem 1.1rem; grid-template-columns: auto 1fr auto; }
+  .nav-left, .nav-right { display: none; }
+  .brand img { height: 36px; }
+}
 
 /* ── Constellation (from homepage) ── */
 .constellation { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
@@ -370,25 +403,33 @@ body {
 
 <div class="gold-bar"></div>
 
-<!-- ── Nav ── -->
-<nav class="nav">
-  <div class="nav-group">
-    <a href="#">Readiness</a>
-    <a href="#">Advisory</a>
+<!-- ── Nav (exact homepage) ── -->
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
   </div>
-  <a href="#" style="display:flex;align-items:center;">
-    <img src="logo-transparent.png" alt="Systems That Decide" height="36" style="height:36px;width:auto;">
+  <a class="brand" href="index.html">
+    <img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200">
   </a>
-  <div class="nav-group">
-    <a href="#">Essays</a>
-    <a href="#" class="active">Playbooks</a>
-    <a href="#">About</a>
-    <a href="/cdn-cgi/l/email-protection#dabbb4bea8bfad9aa9a3a9aebfb7a9aeb2bbaebebfb9b3bebff4b3b5" style="color:var(--gold);font-weight:600;">Contact</a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html" class="active">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#b8d9d6dccaddcff8cbc1cbccddd5cbccd0d9ccdcdddbd1dcdd96d1d7">Contact</a>
   </div>
-</nav>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html" class="active">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#1b7a757f697e6c5b6862686f7e76686f737a6f7f7e78727f7e357274">Contact</a>
+  </nav>
+</header>
 
 <!-- ── Hero ── -->
-<section class="hero" id="main">
+<section class="hero" id="main" style="margin-top:72px;">
   <div class="constellation" aria-hidden="true">
     <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
       <line class="cst-line" x1="220" y1="320" x2="380" y2="180"/>
@@ -596,7 +637,7 @@ body {
     <p>If something in the briefing maps to a decision sitting on your desk, a 30-minute scoping call is the starting point. One business day to reply.</p>
   </div>
   <div class="final-cta-btns">
-    <a class="btn-gold" href="/cdn-cgi/l/email-protection#a5c4cbc1d7c0d2e5d6dcd6d1c0c8d6d1cdc4d1c1c0c6ccc1c08bccca">Book a scoping call</a>
+    <a class="btn-gold" href="/cdn-cgi/l/email-protection#7716191305120037040e0403121a04031f16031312141e1312591e18">Book a scoping call</a>
     <a class="btn-outline" href="#">Take the 90-second assessment</a>
   </div>
 </section>
