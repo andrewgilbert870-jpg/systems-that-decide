@@ -4,394 +4,757 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agentic Readiness Briefings · Systems That Decide</title>
-<meta name="description" content="Three free briefings on what agentic AI buying means for brands, agencies and publishers in ANZ. Unlock once, read all three.">
-<meta name="theme-color" content="#0D0D0D">
+<meta name="description" content="Three free briefings on what agentic AI buying means for brands, agencies and publishers in ANZ. The only ANZ-specific intelligence on this shift.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap">
 <style>
-  /* ============ UNLOCK FORM ============ */
-  .unlock-panel {
-    max-width: 560px;
-    margin-top: 3rem;
-    padding: 2.4rem 2.2rem;
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    position: relative;
-  }
-  .unlock-panel::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-  }
-  .unlock-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .unlock-row.unlock-row-3 { grid-template-columns: 1fr 1fr 1fr; }
-  .unlock-input.unlock-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23696154' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 0.7rem;
-    padding-right: 2.4rem;
-  }
-  .field-label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 0.6rem;
-  }
-  .unlock-input {
-    display: block;
-    width: 100%;
-    background: var(--obsidian);
-    border: 1px solid var(--hairline);
-    color: var(--off);
-    font-family: var(--body);
-    font-size: 0.98rem;
-    padding: 0.85rem 1rem;
-    outline: none;
-    transition: border-color 200ms ease;
-  }
-  .unlock-input::placeholder { color: var(--darker); }
-  .unlock-input:focus { border-color: var(--gold-line); }
-  .unlock-submit {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 0.9rem 1.8rem;
-    background: var(--gold);
-    color: var(--obsidian);
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    transition: background 200ms ease;
-  }
-  .unlock-submit:hover { background: var(--gold-light); }
-  .unlock-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-  .unlock-note {
-    font-size: 0.86rem;
-    color: var(--dim);
-    margin-top: 1rem;
-    margin-bottom: 0;
-    max-width: none;
-  }
-  .unlock-error {
-    font-family: var(--mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.04em;
-    color: #C77B6A;
-    margin-top: 0.9rem;
-    margin-bottom: 0;
-    display: none;
-  }
-  .unlock-error.visible { display: block; }
-  .unlock-banner {
-    max-width: 560px;
-    margin-top: 3rem;
-    padding: 1.4rem 1.6rem;
-    background: var(--gold-faint);
-    border: 1px solid var(--gold-line);
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    color: var(--gold-light);
-  }
-  .relock-notice {
-    max-width: 560px;
-    margin-top: 2rem;
-    padding: 1.1rem 1.4rem;
-    background: var(--gold-faint);
-    border: 1px solid var(--gold-line);
-    font-size: 0.92rem;
-    color: var(--off);
-  }
-  .relock-notice { display: none; }
-  .relock-notice.visible { display: block; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-  /* ============ PLAYBOOK CARDS — unlock state ============ */
-  .card-cta {
-    margin-top: auto;
-    padding-top: 1.5rem;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .card-cta.is-locked { color: var(--dim); }
-  .card-cta.is-locked:hover { color: var(--gold); }
-  .card-cta.is-unlocked { color: var(--gold); }
-  .card-cta.is-unlocked:hover { color: var(--gold-light); }
-  .card.is-unlocked { border-color: var(--gold-line); }
+:root {
+  --obsidian: #0D0D0D;
+  --ink: #0A0A0A;
+  --surface: #141414;
+  --raised: #1C1B1B;
+  --raised2: #23211D;
+  --hairline: #2A2825;
+  --hairline-soft: #1F1D1A;
+  --gold: #9A8B47;
+  --gold-light: #BBA55F;
+  --gold-bright: #C4A84A;
+  --gold-soft: rgba(154,139,71,.18);
+  --gold-line: rgba(154,139,71,.22);
+  --gold-faint: rgba(154,139,71,.08);
+  --off: #F0EDE8;
+  --muted: #B8B2AE;
+  --dim: #7A7773;
+  --darker: #5A5752;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+}
 
-  @media (max-width: 640px) {
-    .unlock-row, .unlock-row.unlock-row-3 { grid-template-columns: 1fr; gap: 0; }
+body {
+  background: var(--obsidian);
+  color: var(--off);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "liga","kern";
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ── Gold top bar ── */
+.gold-bar { height: 3px; background: var(--gold); }
+
+/* ── Nav (exact homepage style) ── */
+.nav {
+  position: fixed;
+  top: 4px; left: 0; right: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1.1rem clamp(1.5rem, 4vw, 3rem);
+  background: rgba(13, 13, 13, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hairline);
+}
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-right { justify-content: flex-end; }
+.nav a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 200ms;
+}
+.nav a:hover { color: var(--off); }
+.nav a.active { color: var(--gold); }
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 44px;
+  justify-content: center;
+}
+.brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+.nav .contact {
+  color: var(--gold);
+  border-left: 1px solid var(--hairline);
+  padding-left: 1.8rem;
+  margin-left: 0.4rem;
+}
+.nav .contact:hover { color: var(--off); }
+.nav-toggle { display: none; }
+.mobile-drawer { display: none; }
+@media (max-width: 768px) {
+  .nav { padding: 0.9rem 1.1rem; grid-template-columns: auto 1fr auto; }
+  .nav-left, .nav-right { display: none; }
+  .brand img { height: 36px; }
+
+  body { max-width: 100%; }
+
+  .hero { padding: 48px 24px 40px; margin-top: 56px; }
+  .hero h1 { font-size: 52px; margin: 16px 0 24px; }
+  .hero-body { grid-template-columns: 1fr; gap: 24px; }
+  .hero-lede { font-size: 17px; }
+  .hero-pills { flex-wrap: wrap; }
+  .hero-meta { gap: 20px; flex-wrap: wrap; }
+
+  .form-section { padding: 40px 24px; }
+  .form-grid { grid-template-columns: 1fr; gap: 40px; }
+  .form-pitch-h2 { font-size: 36px; }
+
+  .briefings-header { padding: 16px 24px; }
+  .briefing-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 36px 24px;
   }
+  .row-title { font-size: 28px; }
+  .unlock-btn { margin-top: 0; width: 100%; text-align: center; display: block; }
+
+  .final-cta { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px; }
+  .final-cta h2 { font-size: 32px; }
+  .site-footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* ── Constellation (from homepage) ── */
+.constellation { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.constellation svg { width: 100%; height: 100%; opacity: 0.55; }
+.cst-dot { fill: #9A8B47; opacity: 0.45; animation: pulse 6s ease-in-out infinite; }
+.cst-dot.large { opacity: 0.85; r: 5; }
+.cst-dot.medium { r: 3.5; }
+.cst-dot.small { r: 2; opacity: 0.35; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.7; }
+}
+.cst-line {
+  stroke: #9A8B47;
+  stroke-width: 0.5;
+  opacity: 0.13;
+}
+
+/* ── Hero (full-width, Signal style) ── */
+.hero {
+  padding: 96px 120px 88px;
+  background:
+    radial-gradient(ellipse at 10% -10%, rgba(154,139,71,.16) 0%, transparent 52%),
+    radial-gradient(ellipse at 90% 110%, rgba(154,139,71,.09) 0%, transparent 48%),
+    linear-gradient(180deg, #0F0E0C 0%, #0A0A0A 100%);
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -180px; top: 80px;
+  width: 860px; height: 860px;
+  border: 1px solid var(--gold-line); border-radius: 50%;
+  opacity: .4; pointer-events: none;
+}
+.hero::before {
+  content: '';
+  position: absolute; right: -60px; top: 180px;
+  width: 680px; height: 680px;
+  border: 1px solid var(--gold-faint); border-radius: 50%;
+  opacity: .5; pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; }
+
+.eyebrow {
+  font-family: var(--mono); font-weight: 700; font-size: 10px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+}
+.eyebrow .sep { color: var(--dim); margin: 0 10px; }
+.eyebrow .hi { color: var(--gold-bright); }
+
+.hero h1 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 104px; line-height: .93; letter-spacing: -0.025em;
+  color: var(--off); margin: 28px 0 40px; max-width: 860px;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+
+.hero-body {
+  display: grid; grid-template-columns: 1fr 420px;
+  gap: 80px; align-items: end;
+}
+.hero-lede {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: 22px; line-height: 1.5; color: var(--muted); max-width: 680px;
+}
+.hero-lede em { font-style: normal; color: var(--off); }
+
+.hero-pills { display: flex; gap: 10px; margin-bottom: 20px; }
+.pill {
+  padding: 9px 16px;
+  border: 1px solid var(--gold-line);
+  background: var(--gold-faint);
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+}
+
+.hero-meta { display: flex; gap: 44px; padding-top: 20px; border-top: 1px solid var(--hairline); }
+.meta-item-label {
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.meta-item-value { font-family: var(--sans); font-size: 12px; color: var(--dim); }
+
+/* ── Form section ── */
+.form-section {
+  padding: 72px 120px;
+  background: linear-gradient(180deg, #100F0D 0%, #0D0D0D 100%);
+  border-bottom: 1px solid var(--hairline);
+}
+.form-grid {
+  display: grid; grid-template-columns: 1fr 480px;
+  gap: 96px; align-items: center;
+}
+.form-pitch-eyebrow { margin-bottom: 18px; }
+.form-pitch-h2 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 56px; line-height: 1.0; letter-spacing: -0.022em;
+  color: var(--off); margin-bottom: 22px;
+}
+.form-pitch-h2 em { font-style: italic; color: var(--gold); }
+.form-pitch-lede {
+  font-family: var(--serif); font-style: italic; font-size: 19px;
+  color: var(--muted); line-height: 1.55; max-width: 520px; margin-bottom: 28px;
+}
+.form-pitch-lede em { font-style: normal; color: var(--off); }
+.form-checks {
+  display: flex; gap: 0; font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+.form-check { display: flex; align-items: center; gap: 8px; color: var(--gold); font-weight: 700; margin-right: 20px; }
+.form-check-tick { color: var(--gold); }
+
+/* Form card */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 36px 32px;
+  position: relative;
+}
+.form-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+}
+.form-header-label {
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.form-header-label::before {
+  content: ''; display: inline-block; width: 6px; height: 6px; background: var(--gold);
+}
+.form-title {
+  font-family: var(--serif); font-weight: 700; font-size: 26px;
+  line-height: 1.05; letter-spacing: -0.015em; color: var(--off); margin-bottom: 20px;
+}
+.form-title em { font-style: italic; color: var(--gold); }
+
+.field-label {
+  display: block; font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px;
+}
+.field-input {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; background: var(--obsidian); border: 1px solid var(--hairline);
+  padding: 11px 13px; font-family: var(--sans); font-size: 13px;
+  color: var(--darker); margin-bottom: 14px; cursor: text;
+  transition: border-color 0.2s;
+}
+.field-input:hover { border-color: var(--gold-line); }
+.field-arrow { color: var(--gold); font-size: 10px; }
+
+.cta-btn {
+  display: block; width: 100%;
+  background: var(--gold); padding: 15px 18px;
+  font-family: var(--mono); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian);
+  text-align: center; cursor: pointer; border: none;
+  transition: background 0.2s;
+}
+.cta-btn:hover { background: var(--gold-bright); }
+.form-note {
+  margin-top: 10px; font-family: var(--sans); font-size: 11px;
+  color: var(--dim); line-height: 1.5;
+}
+
+/* ── Briefings rows ── */
+.briefings-header {
+  padding: 22px 80px;
+  border-bottom: 1px solid var(--hairline);
+  border-top: 1px solid var(--hairline);
+  display: flex; align-items: center; gap: 24px;
+}
+.briefings-header .line {
+  flex: 1; height: 1px; background: var(--hairline);
+}
+
+.briefing-row {
+  border-bottom: 1px solid var(--hairline);
+  padding: 56px 80px;
+  display: grid;
+  grid-template-columns: 240px 1fr 260px auto;
+  gap: 64px;
+  align-items: start;
+  position: relative;
+  transition: background 0.3s;
+}
+.briefing-row:nth-child(even) {
+  background: linear-gradient(180deg, #121110 0%, #0D0D0D 100%);
+}
+.briefing-row::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  background: var(--gold-line);
+  transition: background 0.3s;
+}
+.briefing-row:hover::before { background: var(--gold); }
+
+.row-num-tag {
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 14px;
+}
+.row-title {
+  font-family: var(--serif); font-weight: 700; font-size: 38px;
+  line-height: 1.0; letter-spacing: -0.018em; color: var(--off);
+}
+.row-title em { font-style: italic; color: var(--gold); }
+
+.col-label {
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim);
+  margin-bottom: 16px;
+}
+.for-text { font-family: var(--sans); font-size: 15px; color: var(--muted); line-height: 1.8; }
+
+.module-list { display: flex; flex-direction: column; gap: 10px; }
+.module-item { display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
+.module-num {
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.1em; color: var(--gold);
+}
+.module-text { font-family: var(--sans); font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+
+/* Gold unlock button */
+.unlock-btn {
+  display: inline-block;
+  background: var(--gold);
+  padding: 13px 22px;
+  font-family: var(--mono); font-weight: 700; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--obsidian); cursor: pointer;
+  white-space: nowrap; margin-top: 28px;
+  transition: background 0.2s;
+  border: none; text-decoration: none;
+}
+.unlock-btn:hover { background: var(--gold-bright); }
+
+/* ── Final CTA ── */
+.final-cta {
+  padding: 64px 80px;
+  background: linear-gradient(180deg, #100F0D 0%, #0D0D0D 100%);
+  border-top: 1px solid var(--hairline);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 80px; align-items: center;
+}
+.final-cta h2 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 48px; line-height: 1.0; letter-spacing: -0.02em;
+  color: var(--off); margin-bottom: 14px;
+}
+.final-cta h2 em { font-style: italic; color: var(--gold); }
+.final-cta p {
+  font-family: var(--sans); font-size: 15px; color: var(--muted);
+  line-height: 1.55; max-width: 560px;
+}
+.final-cta-btns { display: flex; flex-direction: column; gap: 10px; }
+.btn-gold {
+  background: var(--gold); padding: 14px 28px;
+  font-family: var(--mono); font-weight: 700; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian);
+  white-space: nowrap; text-align: center; cursor: pointer; text-decoration: none; display: block;
+  transition: background 0.2s;
+}
+.btn-gold:hover { background: var(--gold-bright); }
+.btn-outline {
+  border: 1px solid var(--hairline); padding: 12px 28px;
+  font-family: var(--mono); font-weight: 700; font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim);
+  white-space: nowrap; text-align: center; cursor: pointer; text-decoration: none; display: block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold-line); color: var(--muted); }
+
+/* ── Footer ── */
+.site-footer {
+  padding: 24px 80px;
+  border-top: 1px solid var(--hairline);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-tag {
+  font-family: var(--serif); font-style: italic; font-weight: 700;
+  font-size: 15px; color: var(--gold);
+}
+.footer-copy {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dim);
+}
+
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
 
+<div class="gold-bar"></div>
+
+<!-- ── Nav (exact homepage) ── -->
 <header class="nav">
   <div class="nav-left">
     <a href="asrp.html">Readiness</a>
     <a href="advisory.html">Advisory</a>
   </div>
-  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <a class="brand" href="index.html">
+    <img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200">
+  </a>
   <div class="nav-right">
     <a href="library.html">Essays</a>
-    <a href="playbooks.html" class="active">Briefings</a>
+    <a href="Playbooks_Landing.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
-    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="contact" href="/cdn-cgi/l/email-protection#10717e746275675063696364757d63647871647475737974753e797f">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
     <a href="advisory.html">Advisory</a>
     <a href="library.html">Essays</a>
-    <a href="playbooks.html" class="active">Briefings</a>
+    <a href="Playbooks_Landing.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#25444b4157405265565c5651404856514d44514140464c41400b4c4a">Contact</a>
   </nav>
 </header>
 
-<section class="page-hero" id="main">
-  <div class="container">
-    <p class="eyebrow">Agentic readiness <span class="dot">·</span> <span class="seq">04</span></p>
-    <h1>Three briefings. <em>One unlock.</em></h1>
-    <p class="lede">Practical reads on what agentic AI buying means for brands, agencies and publishers in ANZ, written for operators who need to act, not a literature review. <em>Free. One form unlocks all three.</em></p>
+<!-- ── Hero ── -->
+<section class="hero" id="main" style="margin-top:72px;">
+  <div class="constellation" aria-hidden="true">
+    <svg viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+      <line class="cst-line" x1="220" y1="320" x2="380" y2="180"/>
+      <line class="cst-line" x1="380" y1="180" x2="540" y2="290"/>
+      <line class="cst-line" x1="540" y1="290" x2="720" y2="220"/>
+      <line class="cst-line" x1="720" y1="220" x2="880" y2="350"/>
+      <line class="cst-line" x1="880" y1="350" x2="1080" y2="240"/>
+      <line class="cst-line" x1="1080" y1="240" x2="1220" y2="380"/>
+      <line class="cst-line" x1="220" y1="320" x2="320" y2="510"/>
+      <line class="cst-line" x1="320" y1="510" x2="540" y2="580"/>
+      <line class="cst-line" x1="540" y1="580" x2="720" y2="500"/>
+      <line class="cst-line" x1="720" y1="500" x2="880" y2="620"/>
+      <line class="cst-line" x1="880" y1="620" x2="1080" y2="540"/>
+      <line class="cst-line" x1="540" y1="290" x2="540" y2="580"/>
+      <line class="cst-line" x1="720" y1="220" x2="720" y2="500"/>
+      <line class="cst-line" x1="880" y1="350" x2="880" y2="620"/>
+      <line class="cst-line" x1="380" y1="180" x2="320" y2="510"/>
+      <line class="cst-line" x1="1080" y1="240" x2="1080" y2="540"/>
+      <circle class="cst-dot small" cx="220" cy="320"/>
+      <circle class="cst-dot medium" cx="380" cy="180" style="animation-delay:-1s"/>
+      <circle class="cst-dot large" cx="540" cy="290" style="animation-delay:-2s"/>
+      <circle class="cst-dot small" cx="720" cy="220" style="animation-delay:-3s"/>
+      <circle class="cst-dot medium" cx="880" cy="350" style="animation-delay:-4s"/>
+      <circle class="cst-dot large" cx="1080" cy="240" style="animation-delay:-1.5s"/>
+      <circle class="cst-dot small" cx="1220" cy="380" style="animation-delay:-2.5s"/>
+      <circle class="cst-dot small" cx="320" cy="510" style="animation-delay:-3.5s"/>
+      <circle class="cst-dot medium" cx="540" cy="580" style="animation-delay:-0.5s"/>
+      <circle class="cst-dot large" cx="720" cy="500" style="animation-delay:-4.5s"/>
+      <circle class="cst-dot small" cx="880" cy="620" style="animation-delay:-2s"/>
+      <circle class="cst-dot medium" cx="1080" cy="540" style="animation-delay:-3s"/>
+    </svg>
+  </div>
+  <div class="hero-inner" style="position:relative;z-index:2;">
+    <div class="eyebrow">
+      Agentic Readiness Series<span class="sep">·</span>ANZ<span class="sep">·</span><span class="hi">2026</span>
+    </div>
+    <h1>Three briefings.<br><em>Pick yours.</em></h1>
 
-    <div id="relock-notice" class="relock-notice">Your access link has expired or wasn't recognised. Re-enter your details below to keep reading.</div>
-
-    <form id="unlock-form" class="unlock-panel" novalidate>
-      <div class="unlock-row unlock-row-3">
-        <div>
-          <label for="unlock-name" class="field-label">Name</label>
-          <input type="text" id="unlock-name" name="name" class="unlock-input" placeholder="Jane Smith" autocomplete="name">
+    <div class="hero-body">
+      <p class="hero-lede">
+        The <em>only ANZ-specific intelligence</em> on what agentic AI buying means for brands, agencies and publishers — written for operators who need to act, not a literature review.
+      </p>
+      <div>
+        <div class="hero-pills">
+          <div class="pill">01 · Brands</div>
+          <div class="pill">02 · Agencies</div>
+          <div class="pill">03 · Publishers</div>
         </div>
-        <div>
-          <label for="unlock-email" class="field-label">Work email</label>
-          <input type="email" id="unlock-email" name="email" class="unlock-input" placeholder="jane@company.com" autocomplete="email" required>
-        </div>
-        <div>
-          <label for="unlock-role" class="field-label">I'm a&hellip;</label>
-          <select id="unlock-role" name="role" class="unlock-input unlock-select">
-            <option value="">Select one</option>
-            <option value="Brand">Brand</option>
-            <option value="Agency">Agency</option>
-            <option value="Publisher">Publisher</option>
-            <option value="Other">Other / not sure</option>
-          </select>
+        <div class="hero-meta">
+          <div>
+            <div class="meta-item-label">Free</div>
+            <div class="meta-item-value">No cost, no paywall</div>
+          </div>
+          <div>
+            <div class="meta-item-label">ANZ-specific</div>
+            <div class="meta-item-value">Written for this market</div>
+          </div>
+          <div>
+            <div class="meta-item-label">One form</div>
+            <div class="meta-item-value">Unlocks all three</div>
+          </div>
         </div>
       </div>
-      <button type="submit" class="unlock-submit" id="unlock-submit">Unlock all three briefings</button>
-      <p id="unlock-error" class="unlock-error" role="alert" aria-live="assertive"></p>
-      <p class="unlock-note">No spam. Your details are used only to grant access and let me follow up about the Agentic Readiness Program.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Form section ── -->
+<section class="form-section" id="unlock">
+  <div class="form-grid">
+    <!-- Pitch -->
+    <div>
+      <div class="eyebrow form-pitch-eyebrow">Select your sector. Get your briefing.</div>
+      <h2 class="form-pitch-h2">
+        What's your <em>seat at<br>the table?</em>
+      </h2>
+      <p class="form-pitch-lede">
+        Each briefing is written for a specific role. Select yours below and we'll send you the one that's actually relevant to the decisions you're making. <em>Free, ANZ-specific, no filler.</em>
+      </p>
+      <div class="form-checks">
+        <div class="form-check"><span class="form-check-tick">✓</span> Free</div>
+        <div class="form-check"><span class="form-check-tick">✓</span> ANZ-specific</div>
+        <div class="form-check"><span class="form-check-tick">✓</span> Written for your role</div>
+      </div>
+    </div>
+
+    <!-- Form card -->
+    <form class="form-card" id="unlock-form" novalidate>
+      <div class="form-header-label">Select your sector · Get your briefing</div>
+      <div class="form-title" id="form-title">Get your <em>briefing</em></div>
+
+      <div>
+        <label class="field-label" for="unlock-name">Name</label>
+        <input type="text" id="unlock-name" name="name" autocomplete="name"
+          placeholder="Jane Smith"
+          style="display:block;width:100%;background:var(--obsidian);border:1px solid var(--hairline);padding:11px 13px;font-family:var(--sans);font-size:13px;color:var(--off);margin-bottom:14px;outline:none;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--gold-line)'" onblur="this.style.borderColor='var(--hairline)'">
+      </div>
+      <div>
+        <label class="field-label" for="unlock-email">Work email</label>
+        <input type="email" id="unlock-email" name="email" autocomplete="email" required
+          placeholder="jane@company.com"
+          style="display:block;width:100%;background:var(--obsidian);border:1px solid var(--hairline);padding:11px 13px;font-family:var(--sans);font-size:13px;color:var(--off);margin-bottom:14px;outline:none;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--gold-line)'" onblur="this.style.borderColor='var(--hairline)'">
+      </div>
+      <div>
+        <label class="field-label" for="role-select">I'm a…</label>
+        <select id="role-select" name="role"
+          style="display:block;width:100%;background:var(--obsidian);border:1px solid var(--hairline);padding:11px 13px;font-family:var(--sans);font-size:13px;color:var(--darker);margin-bottom:14px;appearance:none;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 12 8%22%3E%3Cpath fill=%22%239A8B47%22 d=%22M6 8 0 0h12z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 13px center;background-size:0.65rem;cursor:pointer;outline:none;">
+          <option value="">Select one</option>
+          <option value="Brand">Brand</option>
+          <option value="Agency">Agency</option>
+          <option value="Publisher">Publisher</option>
+        </select>
+      </div>
+      <button type="submit" class="cta-btn" id="unlock-btn">Get my briefing →</button>
+      <p id="unlock-error" style="display:none;margin-top:10px;font-family:var(--mono);font-size:11px;color:#C77B6A;letter-spacing:0.04em;"></p>
+      <p class="form-note">No spam. Your details are used only to grant access and let Andrew follow up if relevant.</p>
     </form>
-
-    <div id="unlock-banner" class="unlock-banner" style="display:none;">You're unlocked. Read any of the three below — the link stays active on this device for 30 days.</div>
   </div>
 </section>
 
-<section class="light">
-  <div class="container">
-    <p class="eyebrow">The briefings <span class="dot">·</span> <span class="seq">05</span></p>
-    <h2>Pick your <em>seat at the table.</em></h2>
+<!-- ── Briefing rows ── -->
+<div class="briefings-header">
+  <div class="eyebrow">What's inside each briefing</div>
+  <div class="line"></div>
+</div>
 
-    <div class="cards-3">
-
-      <article class="card" id="card-brands" data-id="brands">
-        <div class="card-tag">01 / Brands</div>
-        <h3>The Brand Operator's <em>Briefing</em></h3>
-        <p>What agentic AI buying means for your budget, your agency, and your measurement stack. Built for Heads of Media and senior digital leads at ANZ brands and retailers.</p>
-        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the buy side. Module 03, how this changes measurement. Module 04, the ANZ readiness audit.</p>
-        <a href="#unlock-form" class="card-cta is-locked" data-id="brands">Unlock above to read →</a>
-      </article>
-
-      <article class="card" id="card-agencies" data-id="agencies">
-        <div class="card-tag">02 / Agencies</div>
-        <h3>The Agency Operator's <em>Briefing</em></h3>
-        <p>What agentic AI buying means for your client relationships, your fee model, and your trading governance. Built for MDs, CEOs, Heads of Trading and Programmatic Directors at ANZ agencies.</p>
-        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the agency model. Module 03, how this changes measurement and reporting. Module 04, the agency readiness audit.</p>
-        <a href="#unlock-form" class="card-cta is-locked" data-id="agencies">Unlock above to read →</a>
-      </article>
-
-      <article class="card" id="card-publishers" data-id="publishers">
-        <div class="card-tag">03 / Publishers</div>
-        <h3>The Publisher's <em>Briefing</em></h3>
-        <p>What agentic AI buying means for your yield, your advertiser relationships, and your inventory governance. Built for Commercial Directors, Heads of Revenue and Ad Tech leads across ANZ.</p>
-        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the sell side. Module 03, how this changes advertiser relationships. Module 04, the publisher readiness audit.</p>
-        <a href="#unlock-form" class="card-cta is-locked" data-id="publishers">Unlock above to read →</a>
-      </article>
-
+<!-- Brands -->
+<div class="briefing-row">
+  <div>
+    <div class="row-num-tag">01 / Brands</div>
+    <div class="row-title">The Brand<br>Operator's<br><em>Briefing</em></div>
+  </div>
+  <div>
+    <div class="col-label">For</div>
+    <div class="for-text">Heads of Media, Media Transformation, senior digital leads at ANZ brands and retailers.</div>
+  </div>
+  <div>
+    <div class="col-label">Contents</div>
+    <div class="module-list">
+      <div class="module-item"><div class="module-num">01</div><div class="module-text">What agentic systems actually do</div></div>
+      <div class="module-item"><div class="module-num">02</div><div class="module-text">How this changes the buy side</div></div>
+      <div class="module-item"><div class="module-num">03</div><div class="module-text">How this changes measurement</div></div>
+      <div class="module-item"><div class="module-num">04</div><div class="module-text">The ANZ readiness audit</div></div>
     </div>
   </div>
-</section>
+  <div>
+    <a class="unlock-btn" href="#unlock" onclick="preselectRole('Brand')">Get the Brand briefing →</a>
+  </div>
+</div>
 
-<section class="final light">
-  <div class="container">
-    <p class="eyebrow">Get started</p>
-    <h2>Read the briefing. <em>Then talk it through.</em></h2>
-    <p>If something in the writing maps onto a decision sitting on your desk, a 30-minute scoping call is the starting point.</p>
-    <div class="actions">
-      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
-      <a class="btn-secondary" href="asrp.html#assessment">Or take the 90-second assessment</a>
+<!-- Agencies -->
+<div class="briefing-row">
+  <div>
+    <div class="row-num-tag">02 / Agencies</div>
+    <div class="row-title">The Agency<br>Operator's<br><em>Briefing</em></div>
+  </div>
+  <div>
+    <div class="col-label">For</div>
+    <div class="for-text">Agency MDs, CEOs, Heads of Trading and Programmatic Directors across ANZ.</div>
+  </div>
+  <div>
+    <div class="col-label">Contents</div>
+    <div class="module-list">
+      <div class="module-item"><div class="module-num">01</div><div class="module-text">What agentic systems actually do</div></div>
+      <div class="module-item"><div class="module-num">02</div><div class="module-text">How this changes the agency model</div></div>
+      <div class="module-item"><div class="module-num">03</div><div class="module-text">How this changes measurement &amp; reporting</div></div>
+      <div class="module-item"><div class="module-num">04</div><div class="module-text">The agency readiness audit</div></div>
     </div>
-    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+  <div>
+    <a class="unlock-btn" href="#unlock" onclick="preselectRole('Agency')">Get the Agency briefing →</a>
+  </div>
+</div>
+
+<!-- Publishers -->
+<div class="briefing-row">
+  <div>
+    <div class="row-num-tag">03 / Publishers</div>
+    <div class="row-title">The Publisher<br>Operator's<br><em>Briefing</em></div>
+  </div>
+  <div>
+    <div class="col-label">For</div>
+    <div class="for-text">Commercial Directors, Heads of Revenue, Ad Tech and Operations leads across ANZ.</div>
+  </div>
+  <div>
+    <div class="col-label">Contents</div>
+    <div class="module-list">
+      <div class="module-item"><div class="module-num">01</div><div class="module-text">What agentic systems actually do</div></div>
+      <div class="module-item"><div class="module-num">02</div><div class="module-text">How this changes the sell side</div></div>
+      <div class="module-item"><div class="module-num">03</div><div class="module-text">How this changes advertiser relationships</div></div>
+      <div class="module-item"><div class="module-num">04</div><div class="module-text">The publisher readiness audit</div></div>
+    </div>
+  </div>
+  <div>
+    <a class="unlock-btn" href="#unlock" onclick="preselectRole('Publisher')">Get the Publisher briefing →</a>
+  </div>
+</div>
+
+<!-- ── Final CTA ── -->
+<section class="final-cta">
+  <div>
+    <h2>Read it. Then <em>talk it through.</em></h2>
+    <p>If something in the briefing maps to a decision sitting on your desk, a 30-minute scoping call is the starting point. One business day to reply.</p>
+  </div>
+  <div class="final-cta-btns">
+    <a class="btn-gold" href="/cdn-cgi/l/email-protection#96f7f8f2e4f3e1d6e5efe5e2f3fbe5e2fef7e2f2f3f5fff2f3b8fff9">Book a scoping call</a>
+    <a class="btn-outline" href="asrp.html">Take the 90-second assessment</a>
   </div>
 </section>
 
+<!-- ── Footer ── -->
 <footer class="site-footer">
-  <div class="container">
-    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
-    <div class="links">
-      <a href="asrp.html">Readiness</a>
-      <a href="advisory.html">Advisory</a>
-      <a href="library.html">Essays</a>
-      <a href="about.html">About</a>
-    </div>
-    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
-  </div>
+  <div class="footer-tag">Follow the control, not the conversation.</div>
+  <div class="footer-copy">© 2026 Systems That Decide · Sydney · ANZ</div>
 </footer>
 
-<script src="nav.js"></script>
-<script>
-  // ── Playbook unlock flow ──────────────────────────────────────────────
-  // One name+email submission unlocks all three briefings (api/unlock.js
-  // sets a single signed cookie; api/playbook.js doesn't care which id you
-  // originally asked for, just whether the cookie is valid). So the form
-  // is shown once, and a successful unlock flips all three card CTAs from
-  // "Unlock above to read" to a direct "Read now" link. The role field
-  // ("I'm a...") is a qualifying field only — it's passed to api/unlock.js
-  // for the notification email, it does not restrict which playbook(s)
-  // get unlocked.
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Role pre-selection (from row buttons) ──────────────────────────────────
+function preselectRole(role) {
+  var select = document.getElementById('role-select');
+  if (select) { select.value = role; updateFormTitle(role); }
+}
 
-  const form = document.getElementById("unlock-form");
-  const nameInput = document.getElementById("unlock-name");
-  const emailInput = document.getElementById("unlock-email");
-  const roleInput = document.getElementById("unlock-role");
-  const errorEl = document.getElementById("unlock-error");
-  const submitBtn = document.getElementById("unlock-submit");
-  const banner = document.getElementById("unlock-banner");
-  const relockNotice = document.getElementById("relock-notice");
+// ── Dynamic title + button copy ────────────────────────────────────────────
+var ROLE_MAP = {
+  Brand:     { id: 'brands',     title: 'Get the Brand <em>Briefing</em>',             btn: 'Get the Brand briefing →' },
+  Agency:    { id: 'agencies',   title: 'Get the Agency <em>Briefing</em>',            btn: 'Get the Agency briefing →' },
+  Publisher: { id: 'publishers', title: 'Get the Publisher Operator\'s <em>Briefing</em>', btn: 'Get the Publisher briefing →' },
+};
 
-  const CTA_IDS = ["brands", "agencies", "publishers"];
+function updateFormTitle(role) {
+  var titleEl = document.getElementById('form-title');
+  var btnEl   = document.getElementById('unlock-btn');
+  if (!titleEl) return;
+  if (ROLE_MAP[role]) {
+    titleEl.innerHTML      = ROLE_MAP[role].title;
+    if (btnEl) btnEl.textContent = ROLE_MAP[role].btn;
+  } else {
+    titleEl.innerHTML      = 'Get your <em>briefing</em>';
+    if (btnEl) btnEl.textContent = 'Get my briefing →';
+  }
+}
 
-  function showError(msg) {
-    errorEl.textContent = msg;
-    errorEl.classList.add("visible");
+document.getElementById('role-select').addEventListener('change', function() {
+  updateFormTitle(this.value);
+});
+
+// ── Form submission ────────────────────────────────────────────────────────
+document.getElementById('unlock-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  var name  = document.getElementById('unlock-name').value.trim();
+  var email = document.getElementById('unlock-email').value.trim();
+  var role  = document.getElementById('role-select').value;
+  var btn   = document.getElementById('unlock-btn');
+  var err   = document.getElementById('unlock-error');
+
+  err.style.display = 'none';
+
+  // Basic validation
+  if (!email || !email.includes('@')) {
+    err.textContent = 'Please enter a valid work email.';
+    err.style.display = 'block';
+    return;
+  }
+  if (!role) {
+    err.textContent = 'Please select your role so we can send the right briefing.';
+    err.style.display = 'block';
+    return;
   }
 
-  function clearError() {
-    errorEl.classList.remove("visible");
-    errorEl.textContent = "";
-  }
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
 
-  function unlockUI(redirectId) {
-    form.style.display = "none";
-    banner.style.display = "block";
-    CTA_IDS.forEach((id) => {
-      const cta = document.querySelector('.card-cta[data-id="' + id + '"]');
-      const card = document.getElementById("card-" + id);
-      if (!cta) return;
-      cta.href = "/api/playbook?id=" + id;
-      cta.textContent = "Read now →";
-      cta.classList.remove("is-locked");
-      cta.classList.add("is-unlocked");
-      if (card) card.classList.add("is-unlocked");
+  try {
+    var resp = await fetch('/api/unlock', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify({ name, email, role }),
     });
-    if (redirectId && CTA_IDS.includes(redirectId)) {
-      window.location.href = "/api/playbook?id=" + redirectId;
+
+    if (!resp.ok) {
+      var body = await resp.json().catch(() => ({}));
+      throw new Error(body.error || 'Something went wrong. Please try again.');
     }
+
+    // Redirect to the matching playbook
+    var playbackId = ROLE_MAP[role] ? ROLE_MAP[role].id : role.toLowerCase() + 's';
+    window.location.href = '/api/playbook?id=' + playbackId;
+
+  } catch (ex) {
+    err.textContent    = ex.message;
+    err.style.display  = 'block';
+    btn.disabled       = false;
+    btn.textContent    = ROLE_MAP[role] ? ROLE_MAP[role].btn : 'Get my briefing →';
   }
-
-  // If a card's locked CTA is clicked, remember which playbook they wanted
-  // so a successful unlock can take them straight there.
-  let pendingId = null;
-  document.querySelectorAll(".card-cta.is-locked").forEach((cta) => {
-    cta.addEventListener("click", () => {
-      pendingId = cta.getAttribute("data-id");
-    });
-  });
-
-  // Bounced back from /api/playbook with an invalid/expired cookie.
-  const params = new URLSearchParams(window.location.search);
-  const lockedId = params.get("locked");
-  if (lockedId && CTA_IDS.includes(lockedId)) {
-    relockNotice.classList.add("visible");
-    pendingId = lockedId;
-  }
-
-  // Already unlocked on this device? Skip the form entirely. Lightweight
-  // check, no file read on the server side.
-  fetch("/api/check-access")
-    .then((r) => (r.ok ? r.json() : { unlocked: false }))
-    .then((data) => {
-      if (data && data.unlocked) {
-        unlockUI(lockedId);
-      }
-    })
-    .catch(() => {});
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearError();
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const role = roleInput.value.trim();
-
-    if (!email || !email.includes("@")) {
-      showError("Enter a valid email address.");
-      emailInput.focus();
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Unlocking…";
-
-    try {
-      const resp = await fetch("/api/unlock", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, role }),
-      });
-
-      if (!resp.ok) {
-        const body = await resp.json().catch(() => ({}));
-        showError(body.error || "Something went wrong. Please try again.");
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Unlock all three briefings";
-        return;
-      }
-
-      unlockUI(pendingId);
-    } catch (err) {
-      showError("Couldn't reach the server. Check your connection and try again.");
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Unlock all three briefings";
-    }
-  });
+});
 </script>
 </body>
 </html>
