@@ -156,10 +156,14 @@ body {
 
   .briefings-header { padding: 16px 24px !important; }
   .briefing-row {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
     gap: 24px !important;
     padding: 36px 24px !important;
   }
+  .briefing-row > div:nth-child(1),
+  .briefing-row > div:nth-child(2),
+  .briefing-row > div:nth-child(3) { width: 100% !important; }
   .row-title { font-size: 26px !important; }
   .unlock-btn { margin-top: 0 !important; width: 100% !important; text-align: center !important; display: block !important; }
 
@@ -481,7 +485,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#1d7c73796f786a5d6e646e6978706e69757c6979787e747978337472">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#d2b3bcb6a0b7a592a1aba1a6b7bfa1a6bab3a6b6b7b1bbb6b7fcbbbd">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
@@ -489,7 +493,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#02636c6670677542717b7176676f71766a63766667616b66672c6b6d">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#6a0b040e180f1d2a1913191e0f07191e020b1e0e0f09030e0f440305">Contact</a>
   </nav>
 </header>
 
