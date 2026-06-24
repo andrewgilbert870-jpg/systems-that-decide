@@ -485,7 +485,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#30515e544255477043494344555d43445851445455535954551e595f">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#6b0a050f190e1c2b1812181f0e06181f030a1f0f0e08020f0e450204">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
@@ -493,7 +493,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#d0b1beb4a2b5a790a3a9a3a4b5bda3a4b8b1a4b4b5b3b9b4b5feb9bf">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#9afbf4fee8ffeddae9e3e9eefff7e9eef2fbeefefff9f3feffb4f3f5">Contact</a>
   </nav>
 </header>
 
@@ -615,6 +615,11 @@ body {
         </select>
       </div>
       <button type="submit" class="cta-btn" id="unlock-btn">Get my briefing →</button>
+      <label style="display:flex;align-items:flex-start;gap:10px;margin-top:14px;cursor:pointer;">
+        <input type="checkbox" id="subscribe-check" name="subscribe" checked
+          style="margin-top:3px;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0;cursor:pointer;">
+        <span style="font-family:var(--sans);font-size:12px;color:var(--dim);line-height:1.5;">Subscribe to the Systems That Decide Substack — weekly analysis of structural shifts in ANZ media.</span>
+      </label>
       <p id="unlock-error" style="display:none;margin-top:10px;font-family:var(--mono);font-size:11px;color:#C77B6A;letter-spacing:0.04em;"></p>
       <p class="form-note">No spam. Your details are used only to grant access and let Andrew follow up if relevant.</p>
     </form>
@@ -755,6 +760,7 @@ document.getElementById('unlock-form').addEventListener('submit', async function
   var name  = document.getElementById('unlock-name').value.trim();
   var email = document.getElementById('unlock-email').value.trim();
   var role  = document.getElementById('role-select').value;
+  var subscribe = document.getElementById('subscribe-check').checked;
   var btn   = document.getElementById('unlock-btn');
   var err   = document.getElementById('unlock-error');
 
@@ -781,12 +787,12 @@ document.getElementById('unlock-form').addEventListener('submit', async function
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         credentials: 'include',
-        body:    JSON.stringify({ name, email, role }),
+        body:    JSON.stringify({ name, email, role, subscribe }),
       }),
       fetch('https://formspree.io/f/xeebegjp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, role, _subject: 'New Playbook Download — ' + role }),
+        body: JSON.stringify({ name, email, role, _subject: 'New Playbook Download — ' + role + (subscribe ? ' + Substack' : '') }),
       }),
     ]);
 
