@@ -99,11 +99,48 @@ body {
   margin-left: 0.4rem;
 }
 .nav .contact:hover { color: var(--off); }
-.nav-toggle { display: none; }
-.mobile-drawer { display: none; }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--muted);
+  transition: background 200ms;
+}
+.nav-toggle:hover span { background: var(--off); }
+.mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  background: rgba(13,13,13,0.97);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  backdrop-filter: blur(14px);
+}
+.mobile-drawer.open { display: flex; }
+.mobile-drawer a {
+  font-family: var(--mono); font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+}
+.mobile-drawer a:hover { color: var(--off); }
+.mobile-drawer a.active { color: var(--gold); }
+.mobile-drawer a.contact { color: var(--gold); }
 @media (max-width: 768px) {
   .nav { padding: 0.9rem 1.1rem; grid-template-columns: auto 1fr auto; }
-  .nav-left, .nav-right { display: none; }
+  .nav-left, .nav-right > a, .nav-right > .contact { display: none; }
+  .nav-toggle { display: flex; }
   .brand img { height: 36px; }
 
   body { max-width: 100%; }
@@ -442,7 +479,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#99f8f7fdebfceed9eae0eaedfcf4eaedf1f8edfdfcfaf0fdfcb7f0f6">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#fa9b949e889f8dba8983898e9f97898e929b8e9e9f99939e9fd49395">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
@@ -450,7 +487,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#c3a2ada7b1a6b483b0bab0b7a6aeb0b7aba2b7a7a6a0aaa7a6edaaac">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#7a1b141e081f0d3a0903090e1f17090e121b0e1e1f19131e1f541315">Contact</a>
   </nav>
 </header>
 
@@ -663,7 +700,7 @@ body {
     <p>If something in the briefing maps to a decision sitting on your desk, a 30-minute scoping call is the starting point. One business day to reply.</p>
   </div>
   <div class="final-cta-btns">
-    <a class="btn-gold" href="/cdn-cgi/l/email-protection#84e5eae0f6e1f3c4f7fdf7f0e1e9f7f0ece5f0e0e1e7ede0e1aaedeb">Book a scoping call</a>
+    <a class="btn-gold" href="index.html">Book a scoping call</a>
     <a class="btn-outline" href="asrp.html">Take the 90-second assessment</a>
   </div>
 </section>
@@ -756,5 +793,6 @@ document.getElementById('unlock-form').addEventListener('submit', async function
   }
 });
 </script>
+<script src="nav.js"></script>
 </body>
 </html>
