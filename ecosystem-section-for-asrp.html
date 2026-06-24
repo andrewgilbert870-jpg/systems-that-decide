@@ -1,0 +1,237 @@
+<!--
+  RELOCATED FROM index.html — 10 June 2026 repositioning.
+  These sections were removed from the homepage (positioning-simplified.md §5)
+  and are intended for asrp.html. The ecosystem section requires the eco-* CSS
+  (previously in the index.html <style> block) and the tab-panel JS
+  (previously at the bottom of index.html). Both are included below.
+
+  NOTE before reuse: the buy-side panel (03) previously said Koa was
+  "operating live in ANZ campaigns." Corrected below: Koa Agents launched
+  21 April 2026 in alpha, Stagwell first partner. Verified 10 June 2026.
+-->
+
+<!-- ============ ECOSYSTEM ============ -->
+<section>
+  <div class="container">
+    <p class="eyebrow">The agentic advertising ecosystem</p>
+    <h2>Where agentic systems <em>are taking hold.</em></h2>
+    <p style="max-width: 64ch;">Six entities run the buy. Four already have agentic decision-making operating inside live campaigns. Click any node to read what is live now, and where the signal is moving.</p>
+
+    <div class="ecosystem">
+      <div class="eco-flow" role="tablist">
+        <button class="eco-node active" data-node="01" role="tab" id="tab-01" aria-selected="true" aria-controls="panel-01">
+          <span class="eco-node-num">01</span>
+          <span class="eco-node-cat">Advertiser</span>
+          <span class="eco-node-name">Brands</span>
+          <span class="eco-node-status"><span class="eco-pip"></span>Live</span>
+        </button>
+        <button class="eco-node" data-node="02" role="tab" id="tab-02" aria-selected="false" aria-controls="panel-02">
+          <span class="eco-node-num">02</span>
+          <span class="eco-node-cat">Intermediary</span>
+          <span class="eco-node-name">Agencies</span>
+          <span class="eco-node-status"><span class="eco-pip"></span>Live</span>
+        </button>
+        <button class="eco-node" data-node="03" role="tab" id="tab-03" aria-selected="false" aria-controls="panel-03">
+          <span class="eco-node-num">03</span>
+          <span class="eco-node-cat">Buy-side</span>
+          <span class="eco-node-name">Buying Platforms</span>
+          <span class="eco-node-status"><span class="eco-pip"></span>Live</span>
+        </button>
+        <button class="eco-node" data-node="04" role="tab" id="tab-04" aria-selected="false" aria-controls="panel-04">
+          <span class="eco-node-num">04</span>
+          <span class="eco-node-cat">Intelligence</span>
+          <span class="eco-node-name">Data Platforms</span>
+          <span class="eco-node-status"><span class="eco-pip"></span>Live</span>
+        </button>
+        <button class="eco-node" data-node="05" role="tab" id="tab-05" aria-selected="false" aria-controls="panel-05">
+          <span class="eco-node-num">05</span>
+          <span class="eco-node-cat">Sell-side</span>
+          <span class="eco-node-name">Supply Platforms</span>
+          <span class="eco-node-status"><span class="eco-pip building"></span>Building</span>
+        </button>
+        <button class="eco-node" data-node="06" role="tab" id="tab-06" aria-selected="false" aria-controls="panel-06">
+          <span class="eco-node-num">06</span>
+          <span class="eco-node-cat">Destination</span>
+          <span class="eco-node-name">Publishers</span>
+          <span class="eco-node-status"><span class="eco-pip building"></span>Building</span>
+        </button>
+      </div>
+
+      <div class="eco-detail">
+        <div class="eco-panel active" data-panel="01" role="tabpanel" id="panel-01" aria-labelledby="tab-01">
+          <div class="eco-panel-cat">01 · Advertiser · Brands</div>
+          <h3>How advertisers are <em>deploying and preparing</em> for agent-driven buying.</h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>Major brand-side teams in ANZ run PMax and Advantage+ at scale, with most of the bid logic delegated to the platforms. In-house programmatic trading desks remain rare; spend flows through agencies or platform-direct. First-party data activation through clean rooms is growing faster than the measurement maturity to validate it.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>Brand-side teams are starting to demand decisioning transparency from the platforms. Procurement is writing agentic-aware clauses into MSA renewals. Internal capability builds are tilting toward clean-room operation and platform-direct API work, not toward traditional trading hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-panel" data-panel="02" role="tabpanel" id="panel-02" aria-labelledby="tab-02">
+          <div class="eco-panel-cat">02 · Intermediary · Agencies</div>
+          <h3>The changing role of the agency <em>inside an automated buying stack.</em></h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>Holding companies are deploying their own agent layers above the platform agents. WPP Open, Publicis CoreAI, Omnicom and IPG following. Independent agencies are under margin pressure as platform automation displaces trading hours that used to be billable.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>The agency contract is being rewritten to handle algorithmic spend management. The FTE-billed model is breaking against the reality that most optimisation work has moved into platform agents. Independents are repositioning around strategy, measurement and procurement advisory, where the operator judgment still pays.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-panel" data-panel="03" role="tabpanel" id="panel-03" aria-labelledby="tab-03">
+          <div class="eco-panel-cat">03 · Buy-side · Buying Platforms</div>
+          <h3>DSPs and demand infrastructure <em>embedding agentic decision-making.</em></h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>Google PMax and Meta Advantage+ are operating live in ANZ campaigns. PMax decides creative, audience, placement and budget allocation across YouTube, Search, Discovery, Gmail and Display. Advantage+ Shopping does the same on Meta surfaces. The Trade Desk launched Koa Agents in alpha in April 2026, with Stagwell as first partner, on top of its existing Koa bidding intelligence.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>Platform agents are starting to operate as autonomous campaign creators. Brief to launch, no human in the loop. Bid-stream decisioning is being abstracted away from human traders entirely. The interesting question is no longer "how do I tune the algorithm" but "how do I run alongside one I cannot tune."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-panel" data-panel="04" role="tabpanel" id="panel-04" aria-labelledby="tab-04">
+          <div class="eco-panel-cat">04 · Intelligence · Data Platforms</div>
+          <h3>Measurement, identity and modelling becoming the <em>agent's nervous system.</em></h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>Identity resolution and clean-room infrastructure (LiveRamp, Habu, Snowflake, AWS Clean Rooms) underpins the data layer that platform agents pull from. Measurement vendors (Innovid, IAS, DoubleVerify, Nielsen) are embedding ML into outcome models. MMM is having a renaissance because attribution can no longer carry the load.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>Whoever owns identity resolution and clean-room infrastructure becomes the connective tissue between platform agents. Measurement is becoming the only honest broker, because every platform agent will report itself favourably. The procurement question shifts from "which DSP" to "which measurement vendor will I let mark the homework."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-panel" data-panel="05" role="tabpanel" id="panel-05" aria-labelledby="tab-05">
+          <div class="eco-panel-cat">05 · Sell-side · Supply Platforms</div>
+          <h3>SSPs building agent interfaces as <em>protocol wars</em> reshape inventory access.</h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>SSPs (PubMatic, Magnite, OpenX) are building agent interfaces and protocols. PubMatic launched AgenticOS in January 2026 and confirmed live end-to-end agentic campaigns in Australia in April 2026. Curation marketplaces are moving up the stack. Header bidding still dominates for legacy reasons, but agentic supply paths are gaining share.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>Protocol wars. The fight is over who controls the bid-request schema that agentic buyers transact against. SSPs that make their inventory legible to buy-side agents win. SSPs that don't get skipped, regardless of price.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-panel" data-panel="06" role="tabpanel" id="panel-06" aria-labelledby="tab-06">
+          <div class="eco-panel-cat">06 · Destination · Publishers</div>
+          <h3>Content owners adapting to <em>agent-mediated discovery</em> and direct deal negotiation.</h3>
+          <div class="eco-panel-grid">
+            <div class="eco-panel-block">
+              <div class="label">Live now</div>
+              <p>Most ANZ publishers still optimise for human-trader workflows. Programmatic Guaranteed and PMP deals dominate. Most inventory is not structured for agentic discoverability. Some larger publishers (News Corp, Nine, Seven West) are building first-party data and clean-room infrastructure to remain transactable.</p>
+            </div>
+            <div class="eco-panel-block">
+              <div class="label">Where the signal is moving</div>
+              <p>Publishers are being skipped by agentic systems that cannot parse their inventory. Direct-deal infrastructure is becoming the only path back to the buy-side for non-Google, non-Meta supply. Content licensing for AI training is emerging as a parallel revenue line that will reshape what content gets made.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE VIGNETTE (was on homepage, for asrp.html) ============ -->
+<!--
+<div class="vignette">
+  <p class="vignette-label">In practice</p>
+  <p class="vignette-body">An ANZ agency managing $55M in programmatic spend ran the Diagnostic after their largest client flagged declining performance they couldn't attribute to a cause. The assessment identified that two of their three primary DSP relationships had overlapping automation mandates: their optimisation logic was competing with itself across the same inventory. The finding resolved three months of internal disagreement and gave the account team the structural language to take back to the client.</p>
+  <p class="vignette-note">Details changed. Outcome unchanged.</p>
+</div>
+-->
+
+<!-- ============ ECOSYSTEM + VIGNETTE CSS (was in index.html <style>) ============ -->
+<style>
+  .vignette { margin: 2.5rem 0; padding: 1.6rem 2rem; border-left: 3px solid var(--gold); background: var(--surface); max-width: 64ch; }
+  .vignette-label { font-family: var(--mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .vignette-body { color: var(--off); font-size: 1.05rem; line-height: 1.65; margin-bottom: 0.8rem; }
+  .vignette-note { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); margin: 0; }
+
+  .ecosystem { margin-top: 3rem; }
+  .eco-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; align-items: stretch; }
+  .eco-node { appearance: none; background: var(--surface); border: 1px solid var(--hairline); padding: 1.4rem 1rem 1.2rem; cursor: pointer; text-align: left; transition: border-color 250ms cubic-bezier(0.33, 1, 0.68, 1), background 250ms; font-family: var(--body); color: var(--off); position: relative; display: flex; flex-direction: column; gap: 0.4rem; min-height: 178px; }
+  .eco-node::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold-soft); transition: background 250ms; }
+  .eco-node:hover { border-color: var(--gold-line); }
+  .eco-node.active { border-color: var(--gold); background: var(--obsidian); }
+  .eco-node.active::before { background: var(--gold); }
+  .eco-node-num { font-family: var(--mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.18em; color: var(--dim); }
+  .eco-node-cat { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+  .eco-node-name { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--off); letter-spacing: -0.005em; line-height: 1.15; }
+  .eco-node-name em { font-style: italic; color: var(--gold); }
+  .eco-node-status { margin-top: auto; padding-top: 0.6rem; font-family: var(--mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+  .eco-pip { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--gold); background: var(--gold); flex-shrink: 0; }
+  .eco-pip.building { background: transparent; }
+  .eco-detail { margin-top: 1.4rem; padding: 2.5rem 2.5rem; background: var(--surface); border: 1px solid var(--hairline); border-top: 2px solid var(--gold); min-height: 320px; }
+  .eco-panel { display: none; }
+  .eco-panel.active { display: block; animation: ecoFade 400ms cubic-bezier(0.33, 1, 0.68, 1); }
+  .eco-panel-cat { font-family: var(--mono); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .eco-panel h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin-bottom: 1.5rem; color: var(--off); max-width: 36ch; line-height: 1.12; }
+  .eco-panel h3 em { font-style: italic; color: var(--gold); }
+  .eco-panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--hairline); }
+  .eco-panel-block .label { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.8rem; }
+  .eco-panel-block p { color: var(--muted); font-size: 0.98rem; line-height: 1.55; max-width: 52ch; }
+  @keyframes ecoFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 1100px) { .eco-flow { grid-template-columns: repeat(3, 1fr); } .eco-panel-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+  @media (max-width: 720px) { .eco-flow { grid-template-columns: 1fr 1fr; } .eco-detail { padding: 1.5rem; } }
+</style>
+
+<!-- ============ ECOSYSTEM TAB JS (move to asrp.html or nav.js) ============ -->
+<script>
+(function () {
+  const nodes  = Array.from(document.querySelectorAll('.eco-node'));
+  const panels = document.querySelectorAll('.eco-panel');
+  if (!nodes.length) return;
+
+  function activate(node) {
+    const id = node.dataset.node;
+    nodes.forEach(n => {
+      n.classList.remove('active');
+      n.setAttribute('aria-selected', 'false');
+      n.setAttribute('tabindex', '-1');
+    });
+    panels.forEach(p => p.classList.remove('active'));
+    node.classList.add('active');
+    node.setAttribute('aria-selected', 'true');
+    node.setAttribute('tabindex', '0');
+    const panel = document.querySelector('.eco-panel[data-panel="' + id + '"]');
+    if (panel) panel.classList.add('active');
+  }
+
+  nodes.forEach((n, i) => n.setAttribute('tabindex', i === 0 ? '0' : '-1'));
+
+  nodes.forEach(node => {
+    node.addEventListener('click', () => { activate(node); node.focus(); });
+    node.addEventListener('keydown', (e) => {
+      const idx = nodes.indexOf(document.activeElement);
+      if (idx === -1) return;
+      let next = -1;
+      if (e.key === 'ArrowRight') { next = (idx + 1) % nodes.length; }
+      else if (e.key === 'ArrowLeft') { next = (idx - 1 + nodes.length) % nodes.length; }
+      else if (e.key === 'Home') { next = 0; }
+      else if (e.key === 'End')  { next = nodes.length - 1; }
+      if (next !== -1) { e.preventDefault(); activate(nodes[next]); nodes[next].focus(); }
+    });
+  });
+})();
+</script>

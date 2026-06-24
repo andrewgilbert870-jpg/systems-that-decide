@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Readiness Briefings · Systems That Decide</title>
+<meta name="description" content="Three free briefings on what agentic AI buying means for brands, agencies and publishers in ANZ. Unlock once, read all three.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ============ UNLOCK FORM ============ */
+  .unlock-panel {
+    max-width: 560px;
+    margin-top: 3rem;
+    padding: 2.4rem 2.2rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    position: relative;
+  }
+  .unlock-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+  }
+  .unlock-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .unlock-row.unlock-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .unlock-input.unlock-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23696154' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.7rem;
+    padding-right: 2.4rem;
+  }
+  .field-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.6rem;
+  }
+  .unlock-input {
+    display: block;
+    width: 100%;
+    background: var(--obsidian);
+    border: 1px solid var(--hairline);
+    color: var(--off);
+    font-family: var(--body);
+    font-size: 0.98rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 200ms ease;
+  }
+  .unlock-input::placeholder { color: var(--darker); }
+  .unlock-input:focus { border-color: var(--gold-line); }
+  .unlock-submit {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.8rem;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background 200ms ease;
+  }
+  .unlock-submit:hover { background: var(--gold-light); }
+  .unlock-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .unlock-note {
+    font-size: 0.86rem;
+    color: var(--dim);
+    margin-top: 1rem;
+    margin-bottom: 0;
+    max-width: none;
+  }
+  .unlock-error {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: #C77B6A;
+    margin-top: 0.9rem;
+    margin-bottom: 0;
+    display: none;
+  }
+  .unlock-error.visible { display: block; }
+  .unlock-banner {
+    max-width: 560px;
+    margin-top: 3rem;
+    padding: 1.4rem 1.6rem;
+    background: var(--gold-faint);
+    border: 1px solid var(--gold-line);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--gold-light);
+  }
+  .relock-notice {
+    max-width: 560px;
+    margin-top: 2rem;
+    padding: 1.1rem 1.4rem;
+    background: var(--gold-faint);
+    border: 1px solid var(--gold-line);
+    font-size: 0.92rem;
+    color: var(--off);
+  }
+  .relock-notice { display: none; }
+  .relock-notice.visible { display: block; }
+
+  /* ============ PLAYBOOK CARDS — unlock state ============ */
+  .card-cta {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-cta.is-locked { color: var(--dim); }
+  .card-cta.is-locked:hover { color: var(--gold); }
+  .card-cta.is-unlocked { color: var(--gold); }
+  .card-cta.is-unlocked:hover { color: var(--gold-light); }
+  .card.is-unlocked { border-color: var(--gold-line); }
+
+  @media (max-width: 640px) {
+    .unlock-row, .unlock-row.unlock-row-3 { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+  </div>
+  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="playbooks.html" class="active">Briefings</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="playbooks.html" class="active">Briefings</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
+
+<section class="page-hero" id="main">
+  <div class="container">
+    <p class="eyebrow">Agentic readiness <span class="dot">·</span> <span class="seq">04</span></p>
+    <h1>Three briefings. <em>One unlock.</em></h1>
+    <p class="lede">Practical reads on what agentic AI buying means for brands, agencies and publishers in ANZ, written for operators who need to act, not a literature review. <em>Free. One form unlocks all three.</em></p>
+
+    <div id="relock-notice" class="relock-notice">Your access link has expired or wasn't recognised. Re-enter your details below to keep reading.</div>
+
+    <form id="unlock-form" class="unlock-panel" novalidate>
+      <div class="unlock-row unlock-row-3">
+        <div>
+          <label for="unlock-name" class="field-label">Name</label>
+          <input type="text" id="unlock-name" name="name" class="unlock-input" placeholder="Jane Smith" autocomplete="name">
+        </div>
+        <div>
+          <label for="unlock-email" class="field-label">Work email</label>
+          <input type="email" id="unlock-email" name="email" class="unlock-input" placeholder="jane@company.com" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="unlock-role" class="field-label">I'm a&hellip;</label>
+          <select id="unlock-role" name="role" class="unlock-input unlock-select">
+            <option value="">Select one</option>
+            <option value="Brand">Brand</option>
+            <option value="Agency">Agency</option>
+            <option value="Publisher">Publisher</option>
+            <option value="Other">Other / not sure</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="unlock-submit" id="unlock-submit">Unlock all three briefings</button>
+      <p id="unlock-error" class="unlock-error" role="alert" aria-live="assertive"></p>
+      <p class="unlock-note">No spam. Your details are used only to grant access and let me follow up about the Agentic Readiness Program.</p>
+    </form>
+
+    <div id="unlock-banner" class="unlock-banner" style="display:none;">You're unlocked. Read any of the three below — the link stays active on this device for 30 days.</div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">The briefings <span class="dot">·</span> <span class="seq">05</span></p>
+    <h2>Pick your <em>seat at the table.</em></h2>
+
+    <div class="cards-3">
+
+      <article class="card" id="card-brands" data-id="brands">
+        <div class="card-tag">01 / Brands</div>
+        <h3>The Brand Operator's <em>Briefing</em></h3>
+        <p>What agentic AI buying means for your budget, your agency, and your measurement stack. Built for Heads of Media and senior digital leads at ANZ brands and retailers.</p>
+        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the buy side. Module 03, how this changes measurement. Module 04, the ANZ readiness audit.</p>
+        <a href="#unlock-form" class="card-cta is-locked" data-id="brands">Unlock above to read →</a>
+      </article>
+
+      <article class="card" id="card-agencies" data-id="agencies">
+        <div class="card-tag">02 / Agencies</div>
+        <h3>The Agency Operator's <em>Briefing</em></h3>
+        <p>What agentic AI buying means for your client relationships, your fee model, and your trading governance. Built for MDs, CEOs, Heads of Trading and Programmatic Directors at ANZ agencies.</p>
+        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the agency model. Module 03, how this changes measurement and reporting. Module 04, the agency readiness audit.</p>
+        <a href="#unlock-form" class="card-cta is-locked" data-id="agencies">Unlock above to read →</a>
+      </article>
+
+      <article class="card" id="card-publishers" data-id="publishers">
+        <div class="card-tag">03 / Publishers</div>
+        <h3>The Publisher's <em>Briefing</em></h3>
+        <p>What agentic AI buying means for your yield, your advertiser relationships, and your inventory governance. Built for Commercial Directors, Heads of Revenue and Ad Tech leads across ANZ.</p>
+        <p style="font-size:0.86rem;color:var(--dim);">Module 01, what agentic systems actually do. Module 02, how this changes the sell side. Module 03, how this changes advertiser relationships. Module 04, the publisher readiness audit.</p>
+        <a href="#unlock-form" class="card-cta is-locked" data-id="publishers">Unlock above to read →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get started</p>
+    <h2>Read the briefing. <em>Then talk it through.</em></h2>
+    <p>If something in the writing maps onto a decision sitting on your desk, a 30-minute scoping call is the starting point.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+      <a class="btn-secondary" href="asrp.html#assessment">Or take the 90-second assessment</a>
+    </div>
+    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  // ── Playbook unlock flow ──────────────────────────────────────────────
+  // One name+email submission unlocks all three briefings (api/unlock.js
+  // sets a single signed cookie; api/playbook.js doesn't care which id you
+  // originally asked for, just whether the cookie is valid). So the form
+  // is shown once, and a successful unlock flips all three card CTAs from
+  // "Unlock above to read" to a direct "Read now" link. The role field
+  // ("I'm a...") is a qualifying field only — it's passed to api/unlock.js
+  // for the notification email, it does not restrict which playbook(s)
+  // get unlocked.
+
+  const form = document.getElementById("unlock-form");
+  const nameInput = document.getElementById("unlock-name");
+  const emailInput = document.getElementById("unlock-email");
+  const roleInput = document.getElementById("unlock-role");
+  const errorEl = document.getElementById("unlock-error");
+  const submitBtn = document.getElementById("unlock-submit");
+  const banner = document.getElementById("unlock-banner");
+  const relockNotice = document.getElementById("relock-notice");
+
+  const CTA_IDS = ["brands", "agencies", "publishers"];
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.classList.add("visible");
+  }
+
+  function clearError() {
+    errorEl.classList.remove("visible");
+    errorEl.textContent = "";
+  }
+
+  function unlockUI(redirectId) {
+    form.style.display = "none";
+    banner.style.display = "block";
+    CTA_IDS.forEach((id) => {
+      const cta = document.querySelector('.card-cta[data-id="' + id + '"]');
+      const card = document.getElementById("card-" + id);
+      if (!cta) return;
+      cta.href = "/api/playbook?id=" + id;
+      cta.textContent = "Read now →";
+      cta.classList.remove("is-locked");
+      cta.classList.add("is-unlocked");
+      if (card) card.classList.add("is-unlocked");
+    });
+    if (redirectId && CTA_IDS.includes(redirectId)) {
+      window.location.href = "/api/playbook?id=" + redirectId;
+    }
+  }
+
+  // If a card's locked CTA is clicked, remember which playbook they wanted
+  // so a successful unlock can take them straight there.
+  let pendingId = null;
+  document.querySelectorAll(".card-cta.is-locked").forEach((cta) => {
+    cta.addEventListener("click", () => {
+      pendingId = cta.getAttribute("data-id");
+    });
+  });
+
+  // Bounced back from /api/playbook with an invalid/expired cookie.
+  const params = new URLSearchParams(window.location.search);
+  const lockedId = params.get("locked");
+  if (lockedId && CTA_IDS.includes(lockedId)) {
+    relockNotice.classList.add("visible");
+    pendingId = lockedId;
+  }
+
+  // Already unlocked on this device? Skip the form entirely. Lightweight
+  // check, no file read on the server side.
+  fetch("/api/check-access")
+    .then((r) => (r.ok ? r.json() : { unlocked: false }))
+    .then((data) => {
+      if (data && data.unlocked) {
+        unlockUI(lockedId);
+      }
+    })
+    .catch(() => {});
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const role = roleInput.value.trim();
+
+    if (!email || !email.includes("@")) {
+      showError("Enter a valid email address.");
+      emailInput.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Unlocking…";
+
+    try {
+      const resp = await fetch("/api/unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, role }),
+      });
+
+      if (!resp.ok) {
+        const body = await resp.json().catch(() => ({}));
+        showError(body.error || "Something went wrong. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Unlock all three briefings";
+        return;
+      }
+
+      unlockUI(pendingId);
+    } catch (err) {
+      showError("Couldn't reach the server. Check your connection and try again.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Unlock all three briefings";
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Admin · Systems That Decide</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/foundations.css" />
+<style>
+/* ------------------------------------------------------------------------
+   Token bridge: this file's classes were authored against a standalone
+   palette (--a-ground, --a-cream, --a-brass, etc). foundations.css is now the
+   single source of truth for color/type tokens across the site, so every
+   old name below is aliased to its foundations.css equivalent rather than
+   redefined. Nothing else in this stylesheet had to change.
+   ------------------------------------------------------------------------ */
+:root {
+  --a-ground: var(--bg);
+  --a-ground-warm: var(--surface);
+  --a-ground-mid: var(--surface-raised);
+  --a-cream: var(--fg);
+  --a-cream-dim: var(--fg-muted);
+  --a-muted: var(--fg-subtle);
+  --a-rule: var(--border);
+  --a-rule-light: rgba(255,255,255,0.14);
+  --a-brass: var(--gold);
+  --a-brass-dim: #6B6232;
+  --a-brass-bg: var(--gold-tint-08);
+  --a-display: var(--font-display);
+  --a-body: var(--font-sans);
+  --a-mono: var(--font-mono);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--a-ground);
+  color: var(--a-cream);
+  font-family: var(--a-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ACCESS GATE */
+#access-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.gate-box {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+.gate-eyebrow {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--a-brass);
+  margin-bottom: 1rem;
+}
+.gate-heading {
+  font-family: var(--a-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--a-cream);
+  margin-bottom: 0.75rem;
+}
+.gate-sub {
+  color: var(--a-muted);
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+/* LAYOUT */
+#admin-app { display: none; }
+.admin-nav {
+  background: var(--a-ground-warm);
+  border-bottom: 1px solid var(--a-rule);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-nav-title {
+  display:inline-flex;
+  align-items:center;
+  gap:0.65rem;
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+}
+.admin-nav-title img { height:20px; width:auto; display:block; }
+
+.admin-body {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  min-height: calc(100vh - 44px);
+}
+
+.sidebar {
+  background: var(--a-ground-warm);
+  border-right: 1px solid var(--a-rule);
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 44px);
+  position: sticky;
+  top: 44px;
+}
+.sidebar-section { margin-bottom: 2rem; }
+.sidebar-label {
+  font-family: var(--a-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+  margin-bottom: 0.75rem;
+}
+
+.main-panel {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* FORM ELEMENTS */
+.field { margin-bottom: 1.1rem; }
+.fl {
+  display: block;
+  font-family: var(--a-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+  margin-bottom: 0.4rem;
+}
+.fi {
+  width: 100%;
+  background: var(--a-ground);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 3px;
+  padding: 0.6rem 0.75rem;
+  color: var(--a-cream);
+  font-family: var(--a-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 150ms;
+}
+.fi:focus { border-color: var(--a-brass); }
+select.fi { cursor: pointer; }
+textarea.fi { resize: vertical; min-height: 80px; line-height: 1.55; }
+
+/* SCORE SELECTS */
+.score-grid {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--a-rule-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dim-row {
+  display: grid;
+  grid-template-columns: 1fr 70px 130px;
+  gap: 0;
+  align-items: center;
+  border-bottom: 1px solid var(--a-rule);
+  background: var(--a-ground);
+}
+.dim-row:last-child { border-bottom: none; }
+.dim-row:nth-child(even) { background: var(--a-ground-warm); }
+.dim-label {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--a-cream-dim);
+}
+.dim-label small {
+  display: block;
+  font-family: var(--a-mono);
+  font-size: 0.58rem;
+  color: var(--a-muted);
+  letter-spacing: 0.08em;
+  margin-top: 1px;
+}
+.dim-score-sel {
+  padding: 0.6rem 0.5rem;
+  border-left: 1px solid var(--a-rule);
+}
+.dim-score-sel select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--a-cream);
+  font-family: var(--a-mono);
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+}
+.dim-flag-sel {
+  padding: 0.6rem 0.5rem;
+  border-left: 1px solid var(--a-rule);
+}
+.dim-flag-sel select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--a-cream-dim);
+  font-family: var(--a-mono);
+  font-size: 0.7rem;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+}
+
+/* TOTAL */
+.total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: var(--a-brass-bg);
+  border: 1px solid var(--a-brass-dim);
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+.total-label { font-family: var(--a-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--a-cream-dim); text-transform: uppercase; }
+.total-score { font-family: var(--a-mono); font-size: 1.1rem; font-weight: 500; color: var(--a-brass); }
+.total-tier { font-family: var(--a-mono); font-size: 0.7rem; color: var(--a-cream-dim); }
+
+/* NARRATIVE PANELS */
+.narrative-block {
+  background: var(--a-ground-warm);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.narrative-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--a-rule);
+  cursor: pointer;
+  user-select: none;
+}
+.narrative-header:hover { background: var(--a-ground-mid); }
+.narrative-header-title {
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--a-cream-dim);
+}
+.narrative-header-score {
+  font-family: var(--a-mono);
+  font-size: 0.7rem;
+  color: var(--a-muted);
+}
+.narrative-body {
+  padding: 0.75rem 1rem;
+}
+.narrative-body textarea {
+  width: 100%;
+  background: var(--a-ground);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 3px;
+  padding: 0.6rem 0.75rem;
+  color: var(--a-cream);
+  font-family: var(--a-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 150ms;
+}
+.narrative-body textarea:focus { border-color: var(--a-brass); }
+.narrative-hint {
+  font-family: var(--a-mono);
+  font-size: 0.58rem;
+  color: var(--a-muted);
+  margin-top: 0.35rem;
+  letter-spacing: 0.06em;
+}
+
+/* NEXT STEPS */
+.next-step-block {
+  background: var(--a-ground-warm);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.ns-label {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--a-brass);
+  margin-bottom: 0.5rem;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 3px;
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 150ms;
+}
+.btn-primary { background: var(--a-brass); color: var(--a-ground); font-weight: 500; }
+.btn-primary:hover { background: #b5a358; }
+.btn-ghost { background: transparent; color: var(--a-muted); border: 1px solid var(--a-rule-light); }
+.btn-ghost:hover { color: var(--a-cream-dim); border-color: var(--a-muted); }
+
+/* URL OUTPUT */
+.url-output {
+  background: var(--a-ground);
+  border: 1px solid var(--a-brass-dim);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.url-label {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--a-brass);
+  margin-bottom: 0.5rem;
+}
+.url-text {
+  font-family: var(--a-mono);
+  font-size: 0.72rem;
+  color: var(--a-cream-dim);
+  word-break: break-all;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.url-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+.copy-feedback {
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  color: var(--a-brass);
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.copy-feedback.show { opacity: 1; }
+
+/* SECTION HEADING */
+.panel-heading {
+  font-family: var(--a-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--a-cream);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--a-rule);
+}
+
+/* AI PANEL */
+.ai-panel {
+  background: var(--a-ground-warm);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.ai-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background: rgba(154,139,71,0.06);
+  border-bottom: 1px solid var(--a-rule);
+}
+.ai-panel-title {
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--a-brass);
+}
+.ai-panel-body { padding: 1rem; }
+.ai-status {
+  font-family: var(--a-mono);
+  font-size: 0.65rem;
+  color: var(--a-muted);
+  letter-spacing: 0.08em;
+}
+.ai-status.running { color: var(--a-brass); }
+.ai-status.done { color: #5BAA8A; }
+.ai-status.error { color: #D97070; }
+
+/* AI SUGGESTION CARDS */
+.ai-suggestions { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.ai-card {
+  background: var(--a-ground);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ai-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--a-rule);
+}
+.ai-card-dim {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--a-cream-dim);
+}
+.ai-card-score-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ai-suggested-score {
+  font-family: var(--a-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--a-brass);
+}
+.btn-apply {
+  padding: 0.25rem 0.6rem;
+  font-family: var(--a-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--a-brass-bg);
+  border: 1px solid var(--a-brass-dim);
+  color: var(--a-brass);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.btn-apply:hover { background: var(--a-brass); color: var(--a-ground); }
+.btn-apply.applied { background: rgba(91,170,138,0.15); border-color: rgba(91,170,138,0.4); color: #5BAA8A; cursor: default; }
+.ai-card-body { padding: 0.65rem 0.85rem; }
+.ai-finding {
+  font-size: 0.82rem;
+  color: var(--a-cream-dim);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.ai-key-phrases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+.ai-phrase-chip {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  background: rgba(154,139,71,0.1);
+  border: 1px solid var(--a-brass-dim);
+  color: var(--a-brass-dim);
+  letter-spacing: 0.04em;
+}
+.ai-redflags {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  background: rgba(139,64,64,0.1);
+  border: 1px solid rgba(139,64,64,0.3);
+  border-radius: 4px;
+}
+.ai-redflag-label {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D97070;
+  margin-bottom: 0.5rem;
+}
+.ai-redflag-item {
+  font-size: 0.82rem;
+  color: #D97070;
+  line-height: 1.6;
+  padding-left: 0.85rem;
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+.ai-redflag-item::before { content: '⚠'; position: absolute; left: 0; font-size: 0.7rem; }
+.ai-overall {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  background: var(--a-ground);
+  border: 1px solid var(--a-rule-light);
+  border-radius: 4px;
+}
+.ai-overall-label {
+  font-family: var(--a-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+  margin-bottom: 0.5rem;
+}
+.ai-overall-text {
+  font-size: 0.85rem;
+  color: var(--a-cream-dim);
+  line-height: 1.7;
+}
+.btn-apply-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  background: rgba(91,170,138,0.1);
+  border: 1px solid rgba(91,170,138,0.35);
+  color: #5BAA8A;
+  border-radius: 3px;
+  font-family: var(--a-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.btn-apply-all:hover { background: rgba(91,170,138,0.2); }
+
+/* SPINNER (small) */
+.spin-sm {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   MAIN TABS + LIVE CLIENT PREVIEW
+   ============================================================ */
+.main-tabs{ display:flex; gap:0.4rem; margin-bottom:1.4rem; border-bottom:1px solid var(--a-rule); }
+.main-tab{ background:none; border:none; border-bottom:2px solid transparent; color:var(--a-muted); cursor:pointer;
+  font-family:var(--a-mono); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.6rem 0.9rem; transition:color 150ms, border-color 150ms; }
+.main-tab:hover{ color:var(--a-cream-dim); }
+.main-tab.active{ color:var(--a-brass); border-bottom-color:var(--a-brass); }
+
+.preview-window{ border:1px solid var(--a-rule-light); border-radius:8px; overflow:hidden; background:#0D0D0D;
+  box-shadow:0 30px 70px -40px rgba(0,0,0,0.8); }
+.pw-chrome{ display:flex; align-items:center; gap:0.55rem; padding:0.6rem 0.85rem; background:var(--a-ground-warm); border-bottom:1px solid var(--a-rule); }
+.pw-dot{ width:9px; height:9px; border-radius:50%; background:var(--a-rule-light); flex-shrink:0; }
+.pw-dot:nth-child(1){ background:#5a4a45; } .pw-dot:nth-child(2){ background:#5a5645; } .pw-dot:nth-child(3){ background:#45543f; }
+.pw-addr{ flex:1; margin-left:0.5rem; font-family:var(--a-mono); font-size:0.62rem; color:var(--a-muted); background:var(--a-ground);
+  border:1px solid var(--a-rule); border-radius:4px; padding:0.3rem 0.7rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pw-btn{ flex-shrink:0; font-family:var(--a-mono); font-size:0.58rem; letter-spacing:0.08em; text-transform:uppercase;
+  background:var(--a-brass-bg); border:1px solid var(--a-brass-dim); color:var(--a-brass); border-radius:4px; padding:0.32rem 0.7rem; cursor:pointer; transition:all 150ms; }
+.pw-btn:hover{ background:var(--a-brass); color:var(--a-ground); }
+.pw-btn.copied{ background:rgba(91,170,138,0.15); border-color:rgba(91,170,138,0.4); color:#5BAA8A; }
+.pw-body{ max-height:calc(100vh - 180px); overflow-y:auto; background:#0D0D0D; }
+
+
+/* ADVANCED REPORT SECTIONS (data-entry rows) — not present in the original
+   prototype; the markup referenced these classes but no rules existed. */
+.adv-details { background: var(--a-ground-warm); border: 1px solid var(--a-rule-light); border-radius: 4px; margin-bottom: 1rem; overflow: hidden; }
+.adv-summary { padding: 0.75rem 1rem; font-family: var(--a-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a-cream-dim); cursor: pointer; user-select: none; list-style: none; position: relative; }
+.adv-summary::-webkit-details-marker { display: none; }
+.adv-summary::before { content: '\25B8'; display: inline-block; margin-right: 0.5rem; color: var(--a-brass); transition: transform 150ms; }
+.adv-details[open] .adv-summary::before { transform: rotate(90deg); }
+.adv-summary:hover { background: var(--a-ground-mid); }
+.adv-body { padding: 0 1rem 1rem; border-top: 1px solid var(--a-rule); padding-top: 0.85rem; }
+.adv-hint { font-family: var(--a-mono); font-size: 0.6rem; color: var(--a-muted); margin-bottom: 0.6rem; line-height: 1.6; }
+.adv-row { display: grid; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center; }
+.adv-row .fi { font-size: 0.78rem; }
+.adv-row-del { background: none; border: 1px solid var(--a-rule-light); color: var(--a-muted); cursor: pointer; border-radius: 3px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transition: all 150ms; }
+.adv-row-del:hover { color: #D97070; border-color: #D97070; }
+.btn-ghost-sm { background: transparent; border: 1px solid var(--a-rule-light); color: var(--a-muted); font-family: var(--a-mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 0.75rem; border-radius: 3px; cursor: pointer; transition: all 150ms; }
+.btn-ghost-sm:hover { color: var(--a-cream-dim); border-color: var(--a-muted); }
+
+/* WORDMARK LOGO — matches login.html / diagnostic.html, replacing the
+   prototype's logo-transparent.png <img> treatment for visual consistency
+   across the portal-adjacent pages. */
+.gate-logo { display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; margin-bottom:1.25rem; }
+.gate-logo .wm-bold { font-family: var(--a-display); font-weight: 600; font-size: 15px; color: var(--a-cream); }
+.gate-logo .wm-light { font-family: var(--a-display); font-weight: 400; font-size: 15px; color: var(--a-cream-dim); }
+
+.admin-logo { display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+.admin-logo .wm-bold { font-family: var(--a-display); font-weight: 600; font-size: 14px; color: var(--a-cream); }
+.admin-logo .wm-light { font-family: var(--a-display); font-weight: 400; font-size: 14px; color: var(--a-cream-dim); }
+</style>
+</head>
+<body>
+
+<!-- ACCESS GATE -->
+<div id="access-gate">
+  <div class="gate-box">
+    <a href="index.html" class="gate-logo" aria-label="Systems That Decide — home">
+      <svg width="28" height="28" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="44" stroke="#9A8B47" stroke-width="3.6" fill="none" />
+        <polygon points="50,6 94,50 50,94 6,50" stroke="#9A8B47" stroke-width="1.4" fill="none" />
+        <circle cx="50" cy="6" r="3.4" fill="#9A8B47" />
+        <circle cx="94" cy="50" r="3.4" fill="#9A8B47" />
+        <circle cx="50" cy="94" r="3.4" fill="#9A8B47" />
+        <circle cx="6" cy="50" r="3.4" fill="#9A8B47" />
+      </svg>
+      <span style="display:flex;flex-direction:column;line-height:1.15">
+        <span class="wm-bold">Systems</span>
+        <span class="wm-light">That Decide</span>
+      </span>
+    </a>
+    <h1 class="gate-heading">Admin Panel</h1>
+    <p class="gate-sub">Enter your admin password to access the diagnostic scoring tool.</p>
+    <div style="margin-bottom:1rem">
+      <input class="fi" type="password" id="admin-pw" placeholder="Admin password"
+        onkeydown="if(event.key==='Enter'){checkAdminPw()}" style="text-align:center;letter-spacing:0.2em" />
+    </div>
+    <button class="btn btn-primary" onclick="checkAdminPw()" id="pw-submit-btn">Enter →</button>
+    <div id="pw-error" style="color:#D97070;font-family:var(--a-mono);font-size:0.65rem;margin-top:0.75rem;display:none">Incorrect password.</div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <div class="admin-nav">
+    <div style="display:flex;align-items:center;gap:0.65rem">
+      <a href="index.html" class="admin-logo" aria-label="Systems That Decide — home">
+        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="44" stroke="#9A8B47" stroke-width="3.6" fill="none" />
+          <polygon points="50,6 94,50 50,94 6,50" stroke="#9A8B47" stroke-width="1.4" fill="none" />
+          <circle cx="50" cy="6" r="3.4" fill="#9A8B47" />
+          <circle cx="94" cy="50" r="3.4" fill="#9A8B47" />
+          <circle cx="50" cy="94" r="3.4" fill="#9A8B47" />
+          <circle cx="6" cy="50" r="3.4" fill="#9A8B47" />
+        </svg>
+        <span><span class="wm-bold">Systems</span> <span class="wm-light">That Decide</span></span>
+      </a>
+      <span class="admin-nav-title">· Diagnostic Admin</span>
+    </div>
+    <div style="font-family:var(--a-mono);font-size:0.6rem;color:var(--a-muted)">Andrew Gilbert · Private</div>
+  </div>
+
+  <div class="admin-body">
+    <!-- SIDEBAR: SCORING -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Client Details</div>
+        <div class="field">
+          <label class="fl">Client Name</label>
+          <input class="fi" type="text" id="s-name" placeholder="Jane Smith" oninput="update()" />
+        </div>
+        <div class="field">
+          <label class="fl">Organisation</label>
+          <input class="fi" type="text" id="s-org" placeholder="Acme Co." oninput="update()" />
+        </div>
+        <div class="field">
+          <label class="fl">Diagnostic Type</label>
+          <select class="fi" id="s-type" onchange="update()">
+            <option value="brand">Brand</option>
+            <option value="agency">Agency</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="fl">Report Date</label>
+          <input class="fi" type="date" id="s-date" oninput="update()" />
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Dimension Scores (0–4 per dimension)</div>
+        <div class="score-grid">
+          <div class="dim-row">
+            <div class="dim-label">Data Infrastructure<small>Dim 1</small></div>
+            <div class="dim-score-sel"><select id="sc-1" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-1" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-label">Platform Architecture<small>Dim 2</small></div>
+            <div class="dim-score-sel"><select id="sc-2" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-2" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-label">Decisioning Architecture<small>Dim 3</small><small style="display:block;color:#C9A84C;margin-top:2px" title="Q3.7 'No' or 'aware but not mapped' caps this dimension at 2/4">Q3.7 low → max 2/4</small></div>
+            <div class="dim-score-sel"><select id="sc-3" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-3" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-label">Human-Machine Handoff<small>Dim 4</small></div>
+            <div class="dim-score-sel"><select id="sc-4" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-4" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-label">Organisational Alignment<small>Dim 5</small></div>
+            <div class="dim-score-sel"><select id="sc-5" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-5" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-label">Measurement Independence<small>Dim 6</small></div>
+            <div class="dim-score-sel"><select id="sc-6" onchange="update()"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+            <div class="dim-flag-sel"><select id="fl-6" onchange="update()"><option value="none">—</option><option value="risk">Priority Risk</option><option value="watch">Watch</option><option value="strength">Strength</option></select></div>
+          </div>
+        </div>
+        <div class="total-row">
+          <span class="total-label">Total Score</span>
+          <div style="text-align:right">
+            <div class="total-score" id="total-display">0 / 24</div>
+            <div class="total-tier" id="tier-display">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Generate Access Code</div>
+        <div class="field" style="margin-bottom:0.65rem">
+          <label class="fl">Engagement tier</label>
+          <input class="fi" type="text" id="gen-tier" placeholder="asrp" value="asrp" />
+        </div>
+        <button class="btn btn-ghost" onclick="generateAccessCode()">Generate code</button>
+        <div class="url-output" id="gen-code-block" style="display:none">
+          <div class="url-label">New access code</div>
+          <div class="url-text" id="gen-code-output" style="font-size:0.95rem;letter-spacing:0.1em"></div>
+          <div class="url-actions">
+            <button class="btn btn-ghost" onclick="copyGenCode()">Copy code</button>
+            <button class="btn btn-ghost" onclick="copyGenSnippet()">Copy JSON snippet</button>
+            <span class="copy-feedback" id="gen-copy-feedback">Copied!</span>
+            <span class="copy-feedback" id="gen-snippet-feedback">Copied!</span>
+          </div>
+        </div>
+        <div style="font-family:var(--a-mono);font-size:0.58rem;color:var(--a-muted);margin-top:0.65rem;line-height:1.6">
+          Paste the JSON snippet into CLIENTS_JSON in the Vercel dashboard (Project Settings → Environment Variables), then redeploy.
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN: NARRATIVES + OUTPUT -->
+    <div class="main-panel">
+      <div class="main-tabs">
+        <button class="main-tab active" id="tab-btn-build" onclick="switchTab('build')">Build report</button>
+        <button class="main-tab" id="tab-btn-preview" onclick="switchTab('preview')">Client preview</button>
+      </div>
+      <div id="tab-build" style="max-width: 680px">
+
+        <!-- ===== AI PRE-SCORING PANEL ===== -->
+        <div class="panel-heading">AI Pre-Scoring</div>
+        <p style="font-size:0.85rem;color:var(--a-muted);margin-bottom:1rem;line-height:1.65">
+          Paste the raw responses from the Formspree submission email, then hit Analyse. Claude scores all six dimensions, writes headline findings, next steps with priorities, and an executive summary — the complete report is auto-generated in one go. Edit any finding, then open the Client preview tab to see the result before sending.
+        </p>
+
+        <div class="ai-panel">
+          <div class="ai-panel-header">
+            <span class="ai-panel-title">Response Input</span>
+            <span class="ai-status" id="ai-status">Ready</span>
+          </div>
+          <div class="ai-panel-body">
+            <div class="field">
+              <label class="fl">Diagnostic type</label>
+              <select class="fi" id="ai-type" style="max-width:200px">
+                <option value="brand">Brand</option>
+                <option value="agency">Agency</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="fl">Paste full Formspree submission (all questions + answers)</label>
+              <textarea class="fi" id="ai-responses" rows="12"
+                placeholder="Paste the full email content from Formspree here. Include all question labels and answers. The more complete the paste, the more accurate the analysis."></textarea>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="runAIAnalysis()" id="ai-run-btn">Analyse + Generate Report →</button>
+              <button class="btn btn-ghost" onclick="prefillFromResponses(true)" id="ai-prefill-btn">Pre-fill details only</button>
+              <span style="font-family:var(--a-mono);font-size:0.6rem;color:var(--a-muted)">Uses claude-haiku · ~$0.01 per analysis</span>
+            </div>
+            <div id="prefill-note" style="font-family:var(--a-mono);font-size:0.6rem;color:#5BAA8A;margin-top:0.5rem;letter-spacing:0.04em;display:none"></div>
+            <div id="ai-results-area"></div>
+          </div>
+        </div>
+
+        <div class="panel-heading">Headline Findings <span style="font-family:var(--a-body);font-weight:300;font-size:0.8rem;color:var(--a-muted);text-transform:none;letter-spacing:0">(optional — up to three)</span></div>
+        <p style="font-size:0.85rem;color:var(--a-muted);margin-bottom:1rem;line-height:1.65">Surfaced at the very top of the report as a management summary. Write 1–2 sentences per finding, as if speaking directly to the client. Auto-populated by Apply All from the AI overall notes if left blank.</p>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:2rem">
+          <div class="field" style="margin-bottom:0"><label class="fl">Finding 1</label><input class="fi" type="text" id="hl-1" placeholder="e.g. Concentration risk is the headline — 80%+ of spend sits with two platforms." oninput="update()" /></div>
+          <div class="field" style="margin-bottom:0"><label class="fl">Finding 2</label><input class="fi" type="text" id="hl-2" placeholder="e.g. Measurement independence is the greatest lever available." oninput="update()" /></div>
+          <div class="field" style="margin-bottom:0"><label class="fl">Finding 3</label><input class="fi" type="text" id="hl-3" placeholder="e.g. Organisational alignment is a genuine strength to build on." oninput="update()" /></div>
+        </div>
+
+        <div class="panel-heading">Executive Summary</div>
+        <div class="field" style="margin-bottom:2rem">
+          <label class="fl">Summary text (2–3 paragraphs). Shown to client above dimension scores. Separate paragraphs with a blank line.</label>
+          <textarea class="fi" id="exec-summary" rows="8" oninput="update()" placeholder="This diagnostic was conducted across six dimensions of agentic readiness. The findings indicate..."></textarea>
+        </div>
+
+        <div class="field" style="margin-bottom:2rem">
+          <label class="fl">Closing-question verbatim quote <span style="font-weight:300;letter-spacing:0;text-transform:none">(optional — shown in leadership briefing)</span></label>
+          <textarea class="fi" id="closing-quote" rows="3" oninput="update()" placeholder="Record the verbatim answer to the closing question from the first working session…"></textarea>
+          <div class="narrative-hint">Exact words, not a paraphrase. This appears in the leadership briefing section of the report.</div>
+        </div>
+
+        <div class="panel-heading">Dimension Narratives</div>
+        <div id="dim-narratives"></div>
+
+        <div class="panel-heading" style="margin-top:1.5rem">Recommended Next Steps</div>
+        <div id="next-steps-blocks"></div>
+
+        <div class="panel-heading" style="margin-top:2rem">Advanced Report Sections</div>
+        <p style="font-size:0.85rem;color:var(--a-muted);margin-bottom:0.85rem;line-height:1.65">Optional. Add what is relevant, leave blank what is not. All sections appear conditionally in the client report.</p>
+        <details class="adv-details">
+          <summary class="adv-summary">Risk Register</summary>
+          <div class="adv-body">
+            <p class="adv-hint">One row per risk. High-severity rows auto-pull into the Leadership Briefing.</p>
+            <div id="risk-rows"></div>
+            <button class="btn-ghost-sm" onclick="addRiskRow()" style="margin-top:0.5rem">+ Add risk</button>
+          </div>
+        </details>
+        <details class="adv-details">
+          <summary class="adv-summary">Agentic Exposure Report</summary>
+          <div class="adv-body">
+            <div style="display:grid;grid-template-columns:120px 1fr;gap:0.75rem;margin-bottom:0.85rem">
+              <div class="field" style="margin-bottom:0"><label class="fl">Overall %</label><input class="fi" type="number" id="ae-pct" min="0" max="100" placeholder="70" oninput="update()" /></div>
+              <div class="field" style="margin-bottom:0"><label class="fl">Context note</label><input class="fi" type="text" id="ae-note" placeholder="Proportion of spend in AI-managed formats" oninput="update()" /></div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:center;margin-bottom:0.85rem;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--a-cream-dim);cursor:pointer">
+                <input type="checkbox" id="ae-tbb" onchange="update()" /> Two-black-box flag
+              </label>
+              <input class="fi" type="text" id="ae-tbb-note" placeholder="Which platforms are both deciding and measuring?" style="flex:1;min-width:200px" oninput="update()" />
+            </div>
+            <div class="field" style="margin-bottom:0.85rem"><label class="fl">Independent verification status</label><input class="fi" type="text" id="ae-verify" placeholder="e.g. No independent measurement exists for PMax or Advantage+ spend" oninput="update()" /></div>
+            <p class="adv-hint">Platform breakdown:</p>
+            <div id="exposure-rows"></div>
+            <button class="btn-ghost-sm" onclick="addExposureRow()" style="margin-top:0.5rem">+ Add platform</button>
+          </div>
+        </details>
+        <details class="adv-details">
+          <summary class="adv-summary">Agentic Stack Map</summary>
+          <div class="adv-body">
+            <p class="adv-hint">One row per platform. Rendered as a Y/N grid in the client report.</p>
+            <div id="stack-rows"></div>
+            <button class="btn-ghost-sm" onclick="addStackRow()" style="margin-top:0.5rem">+ Add platform</button>
+          </div>
+        </details>
+        <details class="adv-details">
+          <summary class="adv-summary">Platform Dependency Map</summary>
+          <div class="adv-body">
+            <div id="dep-rows"></div>
+            <button class="btn-ghost-sm" onclick="addDepRow()" style="margin-top:0.5rem">+ Add platform</button>
+          </div>
+        </details>
+        <details class="adv-details">
+          <summary class="adv-summary">Paired Engagement</summary>
+          <div class="adv-body">
+            <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;color:var(--a-cream-dim);cursor:pointer;margin-bottom:1rem">
+              <input type="checkbox" id="pe-enabled" onchange="update()" /> This is a paired agency and brand engagement
+            </label>
+            <div class="field" style="margin-bottom:0.65rem"><label class="fl">Linked engagement code</label><input class="fi" type="text" id="pe-code" placeholder="e.g. STD-2026-BRAND01" oninput="update()" /></div>
+            <div class="field" style="margin-bottom:0.65rem"><label class="fl">Disclosure divergence note</label><textarea class="fi" rows="2" id="pe-disclosure" oninput="update()" placeholder="e.g. Agency reports full disclosure; brand reports none."></textarea></div>
+            <div class="field" style="margin-bottom:0.65rem"><label class="fl">Optimisation logic divergence</label><textarea class="fi" rows="2" id="pe-optlogic" oninput="update()" placeholder="e.g. Agency describes PMax optimising toward brand uplift; brand does not know."></textarea></div>
+            <div class="field" style="margin-bottom:0"><label class="fl">Measurement independence divergence</label><textarea class="fi" rows="2" id="pe-measure" oninput="update()" placeholder="e.g. Agency claims independent measurement exists; brand has not seen any."></textarea></div>
+          </div>
+        </details>
+
+        <div class="panel-heading" style="margin-top:2rem">Results Link</div>
+        <p style="font-size:0.85rem;color:var(--a-muted);margin-bottom:1rem;line-height:1.65">
+          Click Generate to build the URL that embeds all scores and narratives. Send this to the client when their report is ready. The URL is long — use a URL shortener if preferred.
+        </p>
+        <button class="btn btn-primary" onclick="generateURL()">Generate Results URL</button>
+        <div id="url-output" style="display:none" class="url-output">
+          <div class="url-label">Results URL — share with client</div>
+          <div class="url-text" id="url-text"></div>
+          <div class="url-actions">
+            <button class="btn btn-ghost" onclick="copyURL()">Copy URL</button>
+            <button class="btn btn-ghost" onclick="openURL()">Preview in New Tab</button>
+            <span class="copy-feedback" id="copy-feedback">Copied!</span>
+          </div>
+        </div>
+
+      </div><!-- /tab-build -->
+
+      <div id="tab-preview" style="display:none">
+        <div class="preview-window">
+          <div class="pw-chrome">
+            <span class="pw-dot"></span><span class="pw-dot"></span><span class="pw-dot"></span>
+            <span class="pw-addr" id="pw-addr">diagnostic-results.html?…</span>
+            <button class="pw-btn" onclick="copyPreviewURL()" id="pw-copy">Copy link</button>
+            <button class="pw-btn" onclick="printPreview()">Save as PDF ↓</button>
+            <button class="pw-btn" onclick="openPreviewURL()">Open ↗</button>
+          </div>
+          <div class="pw-body"><iframe id="preview-iframe" src="about:blank" style="width:100%;border:none;min-height:820px;display:block;" title="Client report preview"></iframe></div>
+        </div>
+        <p style="font-family:var(--a-mono);font-size:0.6rem;color:var(--a-muted);margin-top:0.75rem;letter-spacing:0.04em;line-height:1.65">
+          Live preview of exactly what the client receives. Edit scores and narratives under “Build report” — this updates instantly. When it looks right, copy the link above (or generate it under Build) and send it.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// ADMIN PASSWORD
+// The password used to live here as a plaintext constant, readable by
+// anyone who viewed page source (no login required to see it). It now
+// lives only in the ADMIN_PASSWORD environment variable on the server,
+// checked via POST /api/admin-login. This is a lightweight gate matching
+// the original tool's threat model (a solo advisor's internal tool), not
+// a signed-session auth system.
+// ============================================================
+async function checkAdminPw() {
+  const pwInput = document.getElementById('admin-pw');
+  const pw = pwInput.value;
+  const btn = document.getElementById('pw-submit-btn');
+  const errEl = document.getElementById('pw-error');
+  errEl.style.display = 'none';
+  if (btn) { btn.disabled = true; btn.textContent = 'Checking…'; }
+
+  try {
+    const resp = await fetch('/api/admin-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    if (resp.ok) {
+      document.getElementById('access-gate').style.display = 'none';
+      document.getElementById('admin-app').style.display = 'block';
+      initAdmin();
+      return;
+    }
+    errEl.textContent = 'Incorrect password.';
+    errEl.style.display = 'block';
+  } catch (e) {
+    errEl.textContent = "Couldn't reach the server. Check your connection and try again.";
+    errEl.style.display = 'block';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Enter →'; }
+  }
+}
+
+// ============================================================
+// DIM NAMES
+// ============================================================
+const DIM_NAMES = [
+  'Data Infrastructure',
+  'Platform Architecture & Dependency Risk',
+  'Decisioning Architecture',
+  'Human-to-Machine Handoff Readiness',
+  'Organisational Alignment',
+  'Measurement Independence'
+];
+
+const TIER_RANGES = [
+  { tier:'Exposed', min:0, max:9 },
+  { tier:'Aware', min:10, max:15 },
+  { tier:'Structured', min:16, max:20 },
+  { tier:'Positioned', min:21, max:24 }
+];
+
+function getTier(total) {
+  for (const t of TIER_RANGES) {
+    if (total >= t.min && total <= t.max) return t.tier;
+  }
+  return 'Aware';
+}
+
+// Parse a yyyy-mm-dd value as a LOCAL date (new Date('yyyy-mm-dd') is UTC and
+// can render as the previous day in negative-offset timezones).
+function fmtReportDate(s){
+  let dt;
+  if(s){ const [y,m,d]=s.split('-').map(Number); dt=new Date(y,(m||1)-1,d||1); }
+  else { dt=new Date(); }
+  return dt.toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'});
+}
+
+// ============================================================
+// ADVANCED SECTION GATHERERS
+// ============================================================
+let _riskRows=[], _expRows=[], _stackRows=[], _depRows=[], _rowSeq=0;
+function _nextId(){ return ++_rowSeq; }
+
+function _el(id){ return document.getElementById(id); }
+function _v(id){ const e=_el(id); return e?e.value.trim():''; }
+function _b(id){ const e=_el(id); return e?(e.value==='true'?true:e.value==='false'?false:null):null; }
+
+function addRiskRow(){
+  const id=_nextId(); _riskRows.push(id);
+  const wrap=_el('risk-rows'); const d=document.createElement('div');
+  d.className='adv-row'; d.id='rr-'+id;
+  d.style.gridTemplateColumns='1fr 70px 90px 100px 1fr 1fr 90px 26px';
+  d.innerHTML='<input class="fi" type="text" placeholder="Risk description" id="rr-desc-'+id+'" oninput="update()" />'
+    +'<select class="fi" id="rr-dim-'+id+'" onchange="update()"><option value="">Dim</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>'
+    +'<select class="fi" id="rr-sev-'+id+'" onchange="update()"><option value="">Severity</option><option>High</option><option>Medium</option><option>Low</option></select>'
+    +'<select class="fi" id="rr-hor-'+id+'" onchange="update()"><option value="">Horizon</option><option>Immediate</option><option>Near-term</option><option>Structural</option></select>'
+    +'<input class="fi" type="text" placeholder="Trigger conditions" id="rr-trig-'+id+'" oninput="update()" />'
+    +'<input class="fi" type="text" placeholder="Mitigation path" id="rr-mit-'+id+'" oninput="update()" />'
+    +'<input class="fi" type="text" placeholder="Owner" id="rr-own-'+id+'" oninput="update()" />'
+    +'<button class="adv-row-del" onclick="removeRow(\'rr-'+id+'\',\'_riskRows\','+id+')">✕</button>';
+  wrap.appendChild(d);
+}
+function addExposureRow(){
+  const id=_nextId(); _expRows.push(id);
+  const wrap=_el('exposure-rows'); const d=document.createElement('div');
+  d.className='adv-row'; d.id='er-'+id;
+  d.style.gridTemplateColumns='1fr 65px 1fr 120px 26px';
+  d.innerHTML='<input class="fi" type="text" placeholder="Platform name" id="er-name-'+id+'" oninput="update()" />'
+    +'<input class="fi" type="number" min="0" max="100" placeholder="%" id="er-pct-'+id+'" oninput="update()" />'
+    +'<input class="fi" type="text" placeholder="Optimisation objective" id="er-obj-'+id+'" oninput="update()" />'
+    +'<select class="fi" id="er-align-'+id+'" onchange="update()"><option value="">Aligned?</option><option value="true">Yes — aligned</option><option value="false">No — misaligned</option></select>'
+    +'<button class="adv-row-del" onclick="removeRow(\'er-'+id+'\',\'_expRows\','+id+')">✕</button>';
+  wrap.appendChild(d);
+}
+function addStackRow(){
+  const id=_nextId(); _stackRows.push(id);
+  const wrap=_el('stack-rows'); const d=document.createElement('div');
+  d.className='adv-row'; d.id='sr-'+id;
+  d.style.gridTemplateColumns='1fr 90px 80px 150px 80px 26px';
+  d.innerHTML='<input class="fi" type="text" placeholder="Platform" id="sr-name-'+id+'" oninput="update()" />'
+    +'<select class="fi" id="sr-ai-'+id+'" onchange="update()"><option value="">AI-managed?</option><option value="true">Yes</option><option value="false">No</option></select>'
+    +'<select class="fi" id="sr-fp-'+id+'" onchange="update()"><option value="">1P signal?</option><option value="true">Yes</option><option value="false">No</option></select>'
+    +'<select class="fi" id="sr-meas-'+id+'" onchange="update()"><option value="">Indep. meas.?</option><option value="true">Yes</option><option value="false">No</option></select>'
+    +'<select class="fi" id="sr-silo-'+id+'" onchange="update()"><option value="">Silo?</option><option value="true">Yes</option><option value="false">No</option></select>'
+    +'<button class="adv-row-del" onclick="removeRow(\'sr-'+id+'\',\'_stackRows\','+id+')">✕</button>';
+  wrap.appendChild(d);
+}
+function addDepRow(){
+  const id=_nextId(); _depRows.push(id);
+  const wrap=_el('dep-rows'); const d=document.createElement('div');
+  d.className='adv-row'; d.id='dr-'+id;
+  d.style.gridTemplateColumns='1fr 140px 1fr 26px';
+  d.innerHTML='<input class="fi" type="text" placeholder="Platform name" id="dr-name-'+id+'" oninput="update()" />'
+    +'<select class="fi" id="dr-lock-'+id+'" onchange="update()"><option value="">Lock-in</option><option>Locked</option><option>Some optionality</option><option>Portable</option></select>'
+    +'<input class="fi" type="text" placeholder="One-sentence note" id="dr-note-'+id+'" oninput="update()" />'
+    +'<button class="adv-row-del" onclick="removeRow(\'dr-'+id+'\',\'_depRows\','+id+')">✕</button>';
+  wrap.appendChild(d);
+}
+function removeRow(elId,arrName,rowId){
+  const el=document.getElementById(elId); if(el) el.remove();
+  // arrName identifies which tracking array to update. These are declared
+  // with `let` above, so — unlike `var` — they are not window properties;
+  // look them up directly and mutate in place (splice), not by reassigning
+  // through window[arrName] (see fix note above this function).
+  const arr = {_riskRows,_expRows,_stackRows,_depRows}[arrName];
+  if (arr) { const idx = arr.indexOf(rowId); if (idx !== -1) arr.splice(idx, 1); }
+  update();
+}
+function gatherRiskRegister(){
+  return _riskRows.map(id=>({
+    description:_v('rr-desc-'+id), dimension:_v('rr-dim-'+id),
+    severity:_v('rr-sev-'+id), horizon:_v('rr-hor-'+id),
+    trigger:_v('rr-trig-'+id), mitigation:_v('rr-mit-'+id), owner:_v('rr-own-'+id)
+  })).filter(r=>r.description);
+}
+function gatherAgenticExposure(){
+  const pct=parseInt(_v('ae-pct'))||0, note=_v('ae-note');
+  const tbbEl=_el('ae-tbb'), twoBlackBox=tbbEl?tbbEl.checked:false;
+  if(!pct&&!note&&!twoBlackBox&&_expRows.length===0) return null;
+  return { overallPct:pct, note, twoBlackBox, twoBlackBoxNote:_v('ae-tbb-note'),
+    verificationStatus:_v('ae-verify'),
+    platforms:_expRows.map(id=>({name:_v('er-name-'+id),pct:parseInt(_v('er-pct-'+id))||0,objective:_v('er-obj-'+id),aligned:_b('er-align-'+id)})).filter(p=>p.name)};
+}
+function gatherStackMap(){
+  return _stackRows.map(id=>({platform:_v('sr-name-'+id),aiManaged:_b('sr-ai-'+id),firstPartySignal:_b('sr-fp-'+id),independentMeasurement:_b('sr-meas-'+id),silo:_b('sr-silo-'+id)})).filter(r=>r.platform);
+}
+function gatherDepMap(){
+  return _depRows.map(id=>({platform:_v('dr-name-'+id),lockIn:_v('dr-lock-'+id),note:_v('dr-note-'+id)})).filter(r=>r.platform);
+}
+function gatherPairedEngagement(){
+  const el=_el('pe-enabled');
+  return {enabled:el?el.checked:false,linkedCode:_v('pe-code'),rebuttalDisclosure:_v('pe-disclosure'),optimisationLogic:_v('pe-optlogic'),measurementIndependence:_v('pe-measure')};
+}
+
+function gatherReport(){
+  const scores=getScores(), flags=getFlags();
+  const total=scores.reduce((a,b)=>a+b,0);
+  const dims=[];
+  for(let i=1;i<=6;i++){
+    const n=document.getElementById('n-'+i), ev=document.getElementById('ev-'+i);
+    dims.push({score:scores[i-1], flag:flags[i-1],
+      narrative:n?n.value.trim():'', evidence:ev?ev.value.trim():''});
+  }
+  const steps=[];
+  for(let i=1;i<=4;i++){
+    const t=document.getElementById('ns'+i+'-title'), b=document.getElementById('ns'+i+'-body'), pr=document.getElementById('ns'+i+'-priority');
+    if(t&&t.value.trim()) steps.push({title:t.value.trim(), body:b?b.value.trim():'', priority:pr?pr.value:''});
+  }
+  const headlines=[1,2,3].map(i=>{ const el=document.getElementById('hl-'+i); return el?el.value.trim():''; }).filter(Boolean);
+  return {
+    v:2,
+    name:(document.getElementById('s-name').value.trim()||'Client'),
+    org:document.getElementById('s-org').value.trim(),
+    type:document.getElementById('s-type').value,
+    date:fmtReportDate(document.getElementById('s-date').value),
+    total, tier:getTier(total),
+    exec:document.getElementById('exec-summary').value.trim(),
+    closingQuote:(_el('closing-quote')||{value:''}).value.trim(),
+    headlines, dims, steps,
+    riskRegister:gatherRiskRegister(),
+    agenticExposure:gatherAgenticExposure(),
+    stackMap:gatherStackMap(),
+    dependencyMap:gatherDepMap(),
+    pairedEngagement:gatherPairedEngagement()
+  };
+}
+
+function switchTab(which){
+  const showPreview = (which==='preview');
+  document.getElementById('tab-build').style.display = showPreview ? 'none' : 'block';
+  document.getElementById('tab-preview').style.display = showPreview ? 'block' : 'none';
+  document.getElementById('tab-btn-build').classList.toggle('active', !showPreview);
+  document.getElementById('tab-btn-preview').classList.toggle('active', showPreview);
+  if(showPreview){ loadPreviewIframe(); }
+}
+function loadPreviewIframe(){
+  const url = buildResultsURL();
+  const iframe = document.getElementById('preview-iframe');
+  if(iframe) iframe.src = url;
+  const addr = document.getElementById('pw-addr');
+  if(addr){ addr.textContent = url.length>70 ? url.slice(0,70)+'…' : url; addr.title = url; }
+}
+function copyPreviewURL(){
+  navigator.clipboard.writeText(buildResultsURL()).then(()=>{
+    const b=document.getElementById('pw-copy'); b.textContent='Copied'; b.classList.add('copied');
+    setTimeout(()=>{ b.textContent='Copy link'; b.classList.remove('copied'); }, 1800);
+  });
+}
+function openPreviewURL(){ window.open(buildResultsURL(), '_blank'); }
+function printPreview(){
+  const iframe = document.getElementById('preview-iframe');
+  if(iframe && iframe.contentWindow){ iframe.contentWindow.print(); }
+}
+
+
+// ============================================================
+// GENERATE ACCESS CODE
+// Replaces a localStorage-based code list that was disconnected from the
+// real client registry (CLIENTS_JSON, server-side) and never actually
+// granted portal access on its own. This generates a correctly-formatted
+// STD-YYYY-XXXX code client-side (no secret involved) and a ready-to-paste
+// CLIENTS_JSON snippet. Andrew still has to paste that snippet into the
+// Vercel dashboard and redeploy — that step is intentionally manual, so no
+// part of the client registry has to live in a file in this repo.
+// ============================================================
+function generateAccessCode() {
+  const year = new Date().getFullYear();
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous chars (0/O, 1/I)
+  let suffix = '';
+  for (let i = 0; i < 4; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
+  const code = `STD-${year}-${suffix}`;
+  window.__lastGenCode = code;
+  document.getElementById('gen-code-output').textContent = code;
+  document.getElementById('gen-code-block').style.display = 'block';
+}
+function copyGenCode() {
+  const code = window.__lastGenCode || '';
+  if (!code) return;
+  navigator.clipboard.writeText(code).then(() => flashGenCopy('gen-copy-feedback'));
+}
+function copyGenSnippet() {
+  const code = window.__lastGenCode || '';
+  if (!code) return;
+  const name = (document.getElementById('s-name').value.trim() || 'Client Name');
+  const tier = (document.getElementById('gen-tier').value.trim() || 'asrp');
+  const snippet = `"${code}": { "name": "${name}", "tier": "${tier}", "diagnosticComplete": false, "resultsUrl": null }`;
+  navigator.clipboard.writeText(snippet).then(() => flashGenCopy('gen-snippet-feedback'));
+}
+function flashGenCopy(id) {
+  const fb = document.getElementById(id);
+  if (!fb) return;
+  fb.classList.add('show');
+  setTimeout(() => fb.classList.remove('show'), 2000);
+}
+
+// ============================================================
+// UPDATE TOTALS
+// ============================================================
+function getScores() {
+  const scores = [];
+  for (let i = 1; i <= 6; i++) {
+    scores.push(parseInt(document.getElementById(`sc-${i}`).value || '0'));
+  }
+  return scores;
+}
+function getFlags() {
+  const flags = [];
+  for (let i = 1; i <= 6; i++) {
+    flags.push(document.getElementById(`fl-${i}`).value || 'none');
+  }
+  return flags;
+}
+
+function update() {
+  const scores = getScores();
+  const total = scores.reduce((a,b) => a+b, 0);
+  const tier = getTier(total);
+  document.getElementById('total-display').textContent = `${total} / 24`;
+  document.getElementById('tier-display').textContent = tier;
+
+  // Update narrative headers
+  scores.forEach((s, i) => {
+    const el = document.getElementById(`nh-score-${i+1}`);
+    if (el) el.textContent = `Score: ${s}/4`;
+  });
+
+}
+
+// ============================================================
+// BUILD NARRATIVE BLOCKS
+// ============================================================
+function buildDimNarratives() {
+  const el = document.getElementById('dim-narratives');
+  el.innerHTML = DIM_NAMES.map((name, i) => {
+    const n = i + 1;
+    return `
+    <div class="narrative-block">
+      <div class="narrative-header" onclick="toggleNarrative(${n})">
+        <span class="narrative-header-title">Dim ${n}: ${name}</span>
+        <span class="narrative-header-score" id="nh-score-${n}">Score: 0/4</span>
+      </div>
+      <div class="narrative-body" id="nb-${n}" style="display:none">
+        <textarea id="n-${n}" placeholder="Write 2–4 sentences summarising the key finding for this dimension, what it means for the client, and any specific flags from the questionnaire responses." oninput="update()"></textarea>
+        <div class="narrative-hint">2–4 sentences. Reference specific responses where it strengthens the finding.</div>
+        <div style="margin-top:0.65rem">
+          <label class="fl">Evidence / key phrases <span style="text-transform:none;letter-spacing:0;font-weight:300">(optional — shown as quoted chips on the report)</span></label>
+          <input class="fi" type="text" id="ev-${n}" placeholder='e.g. no clean room, agency manages DSP entirely, 70% Google and Meta' oninput="update()" />
+          <div class="narrative-hint" style="margin-top:0.25rem">Comma-separated. Auto-fills on Apply AI findings.</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleNarrative(n) {
+  const el = document.getElementById(`nb-${n}`);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// Builds the four recommended next-step blocks programmatically so the IDs
+// are real DOM elements (a JS template literal in raw HTML is never evaluated).
+function buildNextSteps() {
+  const el = document.getElementById('next-steps-blocks'); if (!el) return;
+  el.innerHTML = [1,2,3,4].map(i => `
+    <div class="next-step-block">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem">
+        <div class="ns-label">Step ${i}</div>
+        <select class="fi" id="ns${i}-priority" onchange="update()" style="width:auto;font-size:0.68rem;padding:0.28rem 0.55rem">
+          <option value="">No priority label</option>
+          <option value="now">Do now</option>
+          <option value="soon">Plan next</option>
+          <option value="later">Consider later</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="fl">Title</label>
+        <input class="fi" type="text" id="ns${i}-title" placeholder="e.g. Implement a clean data governance framework" oninput="update()" />
+      </div>
+      <div class="field">
+        <label class="fl">Detail (optional)</label>
+        <textarea class="fi" rows="2" id="ns${i}-body" oninput="update()"></textarea>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// GENERATE URL
+// ============================================================
+function buildResultsURL() {
+  const base = window.location.href.split('?')[0].replace('diagnostic-admin.html','diagnostic-results.html');
+  // Carry existing search params from admin URL (preserves any sandbox preview tokens)
+  // then embed the full report as a single base64-encoded d= parameter.
+  const carry = new URLSearchParams(window.location.search);
+  carry.set('d', btoa(encodeURIComponent(JSON.stringify(gatherReport()))));
+  return base + '?' + carry.toString();
+}
+
+function generateURL() {
+  const url = buildResultsURL();
+  document.getElementById('url-output').style.display = 'block';
+  document.getElementById('url-text').textContent = url;
+}
+
+function copyURL() {
+  const text = document.getElementById('url-text').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const fb = document.getElementById('copy-feedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 2000);
+  });
+}
+
+function openURL() {
+  const text = document.getElementById('url-text').textContent;
+  window.open(text, '_blank');
+}
+
+// ============================================================
+// AI ANALYSIS
+// ============================================================
+
+// SCORING_RUBRIC and buildAnalysisPrompt used to live here. Both now
+// live server-side only, in api/analyze.js, alongside the Anthropic API
+// key they were written for — see runAIAnalysis() below, which now calls
+// POST /api/analyze instead of building the prompt and calling Anthropic
+// directly from the browser.
+
+// ============================================================
+// PRE-FILL CLIENT DETAILS FROM A PASTED SUBMISSION
+// Parses the Formspree email text for client name, organisation
+// (from Background ctx_1) and diagnostic type, and fills the sidebar.
+// Never clobbers a field Andrew has already typed into.
+// ============================================================
+function setDiagType(t) {
+  const s = document.getElementById('s-type'); if (s) s.value = t;
+  const a = document.getElementById('ai-type'); if (a) a.value = t;
+}
+function prefillFromResponses(announce) {
+  const text = document.getElementById('ai-responses').value;
+  if (!text.trim()) { if (announce) flashPrefill('Paste the submission text first.', true); return; }
+  const lines = text.split(/\r?\n/);
+  const filled = [];
+
+  // Grab value after a label (colon-sep OR label on its own line then value next line)
+  function grab(labels) {
+    for (let i = 0; i < lines.length; i++) {
+      for (const lab of labels) {
+        const re = new RegExp('^\\s*' + lab + '\\s*[:\\-]?\\s*(.*)$', 'i');
+        const m = lines[i].match(re);
+        if (m) {
+          let v = m[1].trim();
+          if (!v) { for (let j=i+1; j<Math.min(i+5,lines.length); j++) { if (lines[j].trim()) { v=lines[j].trim(); break; } } }
+          if (v) return v;
+        }
+      }
+    }
+    return '';
+  }
+
+  // ── Client details ───────────────────────────────────────────────────────
+  const name    = grab(['client_name','name','prepared for']);
+  const typeRaw = grab(['diagnostic_type','type']).toLowerCase();
+  const ctx1    = grab(['\\[background\\]\\s*ctx_1','ctx_1','organisation name','agency name']);
+
+  if (name)  { const el=document.getElementById('s-name'); if(el&&!el.value.trim()){ el.value=name; filled.push('name'); } }
+  if (ctx1)  { const el=document.getElementById('s-org');  if(el&&!el.value.trim()){ el.value=ctx1.split(/[,\u2013\-]/)[0].trim(); filled.push('organisation'); } }
+  if (typeRaw.includes('agency')) { setDiagType('agency'); filled.push('type: Agency'); }
+  else if (typeRaw.includes('brand'))  { setDiagType('brand');  filled.push('type: Brand'); }
+
+  // ── Per-platform answers ─────────────────────────────────────────────────
+  // Platform names may contain commas (e.g. "Google Ads (Search, Display, YouTube)")
+  // so we match against the known list rather than splitting on commas.
+  const KNOWN_PLATFORMS = [
+    'Google Ads (Search, Display, YouTube)',
+    'Google DV360',
+    'Meta (Facebook / Instagram)',
+    'The Trade Desk',
+    'Amazon DSP',
+    'Yahoo DSP',
+    'Nexxen',
+    'MiQ',
+    'StackAdapt',
+    'Adform',
+    'Retail media network(s) (e.g. Cartology, Coles360, Amazon Ads)',
+    'TikTok',
+    'Programmatic Out-of-Home Platforms (Vistar Media, Hivestack etc)',
+    'Other'
+  ];
+  const platformNamesRaw = grab(['platform_names','platforms']);
+  const platforms = platformNamesRaw
+    ? KNOWN_PLATFORMS.filter(function(p){ return platformNamesRaw.toLowerCase().indexOf(p.toLowerCase()) >= 0; })
+    : [];
+  // Fallback: if no known platform matched, try semicolon split
+  const platformsFinal = platforms.length
+    ? platforms
+    : (platformNamesRaw ? platformNamesRaw.split(';').map(function(s){ return s.trim(); }).filter(Boolean) : []);
+
+  if (platformsFinal.length && _stackRows.length===0 && _depRows.length===0 && _expRows.length===0) {
+    platformsFinal.forEach(function(platform) {
+      // Find a line that contains "[Platform: X] Qn" (case-insensitive)
+      function getQ(n) {
+        var needle = '[platform: ' + platform.toLowerCase() + '] q' + n;
+        for (var i=0; i<lines.length; i++) {
+          if (lines[i].toLowerCase().indexOf(needle) >= 0) {
+            // The label line itself contains colons (e.g. [Platform: Name]) — never parse
+            // the answer from it. The value is always on the next non-empty line.
+            for (var j=i+1; j<Math.min(i+5,lines.length); j++) {
+              if (lines[j].trim()) return lines[j].trim();
+            }
+          }
+        }
+        return '';
+      }
+
+      var q1=getQ(1), q2=getQ(2), q3=getQ(3), q4=getQ(4), q5=getQ(5);
+      var q1l=q1.toLowerCase(), q3l=q3.toLowerCase(), q4l=q4.toLowerCase(), q5l=q5.toLowerCase();
+
+      var aiManaged  = q1  ? (q1l.includes('yes')     ? true  : q1l.includes('partial') ? null : false) : null;
+      var firstParty = q3  ? (q3l.includes('yes')     ? true  : q3l.includes('no')      ? false : null) : null;
+      var indepMeas  = q4  ? (q4l.includes('yes')     ? true  : q4l.includes('no')      ? false : null) : null;
+      var silo       = (firstParty===false && indepMeas===false) ? true : null;
+      var lockIn     = q5l.includes('locked') ? 'Locked' : q5l.includes('portable') ? 'Portable' : q5 ? 'Some optionality' : '';
+      var pctLookup  = [['less than 25',12],['25 to 50',37],['50 to 75',62],['more than 75',87]];
+      var pct = 0;
+      if (q2) { pctLookup.forEach(function(p){ if(q2.toLowerCase().includes(p[0])) pct=p[1]; }); }
+
+      function sv(id, val) { var el=document.getElementById(id); if(el && val!==null && val!==undefined) el.value=String(val); }
+
+      // Stack map row
+      addStackRow();
+      var srId = _stackRows[_stackRows.length-1];
+      var srN = document.getElementById('sr-name-'+srId); if(srN) srN.value=platform;
+      if(aiManaged!==null)  sv('sr-ai-'+srId,   aiManaged);
+      if(firstParty!==null) sv('sr-fp-'+srId,   firstParty);
+      if(indepMeas!==null)  sv('sr-meas-'+srId, indepMeas);
+      if(silo!==null)       sv('sr-silo-'+srId,  silo);
+
+      // Dep map row
+      if(lockIn) {
+        addDepRow();
+        var drId = _depRows[_depRows.length-1];
+        var drN = document.getElementById('dr-name-'+drId); if(drN) drN.value=platform;
+        sv('dr-lock-'+drId, lockIn);
+      }
+
+      // Exposure row
+      addExposureRow();
+      var erId = _expRows[_expRows.length-1];
+      var erN = document.getElementById('er-name-'+erId); if(erN) erN.value=platform;
+      if(pct) sv('er-pct-'+erId, pct);
+    });
+
+    filled.push(platformsFinal.length + ' platform' + (platformsFinal.length>1?'s':'') + ' \u2192 stack / dep / exposure rows pre-filled');
+    document.querySelectorAll('.adv-details').forEach(function(d){ d.open=true; });
+  }
+
+  update();
+  if (announce) {
+    flashPrefill(filled.length
+      ? 'Pre-filled \u2014 ' + filled.join(', ') + '. Review in sidebar and advanced sections.'
+      : 'Nothing new to pre-fill (fields already set or not found in paste).');
+  }
+  return filled;
+}
+function flashPrefill(msg, warn) {
+  const el = document.getElementById('prefill-note');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = warn ? '#D97070' : '#5BAA8A';
+  el.style.display = 'block';
+}
+
+async function runAIAnalysis() {
+  const responses = document.getElementById('ai-responses').value.trim();
+  if (!responses) {
+    alert('Please paste the client responses before running the analysis.');
+    return;
+  }
+  // Auto-fill client name / organisation / type from the same paste.
+  prefillFromResponses(false);
+  const type = document.getElementById('ai-type').value;
+
+  // UI: loading state
+  const btn = document.getElementById('ai-run-btn');
+  const statusEl = document.getElementById('ai-status');
+  const resultsArea = document.getElementById('ai-results-area');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin-sm"></span> Analysing…';
+  statusEl.textContent = 'Running…';
+  statusEl.className = 'ai-status running';
+  resultsArea.innerHTML = '';
+
+  try {
+    const resp = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type, responses }),
+    });
+    const result = await resp.json();
+    if (!resp.ok) {
+      throw new Error(result.error || `Server error ${resp.status}`);
+    }
+
+    window.__lastAI = result;
+    applyAllScores();
+    renderAIResults(result);
+    statusEl.textContent = '✓ Report generated — review each section, then open Client preview';
+    statusEl.className = 'ai-status done';
+    // Expand filled narrative blocks so Andrew can scan them without clicking each open
+    [1,2,3,4,5,6].forEach(n => {
+      const nb = document.getElementById('nb-'+n), nv = document.getElementById('n-'+n);
+      if (nb && nv && nv.value.trim()) nb.style.display = 'block';
+    });
+  } catch(e) {
+    statusEl.textContent = `Error: ${e.message}`;
+    statusEl.className = 'ai-status error';
+    resultsArea.innerHTML = `<div style="margin-top:1rem;padding:0.85rem;background:rgba(139,64,64,0.1);border:1px solid rgba(139,64,64,0.3);border-radius:4px;font-family:var(--a-mono);font-size:0.72rem;color:#D97070;line-height:1.65">
+      Analysis failed: ${escHtmlAdmin(e.message)}<br><br>
+      Check that the responses field is not empty, then try again.
+    </div>`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Re-analyse →';
+  }
+}
+
+function renderAIResults(result) {
+  const area = document.getElementById('ai-results-area');
+  if (!result.dimensions) { area.innerHTML = '<p style="color:#D97070;margin-top:1rem">Could not parse AI response. Try again.</p>'; return; }
+  // Stash the full result so Apply / Apply-All can pull findings without
+  // embedding AI-written text (which contains quotes) into inline onclick.
+  window.__lastAI = result;
+
+  const dimCards = result.dimensions.map(dim => {
+    const phrases = (dim.key_phrases || []).map(p =>
+      `<span class="ai-phrase-chip">${escHtmlAdmin(p)}</span>`).join('');
+    const flagLabel = { none:'—', risk:'Priority Risk', watch:'Watch', strength:'Strength' }[dim.suggested_flag] || '—';
+    return `<div class="ai-card">
+      <div class="ai-card-header">
+        <div>
+          <div class="ai-card-dim">Dimension ${dim.number}</div>
+          <div style="font-size:0.78rem;color:var(--a-cream-dim);margin-top:1px">${DIM_NAMES[dim.number-1]}</div>
+        </div>
+        <div class="ai-card-score-row">
+          <span class="ai-suggested-score">${dim.suggested_score}/4 · ${flagLabel}</span>
+          <button class="btn-apply" id="apply-btn-${dim.number}"
+            onclick="applyDimScore(${dim.number}, ${dim.suggested_score}, '${dim.suggested_flag}', this)">
+            Apply
+          </button>
+        </div>
+      </div>
+      <div class="ai-card-body">
+        <div class="ai-finding">${escHtmlAdmin(dim.finding || '')}</div>
+        ${dim.reasoning ? `<div style="font-family:var(--a-mono);font-size:0.6rem;color:var(--a-muted);margin-bottom:0.5rem;letter-spacing:0.05em">${escHtmlAdmin(dim.reasoning)}</div>` : ''}
+        ${phrases ? `<div class="ai-key-phrases">${phrases}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const redFlags = (result.red_flags || []).length > 0 ? `
+    <div class="ai-redflags">
+      <div class="ai-redflag-label">Red Flags Detected</div>
+      ${result.red_flags.map(f => `<div class="ai-redflag-item">${escHtmlAdmin(f)}</div>`).join('')}
+    </div>` : '';
+
+  const overall = result.overall_notes ? `
+    <div class="ai-overall">
+      <div class="ai-overall-label">Overall Pattern</div>
+      <div class="ai-overall-text">${escHtmlAdmin(result.overall_notes)}</div>
+    </div>` : '';
+
+  const applyAll = `
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.85rem;flex-wrap:wrap">
+      <button class="btn-apply-all" onclick="applyAllScores()">
+        ✓ Apply All — Scores &amp; Narratives
+      </button>
+      <span style="font-family:var(--a-mono);font-size:0.6rem;color:var(--a-muted)">Fills each dimension narrative with the AI finding (where empty) and seeds the summary. You can still edit everything afterwards.</span>
+    </div>`;
+
+  area.innerHTML = `<div class="ai-suggestions">${dimCards}</div>${redFlags}${overall}${applyAll}`;
+}
+
+function applyDimScore(dimNum, score, flag, btn) {
+  // Apply to sidebar score select
+  const scoreEl = document.getElementById(`sc-${dimNum}`);
+  const flagEl = document.getElementById(`fl-${dimNum}`);
+  if (scoreEl) scoreEl.value = score.toString();
+  if (flagEl) flagEl.value = flag;
+
+  // Auto-populate narrative and evidence chips from AI findings (only if empty).
+  const nEl = document.getElementById(`n-${dimNum}`);
+  const evEl = document.getElementById(`ev-${dimNum}`);
+  const ai = ((window.__lastAI && window.__lastAI.dimensions) || []).find(d => d.number === dimNum);
+  if (nEl && ai && ai.finding && !nEl.value.trim()) {
+    nEl.value = ai.finding;
+    const body = document.getElementById(`nb-${dimNum}`);
+    if (body) body.style.display = 'block';
+  }
+  if (evEl && ai && ai.key_phrases && ai.key_phrases.length && !evEl.value.trim()) {
+    evEl.value = ai.key_phrases.join(', ');
+  }
+
+  if (btn) { btn.textContent = '✓ Applied'; btn.classList.add('applied'); btn.disabled = true; }
+  update();
+}
+
+function applyAllScores() {
+  const dims = (window.__lastAI && window.__lastAI.dimensions) || [];
+  dims.forEach(dim => {
+    const btn = document.getElementById(`apply-btn-${dim.number}`);
+    if (!btn || !btn.classList.contains('applied')) {
+      applyDimScore(dim.number, dim.suggested_score, dim.suggested_flag, btn);
+    }
+  });
+  // Seed exec summary from overall_notes if blank
+  const ex = document.getElementById('exec-summary');
+  if (ex && !ex.value.trim() && window.__lastAI && window.__lastAI.overall_notes) {
+    ex.value = window.__lastAI.overall_notes;
+  }
+  // Seed headline findings (up to 3) if blank
+  const aiHeadlines = (window.__lastAI && window.__lastAI.headlines) || [];
+  aiHeadlines.slice(0,3).forEach((h, i) => {
+    const el = document.getElementById('hl-'+(i+1));
+    if (el && !el.value.trim()) el.value = h;
+  });
+  // Seed next steps if blank
+  const aiSteps = (window.__lastAI && window.__lastAI.next_steps) || [];
+  aiSteps.slice(0,4).forEach((step, i) => {
+    const t = document.getElementById('ns'+(i+1)+'-title');
+    const b = document.getElementById('ns'+(i+1)+'-body');
+    const p = document.getElementById('ns'+(i+1)+'-priority');
+    if (t && !t.value.trim()) t.value = step.title || '';
+    if (b && !b.value.trim()) b.value = step.body || '';
+    if (p && !p.value) p.value = step.priority || '';
+  });
+  // Auto-add AI-suggested risk register rows (only when register is currently empty)
+  const aiRiskRows = (window.__lastAI && window.__lastAI.risk_register_rows) || [];
+  if (aiRiskRows.length && _riskRows.length === 0) {
+    document.querySelectorAll('.adv-details').forEach(function(d) {
+      const s = d.querySelector('summary');
+      if (s && s.textContent.includes('Risk Register')) d.open = true;
+    });
+    aiRiskRows.forEach(function(row) {
+      addRiskRow();
+      const id = _riskRows[_riskRows.length - 1];
+      const m = { desc: row.description, dim: row.dimension, sev: row.severity, hor: row.horizon, trig: row.trigger, mit: row.mitigation, own: row.owner || '' };
+      Object.entries(m).forEach(function(pair) {
+        const el = _el('rr-' + pair[0] + '-' + id);
+        if (el && pair[1]) el.value = pair[1];
+      });
+    });
+  }
+  update();
+}
+
+function escHtmlAdmin(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function initAdmin() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('s-date').value = today;
+
+  buildDimNarratives();
+  buildNextSteps();
+  update();
+}
+</script>
+</body>
+</html>
