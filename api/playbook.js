@@ -32,7 +32,9 @@ module.exports = async function handler(req, res) {
   }
 
   const cookies = parseCookies(req.headers.cookie);
-  const payload = verify(cookies[COOKIE_NAME], secret);
+  const payload =
+    verify(cookies[COOKIE_NAME], secret) ||
+    verify(req.query && req.query.token, secret);
 
   if (!payload) {
     res.setHeader("Location", `/playbooks.html?locked=${encodeURIComponent(id)}`);
