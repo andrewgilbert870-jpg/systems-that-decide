@@ -1,45 +1,454 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Systems That Decide · Independent Advisory for ANZ</title>
-  <link rel="stylesheet" href="css/foundations.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: var(--bg); }
-    body { background-image: none; }
-    .app-scroll { min-height: 100vh; overflow-x: hidden; }
-    a { color: inherit; }
-    h1, h2, h3, h4 { letter-spacing: 0; }
-    button { font-family: inherit; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems That Decide · Agentic Media Buying · Independent Advisory for ANZ</title>
+<meta name="description" content="Agentic buying will remake media over the next three years. Independent advisory from Andrew Gilbert. Sixteen years inside the stack, no stake in what you buy next. ANZ.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* index-only embellishments */
+
+  .hero {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    overflow: hidden;
+  }
+  .hero .container { position: relative; z-index: 2; }
+  .hero h1 { font-size: clamp(3rem, 6.4vw, 5.4rem); max-width: 20ch; }
+
+  /* Three.js node network canvas */
+  #hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  /* Timeline (the shift) */
+  .timeline {
+    margin-top: 3rem;
+    border-left: 1px solid var(--hairline);
+    padding-left: 0;
+    list-style: none;
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 2.4rem 2.4rem;
+  }
+  .tl-item:last-child { padding-bottom: 0.4rem; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.35em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .tl-item.hollow::before {
+    background: transparent;
+    border: 1px solid var(--gold);
+  }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .tl-item h3 {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--off);
+    margin-bottom: 0.5rem;
+    max-width: 44ch;
+  }
+  .tl-item h3 em { font-style: italic; color: var(--gold); }
+  .tl-item p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .shift-definition {
+    margin-top: 3rem;
+    padding: 1.6rem 2rem;
+    border-left: 3px solid var(--gold);
+    background: var(--surface);
+    max-width: 64ch;
+  }
+  .shift-definition p {
+    color: var(--off);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .shift-close {
+    margin-top: 3rem;
+    max-width: 64ch;
+  }
+  .shift-close p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+  .shift-close strong { color: var(--off); font-weight: 600; }
+
+  /* Why me */
+  .whyme-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .whyme-portrait {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--gold);
+  }
+  .whyme-caption {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 0.9rem;
+  }
+  .whyme-text p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 60ch;
+    margin-bottom: 1.4rem;
+  }
+  .whyme-text strong { color: var(--off); font-weight: 600; }
+  .whyme-text .kicker {
+    color: var(--off);
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 900px) {
+    .whyme-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .whyme-portrait { max-width: 320px; }
+  }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: clamp(2.5rem, 9vw, 4rem); }
+    .tl-item { padding-left: 1.6rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="app-scroll">
-    <div id="app"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
   </div>
+  <a class="brand" href="index.html">
+    <img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200">
+  </a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+<!-- ============ 01 · HERO ============ -->
+<section class="hero" id="main">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <div class="container">
+    <p class="eyebrow">Agentic media buying <span class="dot">·</span> ANZ <span class="dot">·</span> Andrew Gilbert</p>
+    <h1>The next three years of media will be <em>bought by machines.</em></h1>
+    <p class="lede">The first live agent-to-agent media transaction cleared in October 2025. Agentic campaigns are running in Australia today. I'm Andrew Gilbert. Sixteen years inside the stack, now independent, with no stake in what you buy next. I show brands, agencies and publishers how to get ready.</p>
+    <div class="actions">
+      <a class="btn-primary" href="asrp.html#assessment">Take the 90-second self-assessment</a>
+      <a class="btn-secondary" href="mailto:andrew@systemsthatdecide.io">Book a 30-minute scoping call</a>
+    </div>
+    <p class="microcopy">30 minutes · No commitment · One business day to reply</p>
+  </div>
+</section>
 
-  <script>window.__PAGE = "home";</script>
+<!-- ============ 02 · THE SHIFT ============ -->
+<section>
+  <div class="container">
+    <p class="eyebrow">The shift <span class="dot">·</span> <span class="seq">02</span></p>
+    <h2>This is not a forecast. <em>The money is already moving.</em></h2>
 
-  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
-  <script type="text/babel" src="js/atoms.jsx"></script>
-  <script type="text/babel" src="js/components.jsx"></script>
-  <script type="text/babel" src="js/page-home-ecosystem.jsx"></script>
-  <script type="text/babel" src="js/page-home-360.jsx"></script>
-  <script type="text/babel" src="js/page-home.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-1.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-2.jsx"></script>
-  <script type="text/babel" src="js/page-advisory.jsx"></script>
-  <script type="text/babel" src="js/page-about.jsx"></script>
-  <script type="text/babel" src="js/page-library.jsx"></script>
-  <script type="text/babel" src="js/page-enquire.jsx"></script>
-  <script type="text/babel" src="js/bootstrap.jsx"></script>
+    <div class="shift-definition">
+      <p>An agentic buyer is software that takes a campaign brief, finds the inventory, negotiates the price, and writes down every decision it makes. The human approves the goal. <strong style="color:var(--off);font-weight:600">The machine makes the buy.</strong></p>
+    </div>
+
+    <ol class="timeline">
+      <li class="tl-item">
+        <div class="tl-date">October 2025</div>
+        <h3>The first live agent-to-agent media transaction clears.</h3>
+        <p>LG Ads inventory. Real money. AI agents handled creative, targeting and approval under human oversight. One observer compared it to watching the first banner ad being served.</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">January 2026</div>
+        <h3>The platforms go live, and Australia is <em>in the first wave.</em></h3>
+        <p>PubMatic launches AgenticOS at CES with more than twenty agents. Yahoo DSP switches on agentic buying in Australia and Singapore from day one, not as a delayed regional rollout.</p>
+      </li>
+      <li class="tl-item">
+        <div class="tl-date">April 2026</div>
+        <h3>Agentic campaigns are running end-to-end in Australia.</h3>
+        <p>PubMatic confirms live end-to-end agentic campaigns in Australian market. The Trade Desk launches Koa Agents in alpha, with Stagwell first to adopt. From governance body to live local campaigns took under six months.</p>
+      </li>
+      <li class="tl-item hollow">
+        <div class="tl-date">December 2026</div>
+        <h3>The regulation lands before most stacks are ready.</h3>
+        <p>Automated decision-making transparency obligations arrive under the Privacy Act. If a machine is making buying decisions with your budget, you will need to be able to say how.</p>
+      </li>
+    </ol>
+
+    <div class="shift-close">
+      <p>Full autonomy across a diversified media plan is further out. 2027, probably later. But the infrastructure being built now will determine who is positioned when that autonomy arrives, <strong>and who is not.</strong> That is the three-year window, and it is open now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · WHERE YOU SIT ============ -->
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">Where you sit <span class="dot">·</span> <span class="seq">03</span></p>
+    <h2>The question is the same in every seat. <em>Are you ready?</em></h2>
+
+    <div class="cards-3">
+      <article class="card">
+        <div class="card-tag">01 / Brand</div>
+        <h3>Your agency says <em>it's fine.</em></h3>
+        <p>PMax and Advantage+ are already making decisions inside your buy that your agency cannot fully audit.</p>
+        <div class="card-tail"><a href="asrp.html" style="color:var(--gold);text-decoration:none;">How I work with brands →</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-tag">02 / Independent Agency</div>
+        <h3>Your clients will ask <em>before you're ready.</em></h3>
+        <p>Agentic buying compresses the margin model before your clients ask what your position is.</p>
+        <div class="card-tail"><a href="asrp.html" style="color:var(--gold);text-decoration:none;">How I work with agencies →</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-tag">03 / Publisher</div>
+        <h3>You're not losing deals. <em>You're being skipped.</em></h3>
+        <p>If a machine can't read your inventory, it buys somewhere else. You're excluded before the auction starts.</p>
+        <div class="card-tail"><a href="asrp.html" style="color:var(--gold);text-decoration:none;">How I work with publishers →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE MANDATE ============ -->
+<section class="quote-section">
+  <div class="container">
+    <p class="eyebrow">The mandate</p>
+    <blockquote>"The analysis <em style="color:var(--gold);font-style:italic">is</em> the product. I am not incentivised by what you buy next, but by how well you understand what you already have."</blockquote>
+    <cite><a href="conflicts.html" style="color:var(--gold);text-decoration:none;">How independence is enforced →</a></cite>
+  </div>
+</section>
+
+<!-- ============ 04 · WHY ME ============ -->
+<section>
+  <div class="container">
+    <p class="eyebrow">Why me <span class="dot">·</span> <span class="seq">04</span></p>
+    <h2>Sixteen years inside the stack. <em>Now outside it.</em></h2>
+
+    <div class="whyme-grid">
+      <div>
+        <img class="whyme-portrait" src="assets/andrew-gilbert-nobg.png" alt="Andrew Gilbert" width="642" height="601">
+        <p class="whyme-caption">Andrew Gilbert · Founder · Sydney</p>
+      </div>
+      <div class="whyme-text">
+        <p class="kicker">I spent sixteen years operating inside the systems this site is about. Agency trading desks, ad tech platforms, and most recently Afterpay, where I led the launch of the first payments-native commerce media offering in ANZ.</p>
+        <p>I now work independently. No reseller margin, no platform partnership, <strong>no referral fees from anyone.</strong> When I tell you a vendor is the right call, it is because the evidence says so, not because I clip the ticket.</p>
+        <p>Since launching this practice I have been writing the public record on agentic buying in ANZ: what is live, what is positioning dressed as product, and what it means for the people who have to act on it. <strong>The essays are the evidence. Read them before you pay me anything.</strong></p>
+      </div>
+    </div>
+
+    <div class="essay-row" style="margin-top:4rem;">
+      <article class="essay">
+        <div class="essay-meta">04 May 2026 · Strategy · 8 min</div>
+        <h3>Five problems. <em>Five moves.</em></h3>
+        <p>The five structural problems sitting inside ANZ media stacks right now, and the move each one calls for. Written for operators with the authority to act, not the patience for taxonomy.</p>
+        <a class="essay-link" href="https://systemsthatdecide.substack.com/p/five-problems-five-moves">Read on Substack →</a>
+      </article>
+
+      <article class="essay">
+        <div class="essay-meta">26 February 2026 · Programmatic · 5 min</div>
+        <h3>The bid request is the <em>unit of power.</em></h3>
+        <p>If you don't control the bid request, you don't control the auction. If you don't control the auction, you don't control yield. Programmatic strategy is a conversation about who owns this object.</p>
+        <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+      </article>
+
+      <article class="essay">
+        <div class="essay-meta">05 March 2026 · Agency Model · 6 min</div>
+        <h3>Why the agency contract is <em>structurally unstable.</em></h3>
+        <p>The agency contract describes a different service to what is delivered. This is structural. The fee model and the production model have drifted apart for fifteen years, and neither side will say so out loud.</p>
+        <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+      </article>
+    </div>
+
+    <a class="see-more" href="library.html">All essays</a>
+  </div>
+</section>
+
+<!-- ============ 05 · GET READY / CTA ============ -->
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get ready <span class="dot">·</span> <span class="seq">05</span></p>
+    <h2>Leave with a document. <em>Not a quote.</em></h2>
+    <p>Every engagement starts the same way: the Diagnostic. A scored readiness baseline for your stack, 0 to 24, independent of every vendor with something to sell you. You keep the document. What happens next is your call.</p>
+    <div class="actions">
+      <a class="btn-primary" href="asrp.html#assessment">Take the 90-second self-assessment</a>
+      <a class="btn-secondary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+    </div>
+    <p class="closing"><a href="asrp.html" style="color:var(--gold);text-decoration:none;">See the full readiness program →</a></p>
+    <p class="closing" style="margin-top:0.5rem;">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+    <p class="closing" style="margin-top:0.5rem;">Not ready for a call? <a href="https://systemsthatdecide.substack.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Get the essays by email →</a></p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200">
+    </a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── Hero node network ── */
+(function () {
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('hero-canvas');
+  if (isMobile || prefersReduced || !canvas || typeof THREE === 'undefined') return;
+
+  const mouse = { x: 0, y: 0 };
+  window.addEventListener('mousemove', function (e) {
+    mouse.x = (e.clientX / window.innerWidth  - 0.5) * 2;
+    mouse.y = (e.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false }); }
+  catch (e) { return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 1000);
+  camera.position.z = 100;
+
+  const NODE_COUNT = 55;
+  const SPREAD_X = 130, SPREAD_Y = 70, SPREAD_Z = 45;
+  const pts = Array.from({ length: NODE_COUNT }, function () { return {
+    x: (Math.random() - 0.5) * SPREAD_X,
+    y: (Math.random() - 0.5) * SPREAD_Y,
+    z: (Math.random() - 0.5) * SPREAD_Z,
+  }; });
+
+  pts.forEach(function (p) {
+    var isFg = p.z > 0;
+    var geo = new THREE.SphereGeometry(isFg ? 0.55 : 0.32, 5, 4);
+    var mat = new THREE.MeshBasicMaterial({ color: 0x9a8b47, transparent: true, opacity: isFg ? 0.40 : 0.20 });
+    var m = new THREE.Mesh(geo, mat);
+    m.position.set(p.x, p.y, p.z);
+    scene.add(m);
+  });
+
+  var edgeVerts = [], edgeVertsFar = [];
+  var MAX_CLOSE = 26, MAX_FAR = 48;
+  for (var i = 0; i < pts.length; i++) {
+    for (var j = i + 1; j < pts.length; j++) {
+      var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, dz = pts[i].z - pts[j].z;
+      var d  = Math.sqrt(dx*dx + dy*dy + dz*dz);
+      if (d < MAX_CLOSE) {
+        edgeVerts.push(new THREE.Vector3(pts[i].x, pts[i].y, pts[i].z), new THREE.Vector3(pts[j].x, pts[j].y, pts[j].z));
+      } else if (d < MAX_FAR && Math.random() < 0.18) {
+        edgeVertsFar.push(new THREE.Vector3(pts[i].x, pts[i].y, pts[i].z), new THREE.Vector3(pts[j].x, pts[j].y, pts[j].z));
+      }
+    }
+  }
+  if (edgeVerts.length) {
+    scene.add(new THREE.LineSegments(
+      new THREE.BufferGeometry().setFromPoints(edgeVerts),
+      new THREE.LineBasicMaterial({ color: 0x9a8b47, transparent: true, opacity: 0.20 })
+    ));
+  }
+  if (edgeVertsFar.length) {
+    scene.add(new THREE.LineSegments(
+      new THREE.BufferGeometry().setFromPoints(edgeVertsFar),
+      new THREE.LineBasicMaterial({ color: 0x9a8b47, transparent: true, opacity: 0.07 })
+    ));
+  }
+
+  function resize() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  var ro = new ResizeObserver(resize);
+  ro.observe(canvas);
+
+  var t = 0, camX = 0, camY = 0;
+  (function animate() {
+    requestAnimationFrame(animate);
+    t += 0.006;
+    scene.rotation.y = Math.sin(t * 0.8)  * 0.22;
+    scene.rotation.x = Math.cos(t * 0.55) * 0.10;
+    camX += (mouse.x *  8 - camX) * 0.04;
+    camY += (-mouse.y * 4 - camY) * 0.04;
+    camera.position.x = camX;
+    camera.position.y = camY;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  })();
+})();
+</script>
 </body>
 </html>

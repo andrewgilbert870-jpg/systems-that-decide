@@ -1,43 +1,385 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About · Systems That Decide</title>
-  <link rel="stylesheet" href="css/foundations.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: var(--bg); }
-    body { background-image: none; }
-    .app-scroll { min-height: 100vh; overflow-x: hidden; }
-    a { color: inherit; }
-    h1, h2, h3, h4 { letter-spacing: 0; }
-    button { font-family: inherit; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · Systems That Decide</title>
+<meta name="description" content="Sixteen years inside the systems that decide. Now operating outside them. Andrew Gilbert. Independent advisory, Sydney.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .portrait-block {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .portrait-frame {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    position: relative;
+    overflow: hidden;
+  }
+  .portrait-frame::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+    z-index: 1;
+  }
+  .portrait-frame::after {
+    content: '';
+    display: none;
+  }
+  .portrait-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    display: block;
+    position: relative; z-index: 2;
+  }
+  .identity-meta .name {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--off);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.018em;
+  }
+  .identity-meta .name em { font-style: italic; color: var(--gold); }
+  .identity-meta .role {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+  }
+  .identity-meta p { font-size: 1.02rem; color: var(--muted); }
+  .identity-meta .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.8rem;
+  }
+  .identity-meta .tag {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--gold-line);
+    background: rgba(154,139,71,0.06);
+  }
+
+  .role-history { margin-top: 3rem; }
+  .role-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .role-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .role-row .period {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+  }
+  .role-row h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    max-width: none;
+  }
+  .role-row h3 em { font-style: italic; color: var(--gold); }
+  .role-row p { font-size: 0.97rem; color: var(--muted); margin-bottom: 0; max-width: 60ch; }
+
+  .independence {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .indep-block {
+    padding: 2rem 1.6rem;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    position: relative;
+  }
+  .indep-block::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+  }
+  .indep-block .sec {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .indep-block h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+  .indep-block h3 em { font-style: italic; color: var(--gold); }
+  .indep-block p { font-size: 0.95rem; line-height: 1.55; max-width: none; }
+
+  .advisory-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 4rem;
+    margin-top: 3rem;
+  }
+  .advisory-block h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+  .advisory-block h3 em { font-style: italic; color: var(--gold); }
+  .advisory-block p { font-size: 0.98rem; }
+
+  @media (max-width: 920px) {
+    .portrait-block { grid-template-columns: 1fr; gap: 2rem; }
+    .role-row { grid-template-columns: 1fr; gap: 0.4rem; }
+    .independence { grid-template-columns: 1fr; }
+    .advisory-blocks { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="app-scroll">
-    <div id="app"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
   </div>
+  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html" class="active">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html" class="active">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+<section class="page-hero" id="main">
+  <div class="container">
+    <p class="eyebrow">About <span class="dot">·</span> <span class="seq">01</span></p>
+    <h1>Sixteen years inside the systems that decide. <em>Now operating outside them.</em></h1>
+    <p class="lede">Systems That Decide is my independent advisory practice. It exists to answer the question your agency can't — because they earn on the answer. <em>I'm Andrew Gilbert. Sixteen years inside the stack. Now operating outside it.</em></p>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+    <div class="portrait-block">
+      <div class="portrait-frame">
+        <img src="assets/andrew-gilbert-nobg.png" alt="Andrew Gilbert" width="642" height="601" loading="eager" onerror="this.style.display='none'">
+      </div>
+      <div class="identity-meta">
+        <div class="name">Andrew<br><em>Gilbert.</em></div>
+        <div class="role">Independent advisory · Sydney</div>
+        <p>Sixteen years across the buy-side, sell-side and payments-native commerce media — including the launch of the first payments-native commerce media product in ANZ. The value of that time isn't the title. It's knowing where the decisions actually get made.</p>
+        <div class="tags">
+          <span class="tag">Brand</span>
+          <span class="tag">Agency</span>
+          <span class="tag">Publisher</span>
+          <span class="tag">Adtech</span>
+          <span class="tag">Payments</span>
+          <span class="tag">Retail Media</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>window.__PAGE = "about";</script>
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">One thing I got wrong <span class="dot">·</span> <span class="seq">02</span></p>
+    <h2>The most confident-sounding consensus usually belongs to the people with the <em>most to lose</em> if it shifts.</h2>
+    <p>In 2018 I was sure measurement would be solved by identity. The argument seemed obvious at the time. Identity infrastructure was about to consolidate, deterministic match rates were rising, and the long tail of cookie loss looked like an engineering problem.</p>
+    <p>I was wrong about most of it. The platforms that survived built their edge on signal modelling, not identity stitching. <strong style="color:var(--ink);font-weight:600">The lesson I carry into the work now is that the most confident-sounding consensus in this industry usually belongs to the people with the most to lose if it shifts.</strong></p>
+  </div>
+</section>
 
-  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
-  <script type="text/babel" src="js/atoms.jsx"></script>
-  <script type="text/babel" src="js/components.jsx"></script>
-  <script type="text/babel" src="js/page-home-ecosystem.jsx"></script>
-  <script type="text/babel" src="js/page-home.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-1.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-2.jsx"></script>
-  <script type="text/babel" src="js/page-advisory.jsx"></script>
-  <script type="text/babel" src="js/page-about.jsx"></script>
-  <script type="text/babel" src="js/page-library.jsx"></script>
-  <script type="text/babel" src="js/page-enquire.jsx"></script>
-  <script type="text/babel" src="js/bootstrap.jsx"></script>
+<section>
+  <div class="container">
+    <p class="eyebrow">The operator's view <span class="dot">·</span> <span class="seq">03</span></p>
+    <h2>What sixteen years inside <em>changes</em> about what you can see.</h2>
+    <p>Most analysis of the agentic shift is written from outside the systems. Read by people who have never run a P&amp;L against them. The structural mechanics, the commercial incentives, the way contracts and product roadmaps actually get written, <strong style="color:var(--off);font-weight:600">are not in the public conversation — because the people who know them are still inside.</strong></p>
+    <p>I built the practice in that gap. The work is to translate what I saw from inside into clarity for the people now making decisions about it. The advice is direct. <strong style="color:var(--off);font-weight:600">The analysis travels with the engagement, not the relationship.</strong></p>
+  </div>
+</section>
+
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">The scale record <span class="dot">·</span> <span class="seq">04</span></p>
+    <h2>Operator-level work across the buy-side, sell-side and <em>payments-native</em> commerce media.</h2>
+
+    <div class="numbers-grid">
+      <div>
+        <div class="num apex">2,550<span class="pct">%</span></div>
+        <div class="num-label">Revenue growth · Yahoo DSP AUSEA · 2019–2025</div>
+      </div>
+      <div>
+        <div class="num standard">60<span class="pct">%</span></div>
+        <div class="num-label">ANZ market share built · Integral Ad Science</div>
+      </div>
+      <div>
+        <div class="num standard">16</div>
+        <div class="num-label">Years inside · Six categories of operator role</div>
+      </div>
+      <div>
+        <div class="num standard">$0</div>
+        <div class="num-label">Vendor commissions. Ever.</div>
+      </div>
+    </div>
+
+    <div class="role-history">
+      <div class="role-row">
+        <div class="period">2022 — 2024</div>
+        <div>
+          <h3>VP Advertising · <em>Afterpay Ads (Block Inc.)</em></h3>
+          <p>Launched the first payments-native commerce media product in ANZ. Designed the commercial model end to end and built the operating function that ran it.</p>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="period">2019 — 2025</div>
+        <div>
+          <h3>Director Commercial &amp; Solutions AUSEA · <em>Yahoo DSP</em></h3>
+          <p>Led the AUSEA commercial team across Australia, NZ and South-East Asia during 2,550% revenue growth. Senior operator across DSP, retail media and measurement.</p>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="period">2016 — 2019</div>
+        <div>
+          <h3>Director, Sales · <em>Integral Ad Science</em></h3>
+          <p>Helped build Integral Ad Science in ANZ to roughly 60% market share. Senior commercial leadership across publisher, brand and agency sides.</p>
+        </div>
+      </div>
+      <div class="role-row">
+        <div class="period">2010 — 2016</div>
+        <div>
+          <h3>Agency &amp; brand-side · <em>Starcom, Ikon, Vodafone</em></h3>
+          <p>Earlier work on the agency side at Starcom Brisbane and Ikon Communications (Sydney / Brisbane), and brand-side at Vodafone. Six categories of operator role across the same set of systems.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="eyebrow">The independence model <span class="dot">·</span> <span class="seq">05</span></p>
+    <h2>Independence is not a claim. <em>It is a model</em> with no contracts pointing the other way.</h2>
+
+    <div class="independence">
+      <div class="indep-block">
+        <div class="sec">§ 01</div>
+        <h3>The recommendation <em>doesn't lead</em> anywhere else</h3>
+        <p>The practice does not run media, configure platforms or stand up infrastructure. Recommendations are not a path to a build engagement.</p>
+      </div>
+      <div class="indep-block">
+        <div class="sec">§ 02</div>
+        <h3>No platform <em>in the room</em> when the analysis is written</h3>
+        <p>No platform partnerships. No reseller margin. No certification revenue. No co-marketing arrangements with the systems being evaluated.</p>
+      </div>
+      <div class="indep-block">
+        <div class="sec">§ 03</div>
+        <h3>The answer doesn't change <em>based on who's paying</em> for it</h3>
+        <p>No commission on what is recommended, named or unnamed. The analysis ends where the document ends. The next conversation is yours to have.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container">
+    <p class="eyebrow">The mandate <span class="dot">·</span> <span class="seq">06</span></p>
+    <blockquote>"The analysis <em style="color:var(--gold);font-style:italic">is</em> the product. I am not incentivised by what you buy next, but by how well you understand what you already have."</blockquote>
+    <cite>Andrew Gilbert · Founder</cite>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="eyebrow">The advisory model <span class="dot">·</span> <span class="seq">07</span></p>
+    <h2>How an engagement actually runs. <em>What you own at the end.</em></h2>
+    <p style="max-width: 62ch;">A direct read on how the work actually runs. Designed to make a CMO confident they understand what they are buying before they call.</p>
+
+    <div class="advisory-blocks">
+      <div class="advisory-block">
+        <h3>Scoping <em>conversation</em></h3>
+        <p>A 30-minute call. We discuss what you are trying to decide, what is already in motion, who else is around the table. The call ends with clarity on whether an engagement makes sense — and which one. Not a quote. Not a follow-up sequence.</p>
+      </div>
+      <div class="advisory-block">
+        <h3>What you <em>own</em> at the end</h3>
+        <p>You own the document, the framework, the risk register, the analysis. It is yours to share with the board, the agency, the platform, the deal team. The client portal is the delivery and reference channel, not a paywall. There is no licensing, no subscription required to retain what you commissioned.</p>
+      </div>
+      <div class="advisory-block">
+        <h3>Where the <em>work</em> happens</h3>
+        <p>Closed-room sessions with the people who decide. Pre-work and findings happen async. The cadence is calibrated to the engagement type. Short and dense for the Diagnostic, sustained and quarterly for retainer relationships, focused and time-boxed for transaction work.</p>
+      </div>
+      <div class="advisory-block">
+        <h3>What ends, <em>what continues</em></h3>
+        <p>A defined-scope engagement ends when the document is delivered. A retainer continues monthly with a six-month minimum. There is no auto-renewing contract. No notice period structured to make leaving expensive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get started</p>
+    <h2>An independent view starts with <em>one conversation.</em></h2>
+    <p>30 minutes. I respond within one business day. No commitment, no quote at the end of the call.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+      <a class="btn-secondary" href="asrp.html#assessment">Or take the 90-second assessment</a>
+    </div>
+    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+</section>
+
+<!-- Employment signal — findable for recruiters/hiring managers, unobtrusive for advisory visitors -->
+<section style="padding: 1.75rem 0; border-top: 1px solid var(--hairline);">
+  <div class="container">
+    <p style="color: var(--dim); font-size: 0.9rem; margin: 0;">
+      If you're evaluating operator roles in adtech, commerce media, or retail media strategy —
+      <!-- TODO: update LinkedIn URL to your actual profile path -->
+      <a href="https://www.linkedin.com/in/andrewgilbert" target="_blank" rel="noopener" style="color: var(--gold);">connect on LinkedIn</a>
+      or email <a href="mailto:andrew@systemsthatdecide.io" style="color: var(--gold);">andrew@systemsthatdecide.io</a>.
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
 </body>
 </html>

@@ -1,43 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Advisory · Systems That Decide</title>
-  <link rel="stylesheet" href="css/foundations.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: var(--bg); }
-    body { background-image: none; }
-    .app-scroll { min-height: 100vh; overflow-x: hidden; }
-    a { color: inherit; }
-    h1, h2, h3, h4 { letter-spacing: 0; }
-    button { font-family: inherit; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advisory · Systems That Decide</title>
+<meta name="description" content="Four engagement formats alongside the flagship program. Each structurally independent, vendor-neutral by model, built around a specific decision.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .engagement {
+    padding: 3rem 0;
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .engagement:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .engagement .num-block {
+    padding-top: 0.2rem;
+  }
+  .engagement .num-block .n {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 3.6rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.025em;
+  }
+  .engagement .num-block .tag {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .engagement h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    max-width: 32ch;
+  }
+  .engagement h3 em { font-style: italic; color: var(--gold); }
+  .engagement .summary {
+    font-size: 1.15rem;
+    color: var(--off);
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+    max-width: 60ch;
+  }
+  .engagement .body { color: var(--muted); margin-bottom: 1.75rem; max-width: 64ch; }
+  .engagement .meta-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  .engagement .when-it-fits {
+    margin-top: 2rem;
+    padding: 1.4rem 1.6rem;
+    border-left: 3px solid var(--gold);
+    background: var(--surface);
+  }
+  .engagement .when-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .engagement .when-q {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--off);
+    line-height: 1.4;
+    max-width: 60ch;
+  }
+
+  @media (max-width: 720px) {
+    .engagement { grid-template-columns: 1fr; gap: 1rem; }
+    .engagement .num-block .n { font-size: 2.6rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="app-scroll">
-    <div id="app"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html" class="active">Advisory</a>
   </div>
+  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html" class="active">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+<section class="page-hero" id="main">
+  <div class="container">
+    <p class="eyebrow">Engagements alongside the program <span class="dot">·</span> <span class="seq">01</span></p>
+    <h1>Four engagement formats. <em>One mandate.</em></h1>
+    <p class="lede"><em>Each engagement is built around a specific decision you're facing — not a deliverable schedule.</em> These run alongside the flagship program. Independent, vendor-neutral by model.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Discuss an engagement</a>
+      <a class="btn-secondary" href="asrp.html">See the flagship program</a>
+    </div>
+  </div>
+</section>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<section>
+  <div class="container">
+    <p class="eyebrow">Engagements <span class="dot">·</span> <span class="seq">02</span></p>
+    <h2>Four formats. Each calibrated to where a <em>specific decision</em> sits.</h2>
 
-  <script>window.__PAGE = "advisory";</script>
+    <div style="margin-top: 3.5rem;">
+      <div class="engagement">
+        <div class="num-block">
+          <div class="n">01</div>
+          <div class="tag">Education</div>
+        </div>
+        <div>
+          <h3>Team <em>Education.</em></h3>
+          <p class="summary">Half-day or full-day workshops on how the systems your team buys from actually work.</p>
+          <p class="body">Built from the inside of those systems, not from vendor documentation. Aimed at commercial and marketing teams who need to operate confidently in a market where the platforms set most of the rules. The session is closed-room, not branded, and it is not a sales pitch for anything.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Half-day or full-day format</li>
+            <li>Custom-built to your stack and team</li>
+            <li>Pre-session brief and post-session reading list</li>
+          </ul>
+          <div class="when-it-fits">
+            <div class="when-label">When it fits</div>
+            <p class="when-q">"Use when the activation team can run the platforms but cannot defend the choices in a procurement meeting."</p>
+          </div>
+        </div>
+      </div>
 
-  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
-  <script type="text/babel" src="js/atoms.jsx"></script>
-  <script type="text/babel" src="js/components.jsx"></script>
-  <script type="text/babel" src="js/page-home-ecosystem.jsx"></script>
-  <script type="text/babel" src="js/page-home.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-1.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-2.jsx"></script>
-  <script type="text/babel" src="js/page-advisory.jsx"></script>
-  <script type="text/babel" src="js/page-about.jsx"></script>
-  <script type="text/babel" src="js/page-library.jsx"></script>
-  <script type="text/babel" src="js/page-enquire.jsx"></script>
-  <script type="text/babel" src="js/bootstrap.jsx"></script>
+      <div class="engagement">
+        <div class="num-block">
+          <div class="n">02</div>
+          <div class="tag">Advisory</div>
+        </div>
+        <div>
+          <h3>Executive <em>Advisory.</em></h3>
+          <p class="summary">A standing retainer for leadership teams that want an unconflicted outside view.</p>
+          <p class="body">Regular briefings, pressure-testing of strategy, on-call analysis when the structure of a market shifts. Calibrated to where the actual decisions sit. Not a deliverable schedule. A relationship that survives the moments the agency cannot tell you what they really think.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Quarterly leadership briefing</li>
+            <li>Monthly written market read</li>
+            <li>On-call async access between sessions</li>
+          </ul>
+          <div class="when-it-fits">
+            <div class="when-label">When it fits</div>
+            <p class="when-q">"Use when the board is asking questions the executive team cannot fully answer without a vendor in the room."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="engagement">
+        <div class="num-block">
+          <div class="n">03</div>
+          <div class="tag">Market</div>
+        </div>
+        <div>
+          <h3>Market Entry &amp; <em>Expansion.</em></h3>
+          <p class="summary">Independent ground truth for technology companies entering or expanding in ANZ.</p>
+          <p class="body">For platforms outside the region considering entry, and for those who have launched and want to sense-check their commercial strategy before committing further capital. The work is structural. Who buys, who decides, where the gravitational centres are, and what the market will not accept.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Market structure read on the relevant category</li>
+            <li>Buy-side decisioning map</li>
+            <li>Commercial strategy review</li>
+          </ul>
+          <div class="when-it-fits">
+            <div class="when-label">When it fits</div>
+            <p class="when-q">"Use before the regional commitment is made, or before doubling down on a strategy that has not produced the expected outcome."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="engagement">
+        <div class="num-block">
+          <div class="n">04</div>
+          <div class="tag">Transaction</div>
+        </div>
+        <div>
+          <h3>Transaction <em>Advisory.</em></h3>
+          <p class="summary">An operator's read on the asset — separate from the deal advisor's incentives.</p>
+          <p class="body">Diligence on assets in programmatic, marketing technology, retail media or measurement. Independent from any party in the deal. The work is technical and structural, not financial. The aim is to make sure the asset is what the seller says it is, and that the thesis is what the market will support.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Technical and structural diligence</li>
+            <li>Competitive position read</li>
+            <li>Risk register against the investment thesis</li>
+          </ul>
+          <div class="when-it-fits">
+            <div class="when-label">When it fits</div>
+            <p class="when-q">"Use when the deal team needs an independent operator's read separate from the deal advisor's incentives."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">How an engagement works <span class="dot">·</span> <span class="seq">03</span></p>
+    <h2>Four steps. No surprises. <em>No locked-in vendor recommendation</em> at the end.</h2>
+
+    <ol class="steps" style="margin-top: 3rem;">
+      <li>
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>Scoping <em>call</em></h3>
+          <p>30 minutes. We agree what is in scope, what is not, and whether the engagement is the right starting point. No commitment.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>Pre-<em>work</em></h3>
+          <p>A short questionnaire and a request for the artefacts already in your stack. The work begins before the first meeting.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>Working <em>sessions</em></h3>
+          <p>Closed-room. Calibrated to the people who actually decide. Documented, but not dressed-up.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>Findings &amp; <em>ownership</em></h3>
+          <p>You own the document, the framework and the analysis. There is no follow-on quote, no implementation upsell.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get started</p>
+    <h2>Start with a 30-minute <em>scoping call.</em></h2>
+    <p>A scoping call covers what you are trying to decide, what is already in motion, and whether one of these engagements is the right starting point. I respond within one business day.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+      <a class="btn-secondary" href="asrp.html#assessment">Or take the 90-second assessment</a>
+    </div>
+    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
 </body>
 </html>

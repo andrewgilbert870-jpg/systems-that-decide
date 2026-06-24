@@ -1,43 +1,382 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Library · Systems That Decide</title>
-  <link rel="stylesheet" href="css/foundations.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: var(--bg); }
-    body { background-image: none; }
-    .app-scroll { min-height: 100vh; overflow-x: hidden; }
-    a { color: inherit; }
-    h1, h2, h3, h4 { letter-spacing: 0; }
-    button { font-family: inherit; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Library · Systems That Decide</title>
+<meta name="description" content="The practitioner's view, published in long form. Structural reads on the systems shaping advertising, retail media, commerce and platforms.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .featured-essay {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    margin-top: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    position: relative;
+  }
+  .featured-essay::before {
+    content: '';
+    position: absolute; top: -1px; left: 0;
+    width: 80px; height: 1px;
+    background: var(--gold);
+  }
+  .featured-essay .meta-stack {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .featured-essay h2 {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    margin-bottom: 1.5rem;
+    max-width: 22ch;
+  }
+  .featured-essay .featured-take {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    line-height: 1.35;
+    max-width: 42ch;
+    padding-left: 1.2rem;
+    border-left: 3px solid var(--gold);
+  }
+  .featured-essay p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    max-width: 56ch;
+  }
+
+  .archive-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .archive-row:last-of-type { border-bottom: 1px solid var(--hairline); }
+
+  .archive-row .meta-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .archive-row .category {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .archive-row .date {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--off);
+  }
+  .archive-row .read-time {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  .archive-row .body-col h3 {
+    font-size: 1.55rem;
+    margin-bottom: 0.85rem;
+    max-width: 36ch;
+  }
+  .archive-row .body-col h3 em { font-style: italic; color: var(--gold); }
+  .archive-row .body-col .take {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    max-width: 42ch;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--gold-line);
+  }
+  .archive-row .body-col p {
+    font-size: 0.97rem;
+    color: var(--muted);
+    margin-bottom: 0;
+    max-width: 56ch;
+  }
+
+  .archive-row .link-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 0.3rem;
+  }
+
+  @media (max-width: 920px) {
+    .featured-essay { grid-template-columns: 1fr; gap: 1.5rem; }
+    .archive-row { grid-template-columns: 1fr; gap: 1rem; }
+    .archive-row .link-col { justify-content: flex-start; }
+  }
+</style>
 </head>
 <body>
-  <div class="app-scroll">
-    <div id="app"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
   </div>
+  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <div class="nav-right">
+    <a href="library.html" class="active">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html" class="active">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+<section class="page-hero" id="main">
+  <div class="container">
+    <p class="eyebrow">The library <span class="dot">·</span> <span class="seq">01</span></p>
+    <h1>The practitioner's view, <em>published in long form.</em></h1>
+    <p class="lede">Structural reads on the systems shaping advertising, retail media, commerce and platforms. <em>Read by operators at the largest publishers, retailers and brands in the region.</em></p>
+    <div class="actions">
+      <a class="btn-primary" href="https://systemsthatdecide.substack.com/">Subscribe on Substack</a>
+      <a class="btn-secondary" href="mailto:andrew@systemsthatdecide.io">Email me directly</a>
+    </div>
+  </div>
+</section>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<section>
+  <div class="container">
+    <p class="eyebrow">Latest <span class="dot">·</span> <span class="seq">02</span></p>
 
-  <script>window.__PAGE = "library";</script>
+    <article class="featured-essay">
+      <div>
+        <div class="meta-stack">25 May 2026 · Agency Model · 6 min</div>
+        <a class="essay-link" href="https://systemsthatdecide.substack.com/p/the-clause-that-isnt-in-most-brand">Read on Substack →</a>
+      </div>
+      <div>
+        <h2>The clause that isn't in most brand-agency <em>contracts yet.</em></h2>
+        <p class="featured-take">"Agents do exactly what you tell them. Most brands aren't ready for what that means."</p>
+        <p>The missing contractual layer that becomes expensive the first time someone needs it. What the agentic shift means for the MSA, the data processing addendum, and the carve-outs nobody reads twice.</p>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
-  <script type="text/babel" src="js/atoms.jsx"></script>
-  <script type="text/babel" src="js/components.jsx"></script>
-  <script type="text/babel" src="js/page-home-ecosystem.jsx"></script>
-  <script type="text/babel" src="js/page-home.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-1.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-2.jsx"></script>
-  <script type="text/babel" src="js/page-advisory.jsx"></script>
-  <script type="text/babel" src="js/page-about.jsx"></script>
-  <script type="text/babel" src="js/page-library.jsx"></script>
-  <script type="text/babel" src="js/page-enquire.jsx"></script>
-  <script type="text/babel" src="js/bootstrap.jsx"></script>
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">Archive <span class="dot">·</span> <span class="seq">03</span></p>
+    <h2>Earlier <em>essays.</em></h2>
+
+    <div style="margin-top: 3rem;">
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Infrastructure</div>
+          <div class="date">18 May 2026</div>
+          <div class="read-time">7 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>The most consequential document in advertising right now is one <em>most people haven't read.</em></h3>
+          <p class="take">"AdCP vs AAMP, containerised DSPs, Sponsored Intelligence, and why Amazon sits outside the logic entirely."</p>
+          <p>The technical specification that will reshape who controls where media budgets flow — and why most of the industry isn't paying attention to the right object.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/p/the-most-consequential-document-in">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Strategy</div>
+          <div class="date">11 May 2026</div>
+          <div class="read-time">6 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>The industry is calling this an AI story. <em>It isn't.</em></h3>
+          <p class="take">"The protocols and standards being built right now will determine who controls where media budgets flow."</p>
+          <p>Most of the industry is watching the demos. The structural move is happening in the standards bodies and protocol specifications. This is a piece about what actually matters and who is not watching it.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/p/the-industry-is-calling-this-an-ai">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Strategy</div>
+          <div class="date">04 May 2026</div>
+          <div class="read-time">8 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>Five problems. <em>Five moves.</em></h3>
+          <p class="take">"If you're waiting for a clean taxonomy of the agentic shift, you're going to miss the move."</p>
+          <p>The five structural problems sitting inside ANZ media stacks right now, and the move each one calls for. Written for operators with the authority to act, not the patience for taxonomy.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/p/five-problems-five-moves">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Retail Media</div>
+          <div class="date">28 April 2026</div>
+          <div class="read-time">6 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>Retail media won the lower funnel. <em>Now it has to prove it deserved to.</em></h3>
+          <p class="take">"Most retail media networks won't survive the next twelve months."</p>
+          <p>The lower-funnel narrative held for three years on the basis of post-purchase attribution and not much else. The next twelve months will reset what retail media is actually for, and which networks survive the reset.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/p/retail-media-won-the-lower-funnel">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Measurement</div>
+          <div class="date">20 April 2026</div>
+          <div class="read-time">5 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>You're measuring <em>everything.</em> You don't know what works.</h3>
+          <p class="take">"The current measurement stack is mostly theatre."</p>
+          <p>The current measurement stack is a function of what is easy to instrument, not what is causal. The result is a confident dashboard and a market that does not know which dollar moved the outcome.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/p/youre-measuring-everything-you-dont">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Retail Media</div>
+          <div class="date">12 March 2026</div>
+          <div class="read-time">7 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>Retail media is becoming a <em>payments business.</em></h3>
+          <p class="take">"Retailers without checkout aren't really running media networks."</p>
+          <p>The most consequential shift in retail media has nothing to do with measurement. It is who owns the transaction. The retailers building genuine media networks are the ones that already control checkout.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Agency Model</div>
+          <div class="date">05 March 2026</div>
+          <div class="read-time">6 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>Why the agency contract is <em>structurally unstable.</em></h3>
+          <p class="take">"Both sides know the contract describes the wrong service. Neither will say so out loud."</p>
+          <p>The agency contract describes a different service to what is delivered. This is structural. It is not accidental. The fee model and the production model have drifted apart for fifteen years and neither side will say so out loud.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Programmatic</div>
+          <div class="date">26 February 2026</div>
+          <div class="read-time">5 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>The bid request is the <em>unit of power.</em> Everything else is downstream.</h3>
+          <p class="take">"Most programmatic strategy debates are arguing about the wrong object."</p>
+          <p>If you do not control the bid request, you do not control the auction. If you do not control the auction, you do not control yield. Programmatic strategy is a conversation about who owns this object.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+        </div>
+      </article>
+
+      <article class="archive-row">
+        <div class="meta-col">
+          <div class="category">Strategy</div>
+          <div class="date">12 February 2026</div>
+          <div class="read-time">7 min read</div>
+        </div>
+        <div class="body-col">
+          <h3>The agentic media stack is a <em>contracts problem</em> first.</h3>
+          <p class="take">"The technical questions are decoys. The real fight is in the MSAs nobody reads."</p>
+          <p>The technical questions get the headlines. The harder questions sit inside the master service agreement, the data processing addendum, and the carve-outs that nobody reads twice.</p>
+        </div>
+        <div class="link-col">
+          <a class="essay-link" href="https://systemsthatdecide.substack.com/">Read on Substack →</a>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get started</p>
+    <h2>Reading the essays is one path. <em>The other is a conversation.</em></h2>
+    <p>If something in the writing maps onto a decision sitting on your desk, a 30-minute scoping call is the starting point.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+      <a class="btn-secondary" href="asrp.html#assessment">Or take the 90-second assessment</a>
+    </div>
+    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
 </body>
 </html>

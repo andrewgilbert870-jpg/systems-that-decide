@@ -1,43 +1,930 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Agentic Stack Readiness Program · Systems That Decide</title>
-  <link rel="stylesheet" href="css/foundations.css" />
-  <style>
-    html, body { margin: 0; padding: 0; background: var(--bg); }
-    body { background-image: none; }
-    .app-scroll { min-height: 100vh; overflow-x: hidden; }
-    a { color: inherit; }
-    h1, h2, h3, h4 { letter-spacing: 0; }
-    button { font-family: inherit; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agentic Stack Readiness Program · Systems That Decide</title>
+<meta name="description" content="A structured engagement for organisations whose media stack is already running on agentic systems. Anchored by a scored Diagnostic. Vendor-neutral by structure.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .component-detail {
+    padding: 3rem 0;
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .component-detail:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .component-detail .num-block .n {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 3.4rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.025em;
+  }
+  .component-detail .num-block .tag {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .component-detail h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.6rem;
+    max-width: 32ch;
+  }
+  .component-detail h3 em { font-style: italic; color: var(--gold); }
+  .component-detail .summary {
+    font-size: 1.1rem;
+    color: var(--off);
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+    max-width: 60ch;
+  }
+  .component-detail .body { color: var(--muted); margin-bottom: 1.5rem; max-width: 64ch; }
+  .component-detail .meta-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  .component-detail .req {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-line);
+    background: rgba(154,139,71,0.06);
+    padding: 0.4rem 0.85rem;
+  }
+
+  .dimension {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .dimension:last-of-type { border-bottom: 1px solid var(--hairline); }
+  .dimension .num-tag {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
+  .dimension h3 { font-size: 1.35rem; margin-bottom: 0.7rem; max-width: 32ch; }
+  .dimension h3 em { font-style: italic; color: var(--gold); }
+  .dimension p { font-size: 1rem; }
+  .dimension .ask {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    border-left: 3px solid var(--gold);
+    background: var(--surface);
+  }
+  .dimension .ask-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .dimension .ask-q {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--off);
+    line-height: 1.4;
+    max-width: 60ch;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-top: 3.5rem;
+  }
+  .tier {
+    padding: 2rem 1.6rem;
+    border: 1px solid var(--hairline);
+    background: var(--surface);
+    position: relative;
+  }
+  .tier::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+  }
+  .tier .score {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .tier h3 { font-size: 1.55rem; margin-bottom: 1rem; }
+  .tier h3 em { font-style: italic; color: var(--gold); }
+  .tier p { font-size: 0.92rem; line-height: 1.5; }
+
+  .investment-rows {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .investment-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.5fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .investment-row .name {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--off);
+  }
+  .investment-row .name em { font-style: italic; color: var(--gold); }
+  .investment-row .price {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .investment-row .scope {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Assessment */
+  .assessment {
+    margin-top: 3rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    position: relative;
+  }
+  .assessment::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+  }
+  .assessment-intro {
+    padding: 4rem 2.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .assessment-intro p {
+    margin: 0 auto 2rem;
+    text-align: center;
+    max-width: 52ch;
+    color: var(--muted);
+  }
+  .start-btn {
+    appearance: none;
+    background: var(--gold);
+    color: var(--obsidian);
+    border: 1px solid var(--gold);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    cursor: pointer;
+    transition: background 200ms, color 200ms;
+  }
+  .start-btn:hover { background: var(--off); border-color: var(--off); }
+
+  .q-form { display: none; padding: 2.5rem 2.5rem 2rem; }
+  .q-form.active { display: block; }
+
+  .q-block {
+    padding: 2.25rem 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .q-block:last-of-type { border-bottom: none; }
+
+  .q-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .q-text {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.35rem;
+    color: var(--off);
+    line-height: 1.35;
+    margin-bottom: 1.5rem;
+    max-width: 60ch;
+  }
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .q-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.95rem 1.1rem;
+    border: 1px solid var(--hairline);
+    cursor: pointer;
+    background: var(--obsidian);
+    transition: border-color 200ms, background 200ms;
+  }
+  .q-option:hover { border-color: var(--gold-line); }
+  .q-option input { position: absolute; opacity: 0; pointer-events: none; }
+  .q-option .pip {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--muted);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 150ms, border-color 150ms;
+  }
+  .q-option input:checked ~ .pip {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: inset 0 0 0 2px var(--obsidian);
+  }
+  .q-option:has(input:checked) {
+    border-color: var(--gold);
+    background: rgba(154, 139, 71, 0.06);
+  }
+  .q-option .label-text {
+    font-size: 0.96rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .q-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .q-progress {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .submit-btn {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--off);
+    color: var(--off);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.8rem;
+    cursor: pointer;
+    transition: background 200ms, color 200ms, border-color 200ms;
+  }
+  .submit-btn:hover:not(:disabled) {
+    background: var(--off);
+    color: var(--obsidian);
+  }
+  .submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--hairline);
+    color: var(--dim);
+  }
+
+  .q-result { display: none; padding: 3rem 2.5rem; }
+  .q-result.active { display: block; animation: aFade 500ms cubic-bezier(0.33, 1, 0.68, 1); }
+
+  .result-tier {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .result-score {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.028em;
+    color: var(--off);
+    margin-bottom: 0.5rem;
+  }
+  .result-score .of-twenty {
+    font-size: 0.36em;
+    color: var(--gold);
+    font-style: italic;
+    margin-left: 0.5rem;
+  }
+  .result-name {
+    font-family: var(--display);
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    font-weight: 700;
+    color: var(--off);
+    margin-bottom: 1.5rem;
+  }
+  .result-name em { font-style: italic; color: var(--gold); }
+  .result-body {
+    font-size: 1.08rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    max-width: 62ch;
+  }
+  .result-actions {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+  .reset-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .reset-link:hover { color: var(--off); }
+
+  @keyframes aFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 920px) {
+    .component-detail { grid-template-columns: 1fr; gap: 0.8rem; }
+    .dimension { grid-template-columns: 1fr; gap: 0.5rem; }
+    .tiers { grid-template-columns: 1fr 1fr; }
+    .investment-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .assessment-intro, .q-form, .q-result { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .q-actions { flex-direction: column; gap: 1.25rem; align-items: stretch; }
+    .submit-btn { width: 100%; }
+  }
+</style>
 </head>
 <body>
-  <div class="app-scroll">
-    <div id="app"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-left">
+    <a href="asrp.html" class="active">Readiness</a>
+    <a href="advisory.html">Advisory</a>
   </div>
+  <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+  <div class="nav-right">
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
+    <a href="asrp.html" class="active">Readiness</a>
+    <a href="advisory.html">Advisory</a>
+    <a href="library.html">Essays</a>
+    <a href="Playbooks_Landing.html">Playbooks</a>
+    <a href="about.html">About</a>
+    <a class="contact" href="mailto:andrew@systemsthatdecide.io">Contact</a>
+  </nav>
+</header>
 
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+<section class="page-hero" id="main">
+  <div class="container">
+    <p class="eyebrow">The Agentic Stack Readiness Program <span class="dot">·</span> <span class="seq">01</span></p>
+    <h1>Know where your stack stands. <em>Before the decision is made for you.</em></h1>
+    <p class="lede"><em>Vendor-neutral by structure, not by claim.</em> Built for ANZ agencies and brand-side teams operating media at scale. Anchored by a scored Diagnostic.</p>
+    <div class="actions">
+      <a class="btn-primary" href="#assessment">Take the 90-second self-assessment</a>
+      <a class="btn-secondary" href="#components">See the four components</a>
+    </div>
+  </div>
+</section>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<section>
+  <div class="container">
+    <p class="eyebrow">Three places this engagement starts <span class="dot">·</span> <span class="seq">02</span></p>
+    <h2>Most clients arrive in <em>one of three</em> positions.</h2>
+    <div class="cards-3">
+      <article class="card">
+        <div class="card-tag">01 / Decision</div>
+        <h3>Decision <em>in front of you</em></h3>
+        <p>About to make a significant platform call. DSP, data infrastructure, clean room, in-house shift. A vendor across the table. <strong>You need an independent view before you commit.</strong></p>
+        <div class="card-tail">Posture · pre-decision</div>
+      </article>
+      <article class="card">
+        <div class="card-tag">02 / Stack</div>
+        <h3>Stack you <em>cannot map</em></h3>
+        <p>The media stack has grown in ways nobody fully understands. Agency relationships changed. Integrations accumulated. People moved on. <strong>You need a map, a risk register, and a clear account of where you are locked in.</strong></p>
+        <div class="card-tail">Posture · inventory</div>
+      </article>
+      <article class="card">
+        <div class="card-tag">03 / Agentic</div>
+        <h3>Agentic systems <em>already inside</em></h3>
+        <p>PMax, Advantage+ and Koa are operating inside your media buy. You want to know whether your infrastructure was designed for that, or <strong>whether it hands them authority by default.</strong></p>
+        <div class="card-tail">Posture · live</div>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <script>window.__PAGE = "asrp";</script>
+<section id="components">
+  <div class="container">
+    <p class="eyebrow">The four components <span class="dot">·</span> <span class="seq">03</span></p>
+    <h2>One sequenced engagement. <em>Diagnostic first.</em> Everything else builds from that finding.</h2>
+    <p style="max-width: 62ch;">The Diagnostic is standalone or prerequisite. Components two, three and four cannot start without it. The findings shape what comes next, in that order.</p>
 
-  <script type="text/babel" src="js/tweaks-panel.jsx"></script>
-  <script type="text/babel" src="js/atoms.jsx"></script>
-  <script type="text/babel" src="js/components.jsx"></script>
-  <script type="text/babel" src="js/page-home-ecosystem.jsx"></script>
-  <script type="text/babel" src="js/page-home.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-1.jsx"></script>
-  <script type="text/babel" src="js/page-asrp-2.jsx"></script>
-  <script type="text/babel" src="js/page-advisory.jsx"></script>
-  <script type="text/babel" src="js/page-about.jsx"></script>
-  <script type="text/babel" src="js/page-library.jsx"></script>
-  <script type="text/babel" src="js/page-enquire.jsx"></script>
-  <script type="text/babel" src="js/bootstrap.jsx"></script>
+    <div style="margin-top: 3.5rem;">
+      <div class="component-detail">
+        <div class="num-block">
+          <div class="n">01</div>
+          <div class="tag">Diagnose</div>
+        </div>
+        <div>
+          <h3>The Agentic Readiness <em>Diagnostic.</em></h3>
+          <p class="summary">You walk away knowing exactly where your infrastructure stands — scored, ranked by risk, and mapped against the platforms in your buy.</p>
+          <p class="body">The Diagnostic establishes a baseline. It tells you where your infrastructure stands today, where the immediate exposures are, and what the dependency map actually looks like across vendors, agencies and platforms.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Scored readiness report (0–20)</li>
+            <li>Risk register, ranked by severity and time horizon</li>
+            <li>Platform dependency map across DSPs, ad servers, data infrastructure and clean rooms</li>
+          </ul>
+          <div class="meta-label">Engagement structure</div>
+          <p style="font-size: 0.95rem;">Pre-work questionnaire (60–90 minutes). Two working sessions (90 minutes each). One findings review (60 minutes). Branded PDF report within 10 business days.</p>
+          <span class="req">Entry point · Prerequisite for 02–04</span>
+        </div>
+      </div>
+
+      <div class="component-detail">
+        <div class="num-block">
+          <div class="n">02</div>
+          <div class="tag">Map</div>
+        </div>
+        <div>
+          <h3>Technology <em>Mapping.</em></h3>
+          <p class="summary">The criteria, the questions, and the evidence standard for every platform call you're about to make. Built from your risk register, not a vendor's feature list.</p>
+          <p class="body">Not a vendor ranking, and not a pick. In a market where the protocols are still being fought over, naming winners is guesswork dressed as confidence. What you get is the evaluation criteria, the questions to put across the table, and the evidence standard each claim has to meet before you believe it. Built to survive a procurement process where every vendor will claim every capability.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Evaluation criteria derived from Diagnostic findings</li>
+            <li>Platform landscape map across DSPs, agentic buying, clean rooms and measurement</li>
+            <li>Procurement readiness brief, with the questions each vendor has to answer</li>
+          </ul>
+          <div class="meta-label">Engagement structure</div>
+          <p style="font-size: 0.95rem;">Targeted research phase. One working session. Written brief delivered within 15 business days.</p>
+          <span class="req">Requires Diagnostic</span>
+        </div>
+      </div>
+
+      <div class="component-detail">
+        <div class="num-block">
+          <div class="n">03</div>
+          <div class="tag">Roadmap</div>
+        </div>
+        <div>
+          <h3>The <em>Roadmap.</em></h3>
+          <p class="summary">Near-term moves you won't regret in any version of the market. Later moves with named triggers. Sequenced by dependency, built to be revised.</p>
+          <p class="body">Foundation covers the no-regrets work: the moves that pay off however the market resolves. Beyond that, the roadmap is conditional by design. Every later move carries a named trigger, the market event that says it's time, or that the assumption behind it broke. The assumptions are written on page one, so when the market shifts you know exactly which parts of the plan shift with it. <strong style="color:var(--off);font-weight:600">I advise on construction, not execution.</strong></p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Phased roadmap, sequenced by dependency, not by vendor pressure</li>
+            <li>Decision triggers for every conditional move, tied to named market events</li>
+            <li>Assumptions register, page one of the document</li>
+            <li>Build versus buy framework, applied to your stack</li>
+          </ul>
+          <div class="meta-label">Engagement structure</div>
+          <p style="font-size: 0.95rem;">Three working sessions across four weeks. Roadmap document and one executive readout.</p>
+          <span class="req">Requires Diagnostic</span>
+        </div>
+      </div>
+
+      <div class="component-detail">
+        <div class="num-block">
+          <div class="n">04</div>
+          <div class="tag">Retain</div>
+        </div>
+        <div>
+          <h3>Ongoing Advisory <em>Retainer.</em></h3>
+          <p class="summary">A roadmap in this market has a shelf life. The retainer is how it stays current.</p>
+          <p class="body">Each quarter, the roadmap's assumptions get re-tested against what actually happened. Triggers get checked. The plan moves where the market moved. Between reviews, you have a standing independent view on every live decision. Six-month minimum. The retainer is a relationship, not a deliverable schedule.</p>
+          <div class="meta-label">What you receive</div>
+          <ul class="bullets">
+            <li>Quarterly roadmap and assumptions review</li>
+            <li>Monthly market briefing</li>
+            <li>On-call async access (4 hours per month, 24-hour business response)</li>
+            <li>One additional working session per quarter</li>
+          </ul>
+          <div class="meta-label">Engagement structure</div>
+          <p style="font-size: 0.95rem;">Monthly cadence. Six-month minimum. Renews quarterly thereafter.</p>
+          <span class="req">Requires Diagnostic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">Investment <span class="dot">·</span> <span class="seq">04</span></p>
+    <h2>What an engagement <em>costs.</em></h2>
+    <p style="max-width: 60ch;">Pricing is anchored by component and scope, and set in the scoping call. The structure is fixed; the figure depends on the size of the stack, the urgency, and which components are in the engagement.</p>
+
+    <div class="investment-rows" style="border-top-color: var(--paper-rule);">
+      <div class="investment-row" style="border-bottom-color: var(--paper-rule);">
+        <div class="name" style="color: var(--ink);"><em>01 ·</em> Diagnostic</div>
+        <div class="price" style="color: var(--gold-on-paper);">By engagement</div>
+        <div class="scope" style="color: var(--ink-dim);">Two-week timeline · Standalone or entry point</div>
+      </div>
+      <div class="investment-row" style="border-bottom-color: var(--paper-rule);">
+        <div class="name" style="color: var(--ink);"><em>02 ·</em> Technology Mapping</div>
+        <div class="price" style="color: var(--gold-on-paper);">By engagement</div>
+        <div class="scope" style="color: var(--ink-dim);">Three to four weeks · Requires Diagnostic</div>
+      </div>
+      <div class="investment-row" style="border-bottom-color: var(--paper-rule);">
+        <div class="name" style="color: var(--ink);"><em>03 ·</em> Roadmap</div>
+        <div class="price" style="color: var(--gold-on-paper);">By engagement</div>
+        <div class="scope" style="color: var(--ink-dim);">Four to six weeks · Requires Diagnostic</div>
+      </div>
+      <div class="investment-row" style="border-bottom-color: var(--paper-rule);">
+        <div class="name" style="color: var(--ink);"><em>04 ·</em> Advisory Retainer</div>
+        <div class="price" style="color: var(--gold-on-paper);">Monthly · Six-month min.</div>
+        <div class="scope" style="color: var(--ink-dim);">Requires Diagnostic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <p class="eyebrow">The five diagnostic dimensions <span class="dot">·</span> <span class="seq">05</span></p>
+    <h2>Five lenses on the same question. <em>Is your infrastructure ready</em> for systems that decide on your behalf?</h2>
+    <p style="max-width: 62ch;">Each dimension carries a self-assessment question. Read it as a check on recognition, not a quiz. If the question lands, the dimension is probably worth investigating.</p>
+
+    <div style="margin-top: 3.5rem;">
+      <div class="dimension">
+        <div class="num-tag">01</div>
+        <div>
+          <h3>Data infrastructure <em>maturity.</em></h3>
+          <p>The quality, accessibility and structural coherence of your first-party data, and how it is collected, stored, governed and made available to platforms.</p>
+          <div class="ask">
+            <div class="ask-label">Ask yourself</div>
+            <p class="ask-q">"If a procurement process started tomorrow, could you describe the structure of your first-party data without reaching for someone else?"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="num-tag">02</div>
+        <div>
+          <h3>Platform architecture &amp; <em>dependency risk.</em></h3>
+          <p>The degree to which advertising infrastructure is structurally dependent on a small number of vendors, and what that means for lock-in and decisioning autonomy.</p>
+          <div class="ask">
+            <div class="ask-label">Ask yourself</div>
+            <p class="ask-q">"Could you move 30% of spend off any single platform within a quarter, with measurement intact?"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="num-tag">03</div>
+        <div>
+          <h3>Decisioning <em>architecture.</em></h3>
+          <p>The clarity and coherence of existing decision-making structures. Who decides what, on what information, within what constraints, and with what override capability.</p>
+          <div class="ask">
+            <div class="ask-label">Ask yourself</div>
+            <p class="ask-q">"When the algorithm makes a consequential call you would not have made, who notices, and who has authority to step in?"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="num-tag">04</div>
+        <div>
+          <h3>Human-to-machine <em>handoff readiness.</em></h3>
+          <p>Preparedness to manage a media operation where bidding, budget, creative selection and audience construction are increasingly made by automated systems.</p>
+          <div class="ask">
+            <div class="ask-label">Ask yourself</div>
+            <p class="ask-q">"Do your activation teams understand the boundary between what the platform decides and what they decide, well enough to defend it?"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="num-tag">05</div>
+        <div>
+          <h3>Organisational <em>alignment.</em></h3>
+          <p>Whether your organisational structure, internal politics and leadership alignment can support coherent infrastructure decisions across functions.</p>
+          <div class="ask">
+            <div class="ask-label">Ask yourself</div>
+            <p class="ask-q">"Could the marketing, finance and technology leads agree on what 'good' looks like for the next platform decision before the meeting starts?"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="container">
+    <p class="eyebrow">The maturity tiers <span class="dot">·</span> <span class="seq">06</span></p>
+    <h2>A score, then a posture. <em>The number is a starting point,</em> not a verdict.</h2>
+    <p style="max-width: 60ch;">Most ANZ organisations land between Aware and Structured. Few are Exposed by intent. None are Positioned by accident.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="score">Score 0 — 8</div>
+        <h3><em>Exposed.</em></h3>
+        <p>Infrastructure is not equipped for agentic systems. Immediate remediation required across multiple dimensions before further investment makes sense.</p>
+      </div>
+      <div class="tier">
+        <div class="score">Score 9 — 13</div>
+        <h3><em>Aware.</em></h3>
+        <p>Some understanding of the shift. Steps taken in places. Infrastructure remains patchy and reactive. Decisions still made under pressure rather than from posture.</p>
+      </div>
+      <div class="tier">
+        <div class="score">Score 14 — 17</div>
+        <h3><em>Structured.</em></h3>
+        <p>Coherent infrastructure. Functioning governance. Gaps tend to sit in measurement, clean-room readiness, or cross-channel signal coherence.</p>
+      </div>
+      <div class="tier">
+        <div class="score">Score 18 — 20</div>
+        <h3><em>Positioned.</em></h3>
+        <p>Mature, intentional architecture. Proactive decisions on roadmap and procurement. The work shifts to staying ahead of market structural change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="assessment">
+  <div class="container">
+    <p class="eyebrow">90-second self-assessment <span class="dot">·</span> <span class="seq">07</span></p>
+    <h2>Five questions. A directional score. <em>No data leaves the page.</em></h2>
+    <p style="max-width: 62ch;">The full Diagnostic is a structured engagement, not a form. This assessment is a directional read, designed to surface recognition. The numeric output is not a verdict.</p>
+
+    <div class="assessment">
+
+      <div class="assessment-intro" id="assessmentIntro">
+        <p>Five questions. Five dimensions. Pick the answer closest to your reality. The system maps your responses onto the same four tiers used in the Diagnostic. The result is a starting point for a conversation.</p>
+        <button class="start-btn" id="startAssessment" type="button">Begin</button>
+      </div>
+
+      <form class="q-form" id="assessmentForm" onsubmit="return false;">
+
+        <div class="q-block">
+          <div class="q-num">01 · Data infrastructure maturity</div>
+          <p class="q-text">"If a procurement process started tomorrow, could you describe the structure of your first-party data without reaching for someone else?"</p>
+          <div class="q-options">
+            <label class="q-option"><input type="radio" name="q1" value="0"><span class="pip"></span><span class="label-text">Not really. The structure lives in someone else's head, or in a vendor's system we don't fully understand.</span></label>
+            <label class="q-option"><input type="radio" name="q1" value="1"><span class="pip"></span><span class="label-text">One or two people could, with caveats.</span></label>
+            <label class="q-option"><input type="radio" name="q1" value="2"><span class="pip"></span><span class="label-text">Yes in broad terms, but the specifics would need a vendor in the room.</span></label>
+            <label class="q-option"><input type="radio" name="q1" value="3"><span class="pip"></span><span class="label-text">Yes, with documentation. Most decisions could be defended internally.</span></label>
+            <label class="q-option"><input type="radio" name="q1" value="4"><span class="pip"></span><span class="label-text">Yes, confidently. The structure is documented, owned internally, and reviewed quarterly.</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-num">02 · Platform architecture &amp; dependency risk</div>
+          <p class="q-text">"Could you move 30% of spend off any single platform within a quarter, with measurement intact?"</p>
+          <div class="q-options">
+            <label class="q-option"><input type="radio" name="q2" value="0"><span class="pip"></span><span class="label-text">No. The dependency is structural and we have no real alternative path.</span></label>
+            <label class="q-option"><input type="radio" name="q2" value="1"><span class="pip"></span><span class="label-text">Maybe, but measurement would break.</span></label>
+            <label class="q-option"><input type="radio" name="q2" value="2"><span class="pip"></span><span class="label-text">Yes for some platforms, no for others. Google and Meta are the hardest.</span></label>
+            <label class="q-option"><input type="radio" name="q2" value="3"><span class="pip"></span><span class="label-text">Yes, with a plan and three to six months of preparation.</span></label>
+            <label class="q-option"><input type="radio" name="q2" value="4"><span class="pip"></span><span class="label-text">Yes. We have done it before and have the alternate path live.</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-num">03 · Decisioning architecture</div>
+          <p class="q-text">"When the algorithm makes a consequential call you would not have made, who notices, and who has authority to step in?"</p>
+          <div class="q-options">
+            <label class="q-option"><input type="radio" name="q3" value="0"><span class="pip"></span><span class="label-text">Nobody notices. The platform is operating without override.</span></label>
+            <label class="q-option"><input type="radio" name="q3" value="1"><span class="pip"></span><span class="label-text">Someone sometimes notices. There is no clear authority to step in.</span></label>
+            <label class="q-option"><input type="radio" name="q3" value="2"><span class="pip"></span><span class="label-text">Activation team notices. Escalation is informal.</span></label>
+            <label class="q-option"><input type="radio" name="q3" value="3"><span class="pip"></span><span class="label-text">There is a defined override process. We use it occasionally.</span></label>
+            <label class="q-option"><input type="radio" name="q3" value="4"><span class="pip"></span><span class="label-text">Yes. Named owner, documented thresholds, override paths well-rehearsed.</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-num">04 · Human-to-machine handoff readiness</div>
+          <p class="q-text">"Do your activation teams understand the boundary between what the platform decides and what they decide, well enough to defend it?"</p>
+          <div class="q-options">
+            <label class="q-option"><input type="radio" name="q4" value="0"><span class="pip"></span><span class="label-text">No. The boundary has shifted faster than the team's understanding.</span></label>
+            <label class="q-option"><input type="radio" name="q4" value="1"><span class="pip"></span><span class="label-text">Some understand. Most are running on outdated mental models.</span></label>
+            <label class="q-option"><input type="radio" name="q4" value="2"><span class="pip"></span><span class="label-text">Mixed. The senior layer understands. The junior layer follows the playbook.</span></label>
+            <label class="q-option"><input type="radio" name="q4" value="3"><span class="pip"></span><span class="label-text">Mostly. Documented, with occasional gaps when platforms change.</span></label>
+            <label class="q-option"><input type="radio" name="q4" value="4"><span class="pip"></span><span class="label-text">Yes. The team can defend the boundary in a procurement meeting today.</span></label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-num">05 · Organisational alignment</div>
+          <p class="q-text">"Could the marketing, finance and technology leads agree on what 'good' looks like for the next platform decision before the meeting starts?"</p>
+          <div class="q-options">
+            <label class="q-option"><input type="radio" name="q5" value="0"><span class="pip"></span><span class="label-text">No. Each function has different definitions of success.</span></label>
+            <label class="q-option"><input type="radio" name="q5" value="1"><span class="pip"></span><span class="label-text">Possibly, after several rounds of pre-work.</span></label>
+            <label class="q-option"><input type="radio" name="q5" value="2"><span class="pip"></span><span class="label-text">Marketing and finance, yes. Technology often arrives at a different read.</span></label>
+            <label class="q-option"><input type="radio" name="q5" value="3"><span class="pip"></span><span class="label-text">Yes for most categories. Some friction on measurement.</span></label>
+            <label class="q-option"><input type="radio" name="q5" value="4"><span class="pip"></span><span class="label-text">Yes. The alignment exists structurally, not just personally.</span></label>
+          </div>
+        </div>
+
+        <div class="q-actions">
+          <span class="q-progress" id="assessmentProgress">0 of 5 answered</span>
+          <button type="button" class="submit-btn" id="submitAssessment" disabled>See your score</button>
+        </div>
+      </form>
+
+      <div class="q-result" id="assessmentResult">
+        <div class="result-tier" id="resultTier">Tier</div>
+        <div class="result-score" id="resultScore">0<span class="of-twenty">/ 20</span></div>
+        <div class="result-name" id="resultName">Tier name</div>
+        <p class="result-body" id="resultBody">Result body.</p>
+        <div class="result-actions">
+          <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io?subject=Scoping%20call%20-%20Diagnostic">Book a 30-minute scoping call</a>
+          <button type="button" class="reset-link" id="resetAssessment">Reset and try again</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="final light">
+  <div class="container">
+    <p class="eyebrow">Get started</p>
+    <h2>You already know something is off. <em>The Diagnostic names it.</em></h2>
+    <p>A 30-minute scoping call to establish whether the Diagnostic is the right entry point for your organisation, and what the engagement would look like.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:andrew@systemsthatdecide.io">Book a scoping call</a>
+      <a class="btn-secondary" href="#assessment">Or take the 90-second assessment</a>
+    </div>
+    <p class="closing">Andrew Gilbert · andrew@systemsthatdecide.io · One business day to reply</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <a class="brand" href="index.html"><img src="logo-transparent.png" alt="Systems That Decide" width="568" height="200"></a>
+    <div class="links">
+      <a href="asrp.html">Readiness</a>
+      <a href="advisory.html">Advisory</a>
+      <a href="library.html">Essays</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="meta">© 2026 Systems That Decide<br>Sydney · serving ANZ</div>
+  </div>
+</footer>
+
+<script>
+/* ── q-option keyboard accessibility ── */
+(function () {
+  document.querySelectorAll('.q-option').forEach(function (label) {
+    label.setAttribute('tabindex', '0');
+    var input = label.querySelector('input[type="radio"]');
+    if (input) input.setAttribute('tabindex', '-1');
+    label.addEventListener('keydown', function (e) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        if (input) {
+          input.checked = true;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        label.classList.add('active');
+      }
+    });
+  });
+})();
+
+/* ── Assessment logic ── */
+(function () {
+  const startBtn = document.getElementById('startAssessment');
+  if (!startBtn) return;
+
+  const intro = document.getElementById('assessmentIntro');
+  const form = document.getElementById('assessmentForm');
+  const result = document.getElementById('assessmentResult');
+  const submit = document.getElementById('submitAssessment');
+  const reset = document.getElementById('resetAssessment');
+  const progress = document.getElementById('assessmentProgress');
+
+  const tiers = [
+    {
+      min: 0, max: 8, name: 'Exposed',
+      body: 'Your infrastructure is not equipped for agentic systems. Immediate remediation is needed across multiple dimensions before further investment makes sense. The Diagnostic gives you the risk register and a sequenced path out of exposure.'
+    },
+    {
+      min: 9, max: 13, name: 'Aware',
+      body: 'Some understanding of the shift is present. Steps have been taken in places. The infrastructure is patchy and reactive. Decisions are still made under pressure rather than from posture. The Diagnostic gives you the structural read needed to move from reactive to deliberate.'
+    },
+    {
+      min: 14, max: 17, name: 'Structured',
+      body: 'You have coherent infrastructure and functioning governance. Gaps tend to sit in measurement, clean-room readiness, or cross-channel signal coherence. The Diagnostic identifies which of the remaining gaps will cost you the most in the next twelve months.'
+    },
+    {
+      min: 18, max: 20, name: 'Positioned',
+      body: 'Your architecture is mature and intentional. Your work has shifted to staying ahead of structural change in the market. A retainer relationship may be more useful to you than a Diagnostic. The scoping call covers what that looks like.'
+    }
+  ];
+
+  startBtn.addEventListener('click', () => {
+    intro.style.display = 'none';
+    form.classList.add('active');
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function checkComplete() {
+    const answered = form.querySelectorAll('input[type="radio"]:checked').length;
+    progress.textContent = answered + ' of 5 answered';
+    submit.disabled = answered < 5;
+  }
+  form.addEventListener('change', checkComplete);
+
+  submit.addEventListener('click', () => {
+    let score = 0;
+    form.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+      score += parseInt(input.value, 10);
+    });
+    const tier = tiers.find(t => score >= t.min && score <= t.max);
+    document.getElementById('resultScore').innerHTML = score + '<span class="of-twenty">/ 20</span>';
+    document.getElementById('resultTier').textContent = 'Tier · ' + tier.name;
+    document.getElementById('resultName').innerHTML = '<em>' + tier.name + '.</em>';
+    document.getElementById('resultBody').textContent = tier.body;
+    form.classList.remove('active');
+    result.classList.add('active');
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () {
+      var focusTarget = result.querySelector('[tabindex="-1"], h2, h3, .result-score');
+      if (!focusTarget) { result.setAttribute('tabindex', '-1'); focusTarget = result; }
+      focusTarget.focus({ preventScroll: true });
+    }, 450);
+  });
+
+  reset.addEventListener('click', () => {
+    form.querySelectorAll('input[type="radio"]:checked').forEach(input => { input.checked = false; });
+    result.classList.remove('active');
+    intro.style.display = 'block';
+    submit.disabled = true;
+    progress.textContent = '0 of 5 answered';
+    intro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+<script src="nav.js"></script>
 </body>
 </html>
