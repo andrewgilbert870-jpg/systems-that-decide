@@ -41,8 +41,6 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "liga","kern";
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 /* ── Gold top bar ── */
@@ -139,11 +137,11 @@ body {
 .mobile-drawer a.contact { color: var(--gold); }
 @media (max-width: 768px) {
   .nav { padding: 0.9rem 1.1rem; grid-template-columns: auto 1fr auto; }
-  .nav-left, .nav-right > a, .nav-right > .contact { display: none; }
+  .nav-left { display: none; }
+  .nav-right { display: flex; justify-content: flex-end; }
+  .nav-right > a, .nav-right > .contact { display: none; }
   .nav-toggle { display: flex; }
   .brand img { height: 36px; }
-
-  body { max-width: 100%; }
 
   .hero { padding: 48px 24px 40px; margin-top: 56px; }
   .hero h1 { font-size: 52px; margin: 16px 0 24px; }
@@ -479,7 +477,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#fa9b949e889f8dba8983898e9f97898e929b8e9e9f99939e9fd49395">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#0a6b646e786f7d4a7973797e6f67797e626b7e6e6f69636e6f246365">Contact</a>
   </div>
   <nav class="mobile-drawer" id="mobileNav" aria-hidden="true">
     <a href="asrp.html">Readiness</a>
@@ -487,7 +485,7 @@ body {
     <a href="library.html">Essays</a>
     <a href="playbooks.html" class="active">Playbooks</a>
     <a href="about.html">About</a>
-    <a class="contact" href="/cdn-cgi/l/email-protection#7a1b141e081f0d3a0903090e1f17090e121b0e1e1f19131e1f541315">Contact</a>
+    <a class="contact" href="/cdn-cgi/l/email-protection#3d5c53594f584a7d4e444e4958504e49555c4959585e545958135452">Contact</a>
   </nav>
 </header>
 
